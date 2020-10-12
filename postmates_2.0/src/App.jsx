@@ -1,5 +1,7 @@
 import React from 'react';
-import Header from './Components/Header/Header';
+import Button from 'react-bootstrap/Button';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 export default class App extends React.Component{
@@ -14,8 +16,6 @@ export default class App extends React.Component{
   render() {
     return (
       <>
-        <h1> App </h1>
-        <Header/>
       </>
     )
   }
