@@ -24,7 +24,7 @@ export default class App extends React.Component{
     return (
       <>
       <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-        <Navbar.Brand>WatchParty</Navbar.Brand>
+        <Navbar.Brand>Postmates 2.0</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
