@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Move into project directory
 `cd postmates_2.0`
 
-### Install packages
+### Install packages (creates node_modules folder)
 `npm install`
 
 ### Startup localhost and run
