@@ -1,12 +1,9 @@
 import React from "react";
-
 import { HashRouter as Router } from "react-router-dom";
-
-import NavBar from "./components/NavBar";
+import Routes from "./Routes";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Routes from "./Routes";
 
 export default class App extends React.Component {
   constructor() {
@@ -19,12 +16,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <>
-        <Router>
-          <NavBar />
-          <Routes />
-        </Router>
-      </>
+      <Router>
+        <Routes />
+      </Router>
     );
   }
 }
