@@ -8,6 +8,12 @@ const setUser = (user) => {
   };
 };
 
+const resetUser = () => {
+  return {
+    type: "RESET_USER",
+  };
+};
+
 const login = (formData, history) => {
   return async (dispatch) => {
     try {
@@ -33,7 +39,7 @@ const logout = (history) => {
   return async (dispatch) => {
     localStorage.removeItem("jwt");
     setJwtHeader(false);
-    dispatch(setUser({}));
+    dispatch(resetUser());
     history.push("/");
   };
 };

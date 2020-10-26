@@ -1,4 +1,9 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { isEmpty } from "lodash";
+import { logout } from "../redux/actions/user";
+
 import {
   Nav,
   Navbar,
@@ -12,6 +17,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector(({ user }) => user);
+
+  const handleLogout = async () => {
+    dispatch(logout(history));
+    history.go(0);
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Link to="/">
@@ -32,16 +46,26 @@ const NavBar = () => {
           </Form>
         </Nav>
         <Nav>
-          <Link to="/Signin">
-            <Navbar.Text>Sign-In</Navbar.Text>
-          </Link>
-          <NavDropdown
-            title={<FontAwesomeIcon icon={faCartPlus} size="2x" />}
-            id="collapsible-nav-dropdown"
-            alignRight
-          >
-            <NavDropdown.Item>My Cart</NavDropdown.Item>
-          </NavDropdown>
+          {isEmpty(user) ? (
+            <>
+              <Link to="/signin">
+                <Navbar.Text>Sign-In</Navbar.Text>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Navbar.Text onClick={handleLogout} className="btn">
+                Logout
+              </Navbar.Text>
+              <NavDropdown
+                title={<FontAwesomeIcon icon={faCartPlus} size="2x" />}
+                id="collapsible-nav-dropdown"
+                alignRight
+              >
+                <NavDropdown.Item>My Cart</NavDropdown.Item>
+              </NavDropdown>
+            </>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -8,6 +8,8 @@ import Layout from "./layouts";
 const Routes = () => {
   return (
     <Switch>
+      {/* Customer Routes */}
+
       <Route
         exact
         path="/"
@@ -35,11 +37,18 @@ const Routes = () => {
           <Layout page={() => <div>Customer balance</div>} {...props} />
         )}
       />
+
+      {/* Employee Routes */}
+
       <Route
         exact
         path="/employees"
         render={(props) => (
-          <Layout page={() => <div>For Employees</div>} {...props} />
+          <Layout
+            type="employee"
+            page={() => <div>Employees HOmes</div>}
+            {...props}
+          />
         )}
       />
       <Route render={() => <Redirect to="/" />} />
