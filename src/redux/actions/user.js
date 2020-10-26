@@ -11,10 +11,21 @@ const setUser = (user) => {
 const login = (formData, history) => {
   return async (dispatch) => {
     try {
-      const { data } = await api.post("/auth", formData);
-      dispatch(setUser({ ...data }));
+      const { data, headers } = await api.post("/auth", formData);
+      console.log(localStorage.jwt, data);
+      localStorage.setItem("jwt", headers.authorization);
+      dispatch(
+        setUser({
+          id: data.id,
+          username: data.username,
+          role: data.role,
+          closed: data.closed,
+        })
+      );
       history.push("/");
-    } catch (err) {}
+    } catch (err) {
+      throw err;
+    }
   };
 };
 
