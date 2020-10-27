@@ -32,11 +32,11 @@ const Routes = () => {
       />
       <Route
         exact
-        path="/balance"
+        path="/account"
         render={(props) => (
           <Layout
             isPrivate={true}
-            page={() => <div>Customer balance</div>}
+            page={() => <div>Customer Account</div>}
             {...props}
           />
         )}
@@ -46,7 +46,7 @@ const Routes = () => {
 
       <Route
         exact
-        path="/employees"
+        path="/employee"
         render={(props) => (
           <Layout
             isPrivate={true}

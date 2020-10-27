@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -46,25 +46,29 @@ const NavBar = () => {
           </Form>
         </Nav>
         <Nav>
-          {isEmpty(user) ? (
-            <>
-              <Link to="/signin">
-                <Navbar.Text>Sign-In</Navbar.Text>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Navbar.Text onClick={handleLogout} className="btn">
-                Logout
-              </Navbar.Text>
-              <NavDropdown
-                title={<FontAwesomeIcon icon={faCartPlus} size="2x" />}
-                id="collapsible-nav-dropdown"
-                alignRight
-              >
-                <NavDropdown.Item>My Cart</NavDropdown.Item>
-              </NavDropdown>
-            </>
+          {isEmpty(user) && (
+            <Link to="/signin">
+              <Navbar.Text>Sign-In</Navbar.Text>
+            </Link>
+          )}
+          {!isEmpty(user) && (
+            <Navbar.Text onClick={handleLogout} className="btn">
+              Logout
+            </Navbar.Text>
+          )}
+          {!isEmpty(user) && user.role === "CUSTOMER" && (
+            <NavDropdown
+              title={<FontAwesomeIcon icon={faCartPlus} size="2x" />}
+              id="collapsible-nav-dropdown"
+              alignRight
+            >
+              <NavDropdown.Item>My Cart</NavDropdown.Item>
+            </NavDropdown>
+          )}
+          {!isEmpty(user) && user.role !== "CUSTOMER" && (
+            <Link to="/employee" className="d-flex  align-items-center">
+              <FontAwesomeIcon icon={faBriefcase} size="2x" />
+            </Link>
           )}
         </Nav>
       </Navbar.Collapse>
