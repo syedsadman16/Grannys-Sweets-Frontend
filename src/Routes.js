@@ -2,6 +2,7 @@ import React from "react";
 import Menu from "./pages/Menu";
 import Chefs from "./pages/Chefs";
 import Signin from "./pages/Signin";
+import Home from "./pages/Home";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Layout from "./layouts";
 
@@ -13,7 +14,7 @@ const Routes = () => {
       <Route
         exact
         path="/"
-        render={(props) => <Layout page={() => <div>Home</div>} {...props} />}
+        render={(props) => <Layout page={Home} {...props} />}
       />
       <Route
         exact
@@ -51,7 +52,7 @@ const Routes = () => {
           <Layout
             isPrivate={true}
             type="employee"
-            page={() => <div>Employees HOmes</div>}
+            page={() => <div>Employees Homes</div>}
             {...props}
           />
         )}
