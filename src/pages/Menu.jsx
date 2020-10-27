@@ -1,6 +1,8 @@
 import React from 'react';
 import {Grid, Divider} from '@material-ui/core/';
 import {Navbar, Button} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 
 import './Menu.css';
 
@@ -58,9 +60,15 @@ export default class Menu extends React.Component{
       console.log(data)
       return (
         <>
-        <div className="page-title-text">
-          <h1>Menu</h1>
-          <hr className="title-divider"/>
+        <div className="page-title-container">
+          <div className="page-title-text">
+            Menu
+          </div>
+          <div className="menu-icon-divider-container">
+            <hr className="title-divider-left"/>
+            <FontAwesomeIcon icon={faUtensils} size="2x" color="gray" />
+            <hr className="title-divider-right"/>
+          </div>
         </div>
         {!isLoading ? 
         (
@@ -73,8 +81,8 @@ export default class Menu extends React.Component{
                     <div className="dish-img-container">
                       <img
                         onError={(event) => { event.target.src = "/favicon.png"; }}
-                        src="/logo192.png"
-                        width="275"
+                        src="/menu-item-img-default.jpg"
+                        width="298"
                         height="200"
                         alt="dish"
                       />
