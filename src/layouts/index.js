@@ -1,18 +1,19 @@
 import React from "react";
 import EmployeeLayout from "./EmployeeLayout";
 import CustomerLayout from "./CustomerLayout";
-
-const Layout = ({ page, type, ...props }) => {
-  const Page = page;
+import authPage from "../auth";
+const Layout = ({ page, isPrivate, type, ...props }) => {
+  //Need to use user role
+  const Page = authPage(page, isPrivate);
   return (
     <>
       {type === "employee" ? (
         <EmployeeLayout {...props}>
-          <Page />
+          <Page {...props} />
         </EmployeeLayout>
       ) : (
         <CustomerLayout {...props}>
-          <Page />
+          <Page {...props} />
         </CustomerLayout>
       )}
     </>
