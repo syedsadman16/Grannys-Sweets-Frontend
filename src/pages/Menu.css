@@ -1,0 +1,108 @@
+.page-title-container{
+    margin: auto;
+    width: max-content;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.page-title-text {
+    font-size: 3rem;
+}
+
+.menu-icon-divider-container {
+    display: flex;
+}
+
+.menu-items-container{
+    margin-top: 20px;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.title-divider-left {
+    background-color: gray;
+    width: 100px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    margin-right: 5px;
+}
+
+.title-divider-right {
+    background-color: gray;
+    width: 100px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+.item-container {
+    width: 300px;
+    height: 400px;
+    background-color: #dbdbdb;
+    margin-right: 25px;
+    margin-left: 25px;
+    border: 1px solid #969696;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.dish-img-container {
+    width: 298px;
+    height: 200px;
+}
+
+.dish-title-container {
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+    font-size:  25px;
+    font-family: bold;
+}
+
+.dish-desc-container {
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 275px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+.price-add-btn-container {
+    margin: 0 auto;
+    width: 75%;
+    display: flex;  
+}
+
+.dish-price-container {
+    font-size: 25px;
+    margin: auto;
+    width: 50%;
+}
+
+.add-cart-btn {
+    display: flex; 
+    width: 50%;
+}
+
+.item-container:hover {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    border: 1px solid #212121;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-2px, 0px) rotate(1deg); }
+    30% { transform: translate(2px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+}
