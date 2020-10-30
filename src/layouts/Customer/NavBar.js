@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { isEmpty } from "lodash";
-import { logout } from "../redux/actions/user";
+import { logout } from "../../redux/actions/user";
 
 import {
   Nav,
@@ -34,10 +34,10 @@ const NavBar = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse>
         <Nav className="mr-auto">
-          <Link to="/Menu">
+          <Link to="/menu">
             <Navbar.Text>Menu</Navbar.Text>
           </Link>
-          <Link to="/Chefs">
+          <Link to="/chefs">
             <Navbar.Text>Chefs</Navbar.Text>
           </Link>
           <Form inline>

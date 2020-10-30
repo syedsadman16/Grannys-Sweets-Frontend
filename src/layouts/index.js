@@ -1,10 +1,12 @@
 import React from "react";
-import EmployeeLayout from "./EmployeeLayout";
-import CustomerLayout from "./CustomerLayout";
+import EmployeeLayout from "./Employee";
+import CustomerLayout from "./Customer";
 import authPage from "../auth";
+
 const Layout = ({ page, isPrivate, type, ...props }) => {
   //Need to use user role
   const Page = authPage(page, isPrivate);
+
   return (
     <>
       {type === "employee" ? (
