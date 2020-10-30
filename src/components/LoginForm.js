@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/actions/user";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { Button, Form, } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+
+import './LoginForm.css';
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -18,7 +24,8 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault()
     try {
       await dispatch(login({ username, password }, history));
     } catch (err) {
@@ -26,32 +33,52 @@ const LoginForm = () => {
     }
   };
 
-  return (
-    <div>
-      <label htmlFor="username">
-        <b>Username</b>
-      </label>
-      <input
-        type="text"
-        placeholder="Enter Username"
-        name="username"
-        value={username}
-        onChange={handleUsernameChange}
-      />
+  const handleInvalidLogin = () => {
+    alert(error);
+    setError("");
+    setPassword("");
+    document.getElementById("password-field").focus()
+  };
 
-      <label htmlFor="password">
-        <b>Password</b>
-      </label>
-      <input
-        type="password"
-        placeholder="Enter Password"
-        name="password"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-      <button onClick={handleLogin}>Login</button>
-      {error && <div>{error}</div>}
+  return (
+    <>
+    <div className="sign-in-title">
+      Sign-In
     </div>
+    <div className="menu-icon-divider-container">
+      <hr className="title-divider-left"/>
+      <FontAwesomeIcon icon={faUtensils} size="2x" color="gray" />
+      <hr className="title-divider-right"/>
+    </div>
+    <div className="form-container">
+      <Form onSubmit={handleLogin}>
+        <Form.Group>
+          <Form.Label>Username</Form.Label>
+            <Form.Control autoFocus name="username" value={username} onChange={handleUsernameChange} placeholder="Enter Username"/>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password</Form.Label>
+            <Form.Control type="password" id="password-field" name="password" value={password} onChange={handlePasswordChange} placeholder="Enter Password" />
+        </Form.Group>
+        <div className="signin-btn-container">
+          <Button variant="success" type="submit" block>
+            Signin
+          </Button>
+          <hr className="signin-create-divider"/>
+        </div>
+      </Form>
+      <Link to="/Signup">
+        <Button variant="primary" type="submit" block>
+          Create Account
+        </Button>
+      </Link>
+    </div>
+    {error !== "" ? 
+    handleInvalidLogin()
+    : 
+    null
+    }
+    </>
   );
 };
 
