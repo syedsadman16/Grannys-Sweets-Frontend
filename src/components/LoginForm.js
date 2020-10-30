@@ -62,7 +62,7 @@ const LoginForm = () => {
         </Form.Group>
         <div className="signin-btn-container">
           <Button variant="success" type="submit" block>
-            Signin
+            Sign In
           </Button>
           <hr className="signin-create-divider"/>
         </div>
