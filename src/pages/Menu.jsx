@@ -80,8 +80,8 @@ export default class Menu extends React.Component{
                   <div className="item-container">
                     <div className="dish-img-container">
                       <img
-                        onError={(event) => { event.target.src = "/favicon.png"; }}
-                        src="/menu-item-img-default.jpg"
+                        onError={(event) => { event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico"; }}
+                        src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
                         width="298"
                         height="200"
                         alt="dish"
