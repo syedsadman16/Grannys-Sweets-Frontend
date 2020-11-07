@@ -2,6 +2,7 @@ import React from "react";
 import Menu from "./pages/Menu";
 import Chefs from "./pages/Chefs";
 import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Employee/Home";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -35,7 +36,11 @@ const Routes = () => {
         path="/signin"
         render={(props) => <Layout page={Signin} {...props} />}
       />
-      <Route exact path="/signup" render={(props) => <>Signup</>} />
+      <Route 
+        exact 
+        path="/signup" 
+        render={(props) => <Layout page={Signup} {...props} />} 
+      />
       <Route
         exact
         path="/account"
