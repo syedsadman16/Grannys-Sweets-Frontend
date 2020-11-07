@@ -6,7 +6,6 @@ import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import { Button, Form } from "react-bootstrap";
 
 import "./SignupForm.css";
-import { set } from "lodash";
 
 const SignupForm = () => {
 	const [username, setUsername] = useState("");
