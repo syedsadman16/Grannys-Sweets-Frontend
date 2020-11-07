@@ -32,15 +32,11 @@ const SignupForm = () => {
 		e.preventDefault();
 		//REDUX REGISTER ACOUNT CALL HERE//
 		alert("Account Registered")
-	}
+	};
 
-	const handleSetUserAsCustomer = () => {
-		setUserType("customer")
-	}
-
-	const handleSetUserAsChef = () => {
-		setUserType("chef")
-	}
+	const handleUserTypeChange = (e) => {
+		setUserType(e.target.value)
+	};
 
   return (
     <>
@@ -98,14 +94,16 @@ const SignupForm = () => {
 									label="customer"
 									name="user-type"
 									id="customer"
-									onChange={handleSetUserAsCustomer}
+									value="customer"
+									onChange={handleUserTypeChange}
 								/>
 								<Form.Check inline
 									type="radio"
 									label="chef"
 									name="user-type"
 									id="chef"
-									onChange={handleSetUserAsChef}
+									value="chef"
+									onChange={handleUserTypeChange}
 								/>
 							</Form.Group>
 						</Form.Group>
@@ -120,6 +118,6 @@ const SignupForm = () => {
 			{console.log(username,address,password, userType)}
     </>
   )
-}
+};
 
 export default SignupForm;
