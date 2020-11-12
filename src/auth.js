@@ -6,14 +6,15 @@ import { isEmpty } from "lodash";
 export default (OriginalComponent, isPrivate = false) => {
   class ComposedComponent extends Component {
     checkAuth = async () => {
+      const user = this.props.user;
       await this.props.getUser(localStorage.getItem("userId"));
-      if (isEmpty(this.props.user) && isPrivate) {
+      if (isEmpty(user) && isPrivate) {
         this.props.history.push("/signin");
       }
       if (
-        !isEmpty(this.props.user) &&
+        !isEmpty(user) &&
         (this.props.location.pathname === "/signin" ||
-          this.props.location.pathname === "/register")
+          this.props.location.pathname === "/signup")
       ) {
         this.props.history.push("/");
       }
@@ -28,9 +29,9 @@ export default (OriginalComponent, isPrivate = false) => {
     }
   }
 
-  const mapStateToProps = (state) => {
+  const mapStateToProps = ({ user }) => {
     return {
-      user: state.user,
+      user,
     };
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../components/CustomerNav";
+import NavBar from "./NavBar";
 
 const CustomerLayout = ({ children }) => {
   return (
