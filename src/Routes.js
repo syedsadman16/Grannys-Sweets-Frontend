@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./pages/Menu";
-import Chefs from "./pages/Chefs";
+import Chefs from "./pages/Chefs/Chefs";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";

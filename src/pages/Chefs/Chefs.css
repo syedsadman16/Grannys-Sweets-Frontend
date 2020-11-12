@@ -1,0 +1,15 @@
+.chef-items-container {
+    width: 300px;
+    height: 400px;
+    background-color: #dbdbdb;
+    margin-right: 25px;
+    margin-left: 25px;
+    border: 1px solid #969696;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.chef-img-container {
+    width: 298px;
+    height: 200px;
+}
