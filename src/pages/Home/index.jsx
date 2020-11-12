@@ -13,8 +13,8 @@ export default class Home extends React.Component{
         <>
         <div className="img-section-container">
           <img className="img1"
-            onError={(event) => { event.target.src = "/favicon.png"; }}
-            src="/homepage-img.png"
+            onError={(event) => { event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico"; }}
+            src="/Online-Restaurant-System-Frontend/homepage-img.png"
             width="100%"
             height="500"
             alt="dish"

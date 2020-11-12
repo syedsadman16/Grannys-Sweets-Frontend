@@ -27,17 +27,12 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setError("Loading...");
       await dispatch(login({ username, password }, history));
     } catch (err) {
       setError("Can't Login. Please try again.");
+      document.getElementById("password-field").focus();
     }
-  };
-
-  const handleInvalidLogin = () => {
-    alert(error);
-    setError("");
-    setPassword("");
-    document.getElementById("password-field").focus();
   };
 
   return (
@@ -54,6 +49,7 @@ const LoginForm = () => {
             <Form.Label>Username</Form.Label>
             <Form.Control
               autoFocus
+              required
               name="username"
               value={username}
               onChange={handleUsernameChange}
@@ -63,6 +59,7 @@ const LoginForm = () => {
           <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
+              required
               type="password"
               id="password-field"
               name="password"
@@ -75,6 +72,7 @@ const LoginForm = () => {
             <Button variant="success" type="submit" block>
               Sign In
             </Button>
+            {error && <div>{error}</div>}
             <hr className="signin-create-divider" />
           </div>
         </Form>
@@ -84,7 +82,6 @@ const LoginForm = () => {
           </Button>
         </Link>
       </div>
-      {error !== "" ? handleInvalidLogin() : null}
     </>
   );
 };

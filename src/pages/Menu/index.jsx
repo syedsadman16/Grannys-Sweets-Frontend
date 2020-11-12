@@ -58,7 +58,6 @@ export default class Menu extends React.Component {
 
   render() {
     const { data, isLoading } = this.state;
-    console.log(data);
     return (
       <>
         <div className="page-title-container">
@@ -84,9 +83,9 @@ export default class Menu extends React.Component {
                     <div className="dish-img-container">
                       <img
                         onError={(event) => {
-                          event.target.src = "/favicon.png";
+                          event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico";
                         }}
-                        src="/menu-item-img-default.jpg"
+                        src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
                         width="298"
                         height="200"
                         alt="dish"
