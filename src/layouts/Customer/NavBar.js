@@ -34,10 +34,10 @@ const NavBar = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse>
         <Nav className="mr-auto">
-          <Link to="/menu">
+          <Link to="/menu" className="header-link">
             <Navbar.Text>Menu</Navbar.Text>
           </Link>
-          <Link to="/chefs">
+          <Link to="/chefs" className="header-link">
             <Navbar.Text>Chefs</Navbar.Text>
           </Link>
           <Form inline>

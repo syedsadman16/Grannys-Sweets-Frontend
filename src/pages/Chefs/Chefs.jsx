@@ -23,17 +23,17 @@ export default class Chefs extends React.Component{
         {
           chefId: 1,
           chefName: "Gordan Ramsay",
-          dishDescription: "Young chef specializes in making sweet donuts",
+          chefDescription: "Multi-Michelin starred chef and star of Hell's Kitchen",
         },
         {
           chefId: 2,
           chefName: "Guy Fieri",
-          dishDescription: "Young chef specializes in making sweet donuts",
+          chefDescription: "An American restaurateur, author, and an Emmy Award winning television presenter",
         },
         {
           chefId: 3,
           chefName: "Wolfgang Puck",
-          dishDescription: "Young chef specializes in making sweet donuts",
+          chefDescription: "Wolfgang Johannes Puck is an Austrian-American chef, restaurateur, and actor",
         },
       ],
     });
@@ -68,12 +68,25 @@ export default class Chefs extends React.Component{
                           onError={(event) => {
                             event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico";
                           }}
-                          src="/Online-Restaurant-System-Frontend/chef-img-default.jpeg"
+                          src="/Online-Restaurant-System-Frontend/chef-img-default.jpg"
                           width="298"
-                          height="200"
-                          alt="dish"
+                          height="230"
+                          alt="chef"
                         />
                       </div>
+                      <Divider />
+                      <div className="chef-title-container">
+                        {el.chefName}
+                      </div>
+                      {el.chefDescription.length > 71 ? (
+                      <div className="chef-desc-container">
+                        {el.chefDescription.substring(0, 71) + " ..."}
+                      </div>
+                    ) : (
+                      <div className="chef-desc-container">
+                        {el.chefDescription}
+                      </div>
+                    )}
                     </div>
                   </Grid>
                 ))}

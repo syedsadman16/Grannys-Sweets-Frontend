@@ -11,5 +11,27 @@
 
 .chef-img-container {
     width: 298px;
-    height: 200px;
+    height: 230px;
+}
+
+.chef-title-container {
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+    font-size:  25px;
+    font-family: bold;
+    padding-bottom: 7px;
+}
+
+.chef-desc-container {
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 275px;
+    min-height: 50px;
+    max-height: 50px;
 }
