@@ -58,7 +58,6 @@ export default class Menu extends React.Component {
 
   render() {
     const { data, isLoading } = this.state;
-    console.log(data);
     return (
       <>
         <div className="page-title-container">
