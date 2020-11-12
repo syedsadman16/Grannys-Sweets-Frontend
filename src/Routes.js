@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "./pages/Menu/Menu";
+import Menu from "./pages/Menu";
 import Chefs from "./pages/Chefs";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
