@@ -105,6 +105,14 @@ const SignupForm = () => {
 									value="chef"
 									onChange={handleUserTypeChange}
 								/>
+								<Form.Check inline
+									type="radio"
+									label="deliverer"
+									name="user-type"
+									id="deliverer"
+									value="deliverer"
+									onChange={handleUserTypeChange}
+								/>
 							</Form.Group>
 						</Form.Group>
 					</fieldset>
