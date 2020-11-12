@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "./pages/Menu";
+import Menu from "./pages/Menu/Menu";
 import Chefs from "./pages/Chefs";
 import Signin from "./pages/Signin";
 import { Switch, Route, Redirect } from "react-router-dom";
