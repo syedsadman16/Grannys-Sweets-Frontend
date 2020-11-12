@@ -74,10 +74,10 @@ export default class Chefs extends React.Component{
                           alt="chef"
                         />
                       </div>
-                      <Divider />
                       <div className="chef-title-container">
                         {el.chefName}
                       </div>
+                      <Divider />
                       {el.chefDescription.length > 71 ? (
                       <div className="chef-desc-container">
                         {el.chefDescription.substring(0, 71) + " ..."}
