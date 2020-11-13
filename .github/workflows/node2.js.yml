@@ -1,0 +1,36 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+ 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Packages
+        run: npm install
+      - name: Deploy to GH Pages
+        run: |
+          git config --global user.email ${{secrets.GH_EMAIL}}
+          git config --global user.name ${{secrets.GH_USERNAME}}
+          git remote set-url origin  https://${{secrets.PAT_TOKEN}}@github.com/${{secrets.GH_USERNAME}}/syedsadman16/Online-Restaurant-System-Frontend
+          npm run deploy
+        env:
+          CI: false
