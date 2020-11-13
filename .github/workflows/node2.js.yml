@@ -30,7 +30,7 @@ jobs:
         run: |
           git config --global user.email ${{secrets.GH_EMAIL}}
           git config --global user.name ${{secrets.GH_USERNAME}}
-          git remote set-url origin  https://${{secrets.PAT_TOKEN}}@github.com/${{secrets.GH_USERNAME}}/syedsadman16/Online-Restaurant-System-Frontend
+          git remote set-url origin  https://${{secrets.PAT_TOKEN}}@github.com/${{secrets.GH_USERNAME}}/Online-Restaurant-System-Frontend.git
           npm run deploy
         env:
           CI: false
