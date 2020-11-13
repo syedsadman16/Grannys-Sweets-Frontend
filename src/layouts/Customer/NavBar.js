@@ -40,10 +40,6 @@ const NavBar = () => {
           <Link to="/chefs" className="header-link">
             <Navbar.Text>Chefs</Navbar.Text>
           </Link>
-          <Form inline>
-            <FormControl className="mr-sm-2" type="text" placeholder="Search" />
-            <Button variant="outline-info">Search</Button>
-          </Form>
         </Nav>
         <Nav>
           {isEmpty(user) && (

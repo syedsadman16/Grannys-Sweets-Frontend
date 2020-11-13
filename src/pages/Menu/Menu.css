@@ -4,7 +4,6 @@
     margin-bottom: 10px;
     text-align: center;
     padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .page-title-text {
@@ -35,6 +34,10 @@
     margin-top: 15px;
     margin-bottom: 0px;
     margin-left: 5px;
+}
+
+.menu-searchbox-container {
+    margin-top: 20px;
 }
 
 .item-container {
