@@ -31,7 +31,6 @@ const LoginForm = () => {
       await dispatch(login({ username, password }, history));
     } catch (err) {
       setError("Can't Login. Please try again.");
-      document.getElementById("password-field").focus();
     }
   };
 
