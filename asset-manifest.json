@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Online-Restaurant-System-Frontend/static/css/main.9d206dcd.chunk.css",
-    "main.js": "/Online-Restaurant-System-Frontend/static/js/main.8aa2e248.chunk.js",
-    "main.js.map": "/Online-Restaurant-System-Frontend/static/js/main.8aa2e248.chunk.js.map",
+    "main.css": "/Online-Restaurant-System-Frontend/static/css/main.c92c3355.chunk.css",
+    "main.js": "/Online-Restaurant-System-Frontend/static/js/main.835249c5.chunk.js",
+    "main.js.map": "/Online-Restaurant-System-Frontend/static/js/main.835249c5.chunk.js.map",
     "runtime-main.js": "/Online-Restaurant-System-Frontend/static/js/runtime-main.7a1156cd.js",
     "runtime-main.js.map": "/Online-Restaurant-System-Frontend/static/js/runtime-main.7a1156cd.js.map",
     "static/css/2.d9ad5f5c.chunk.css": "/Online-Restaurant-System-Frontend/static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.94c84d65.chunk.js": "/Online-Restaurant-System-Frontend/static/js/2.94c84d65.chunk.js",
-    "static/js/2.94c84d65.chunk.js.map": "/Online-Restaurant-System-Frontend/static/js/2.94c84d65.chunk.js.map",
+    "static/js/2.3a87e427.chunk.js": "/Online-Restaurant-System-Frontend/static/js/2.3a87e427.chunk.js",
+    "static/js/2.3a87e427.chunk.js.map": "/Online-Restaurant-System-Frontend/static/js/2.3a87e427.chunk.js.map",
     "index.html": "/Online-Restaurant-System-Frontend/index.html",
-    "precache-manifest.709585859f6355238dd33e7fe744b89c.js": "/Online-Restaurant-System-Frontend/precache-manifest.709585859f6355238dd33e7fe744b89c.js",
+    "precache-manifest.ae4b0ff711405c89caf94b820581c94c.js": "/Online-Restaurant-System-Frontend/precache-manifest.ae4b0ff711405c89caf94b820581c94c.js",
     "service-worker.js": "/Online-Restaurant-System-Frontend/service-worker.js",
     "static/css/2.d9ad5f5c.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/2.d9ad5f5c.chunk.css.map",
-    "static/css/main.9d206dcd.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/main.9d206dcd.chunk.css.map",
-    "static/js/2.94c84d65.chunk.js.LICENSE.txt": "/Online-Restaurant-System-Frontend/static/js/2.94c84d65.chunk.js.LICENSE.txt"
+    "static/css/main.c92c3355.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/main.c92c3355.chunk.css.map",
+    "static/js/2.3a87e427.chunk.js.LICENSE.txt": "/Online-Restaurant-System-Frontend/static/js/2.3a87e427.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7a1156cd.js",
     "static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.94c84d65.chunk.js",
-    "static/css/main.9d206dcd.chunk.css",
-    "static/js/main.8aa2e248.chunk.js"
+    "static/js/2.3a87e427.chunk.js",
+    "static/css/main.c92c3355.chunk.css",
+    "static/js/main.835249c5.chunk.js"
   ]
 }
