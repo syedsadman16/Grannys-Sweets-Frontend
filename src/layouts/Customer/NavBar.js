@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faBriefcase, faCookieBite } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -28,8 +28,8 @@ const NavBar = () => {
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Link to="/">
-        <Navbar.Brand>Postmates 2.0</Navbar.Brand>
+      <Link to="/" className="header-link">
+        <FontAwesomeIcon icon={faCookieBite} size="2x" color="white" />
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse>

@@ -6,13 +6,31 @@
 }
 
 .navbar-text {
-    font-size: 1.5em;
+    font-size: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    font-weight:600;
+    letter-spacing: 1.5px;
 }
 
 .header-link {
-    margin-right: 15px;
+    margin-right: 25px;
 }
 
 .form-inline {
     margin-left: 5px;
+}
+
+.navbar-dark .navbar-text {
+    color: white;
+}
+
+.navbar {
+    padding-right: 12rem;
+    padding-left: 12rem;
+}
+
+.navbar__link--active {
+    border-bottom: 3px solid #29b6f6;
+    transition: border-bottom .5s ease-in-out;
 }
