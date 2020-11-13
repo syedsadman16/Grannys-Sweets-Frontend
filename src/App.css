@@ -11,9 +11,10 @@
     color: white;
     font-weight:600;
     letter-spacing: 1.5px;
+    margin-right: 25px;
 }
 
-.header-link {
+.header-icon {
     margin-right: 25px;
 }
 
@@ -25,12 +26,23 @@
     color: white;
 }
 
+.dropdown-toggle::after {
+    color: white;
+}
+
 .navbar {
     padding-right: 12rem;
     padding-left: 12rem;
 }
 
-.navbar__link--active {
-    border-bottom: 3px solid #29b6f6;
-    transition: border-bottom .5s ease-in-out;
+.nav-logout-text {
+    cursor: pointer;
+}
+
+.nav-link {
+    padding: 0;
+}
+
+.nav-logout-text {
+    color: white;
 }

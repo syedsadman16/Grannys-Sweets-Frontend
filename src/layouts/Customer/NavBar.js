@@ -28,45 +28,50 @@ const NavBar = () => {
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Link to="/" className="header-link">
+      <Link to="/" className="header-icon">
         <FontAwesomeIcon icon={faCookieBite} size="2x" color="white" />
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse>
         <Nav className="mr-auto">
-          <Link to="/menu" className="header-link">
+          <Link to="/menu">
             <Navbar.Text>Menu</Navbar.Text>
           </Link>
-          <Link to="/chefs" className="header-link">
+          <Link to="/chefs">
             <Navbar.Text>Chefs</Navbar.Text>
           </Link>
         </Nav>
-        <Nav>
           {isEmpty(user) && (
             <Link to="/signin">
               <Navbar.Text>Sign-In</Navbar.Text>
             </Link>
           )}
           {!isEmpty(user) && (
-            <Navbar.Text onClick={handleLogout} className="btn">
+            <Navbar.Text onClick={handleLogout} className="nav-logout-text">
               Logout
             </Navbar.Text>
           )}
           {!isEmpty(user) && user.role === "CUSTOMER" && (
             <NavDropdown
-              title={<FontAwesomeIcon icon={faCartPlus} size="2x" />}
+              title={<FontAwesomeIcon icon={faCartPlus} size="2x" color="white"/>}
               id="collapsible-nav-dropdown"
+              color="white"
               alignRight
             >
               <NavDropdown.Item>My Cart</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/customerprofile">Profile</NavDropdown.Item>
             </NavDropdown>
           )}
-          {!isEmpty(user) && user.role !== "CUSTOMER" && (
-            <Link to="/employee" className="d-flex  align-items-center">
-              <FontAwesomeIcon icon={faBriefcase} size="2x" />
-            </Link>
+          {!isEmpty(user) && user.role === "MANAGER" && (
+            <NavDropdown
+              title={<FontAwesomeIcon icon={faBriefcase} size="2x" color="white"/>}
+              id="collapsible-nav-dropdown"
+              color="white"
+              alignRight
+            >
+              <NavDropdown.Item as={Link} to="/employee">Profile</NavDropdown.Item>
+            </NavDropdown>
           )}
-        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
