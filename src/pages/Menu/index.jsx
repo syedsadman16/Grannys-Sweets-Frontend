@@ -75,6 +75,20 @@ export default class Menu extends React.Component {
           dishPrice: "15.99",
           keywords: ["cake", "vegan"]
         },
+        {
+          dishId: 7,
+          dishTitle: "Boston Cream Donut",
+          dishDescription: "Some sort of description for a donut",
+          dishPrice: "2.99",
+          keywords: ["donut"]
+        },
+        {
+          dishId: 8,
+          dishTitle: "Vanilla Cream Donut",
+          dishDescription: "Some sort of description for a donut",
+          dishPrice: "2.99",
+          keywords: ["donut"]
+        },
       ],
     });
   }
