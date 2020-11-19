@@ -109,3 +109,19 @@
     30% { transform: translate(2px, 2px) rotate(0deg); }
     40% { transform: translate(1px, -1px) rotate(1deg); }
 }
+
+.modal-backdrop {
+    background-color: rgba(0,0,0,.4) !important;
+}
+
+.modal-content {
+    text-align: center;
+}
+.modal-footer {
+    display: block;
+    text-align: center;
+}
+
+.modal-signin-message {
+    padding-bottom: 1rem;
+}

@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Divider } from "@material-ui/core/";
+import MenuItemModal from "./MenuItemModal";
 import { 
   Form,
-  FormControl,
-  Button 
+  Button, 
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
@@ -11,16 +11,27 @@ import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import "./Menu.css";
 
 export default class Menu extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       data: [],
       isLoading: true,
       searchText: '',
+      modalShow: false,
+      modalData: {},
     };
-
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.handleModalShow = this.handleModalShow.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
+  }
+
+  handleModalShow(el){
+    this.setState({modalShow: true, modalData: el})
+  }
+
+  handleModalClose() {
+    this.setState({modalShow: false})
   }
 
   handleSearchTextChange(event) {
@@ -94,7 +105,7 @@ export default class Menu extends React.Component {
   }
 
   render() {
-    const { data, isLoading, searchText } = this.state;
+    const { data, isLoading, searchText, modalShow , modalData } = this.state;
     return (
       <>
         <div className="page-title-container">
@@ -127,9 +138,9 @@ export default class Menu extends React.Component {
             > 
             {
             data.filter(p => p.keywords.some( (s) => {
-              if(searchText == '')
+              if(searchText === '')
                   return s
-              else if(s.indexOf(searchText.toLowerCase()) != -1){
+              else if(s.indexOf(searchText.toLowerCase()) !== -1){
                   return s
               }
             }    
@@ -166,7 +177,7 @@ export default class Menu extends React.Component {
                           ${el.dishPrice}
                         </div>
                         <div className="add-cart-btn">
-                          <Button variant="success">Add to Cart</Button>
+                          <Button variant="success" onClick={() => this.setState({modalShow: true, modalData: el})}>Add to Cart</Button>
                         </div>
                       </div>
                     </div>
@@ -174,6 +185,7 @@ export default class Menu extends React.Component {
                 ))
             }
             </Grid>
+            <MenuItemModal show={modalShow} onHide={this.handleModalClose} modalData={modalData} {...this.props}/>
           </div>
         ) : (
           <h3>Unable to Load Menu Data</h3>
