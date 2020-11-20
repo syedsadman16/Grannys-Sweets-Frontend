@@ -125,3 +125,22 @@
 .modal-signin-message {
     padding-bottom: 1rem;
 }
+
+.modal-item-img {
+    padding-top: 1rem;
+}
+
+.modal-dish-desc {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-keyword-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-quantity-form {
+    width: 50%;
+    margin: auto;
+}

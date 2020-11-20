@@ -19,19 +19,29 @@ export default class Menu extends React.Component {
       isLoading: true,
       searchText: '',
       modalShow: false,
-      modalData: {},
+      modalData: {
+        dishId: 1,
+        dishTitle: "Cup Cake",
+        dishDescription: "Some sort of description for a dish",
+        dishPrice: "5.99",
+        keywords: ["sweet", "cake", "cup"]
+      },
+      orderItemQuantity: null,
+      orderItemId: null,
     };
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
-    this.handleModalShow = this.handleModalShow.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
-  }
-
-  handleModalShow(el){
-    this.setState({modalShow: true, modalData: el})
+    this.handleModalOrder = this.handleModalOrder.bind(this);
   }
 
   handleModalClose() {
     this.setState({modalShow: false})
+  }
+
+  /* takes in a quantity from the modal state and updates here then makes backend order call*/
+  handleModalOrder(quantity) {
+    this.setState({orderItemQuantity: parseInt(quantity), modalShow: false });
+    /* MAKE ORDER BACKEND API CALL HERE*/
   }
 
   handleSearchTextChange(event) {
@@ -63,7 +73,7 @@ export default class Menu extends React.Component {
           dishTitle: "Birthday Cake",
           dishDescription: "Some sort of description for a dish",
           dishPrice: "2.99",
-          keywords: ["sweet", "cake", "low-fat", "birthday"]
+          keywords: ["sweet", "cake", "low-fat", "birthday","dessert"]
         },
         {
           dishId: 4,
@@ -84,28 +94,29 @@ export default class Menu extends React.Component {
           dishTitle: "Vegan Cake",
           dishDescription: "Some sort of description for a vegan cake",
           dishPrice: "15.99",
-          keywords: ["cake", "vegan"]
+          keywords: ["cake", "vegan", "low-fat"]
         },
         {
           dishId: 7,
           dishTitle: "Boston Cream Donut",
           dishDescription: "Some sort of description for a donut",
           dishPrice: "2.99",
-          keywords: ["donut"]
+          keywords: ["donut", "boston", "cream"]
         },
         {
           dishId: 8,
           dishTitle: "Vanilla Cream Donut",
           dishDescription: "Some sort of description for a donut",
           dishPrice: "2.99",
-          keywords: ["donut"]
+          keywords: ["donut","vanilla", "cream"]
         },
       ],
     });
   }
 
   render() {
-    const { data, isLoading, searchText, modalShow , modalData } = this.state;
+    const { data, isLoading, searchText, modalShow , modalData, orderItemId } = this.state;
+    console.log(this.state)
     return (
       <>
         <div className="page-title-container">
@@ -177,7 +188,7 @@ export default class Menu extends React.Component {
                           ${el.dishPrice}
                         </div>
                         <div className="add-cart-btn">
-                          <Button variant="success" onClick={() => this.setState({modalShow: true, modalData: el})}>Add to Cart</Button>
+                          <Button variant="success" onClick={() => this.setState({modalShow: true, modalData: el, orderItemId: el.dishId})}>Add to Cart</Button>
                         </div>
                       </div>
                     </div>
@@ -185,7 +196,7 @@ export default class Menu extends React.Component {
                 ))
             }
             </Grid>
-            <MenuItemModal show={modalShow} onHide={this.handleModalClose} modalData={modalData} {...this.props}/>
+            <MenuItemModal show={modalShow} handleOrder={this.handleModalOrder} onHide={this.handleModalClose} modalData={modalData} {...this.props} />
           </div>
         ) : (
           <h3>Unable to Load Menu Data</h3>
