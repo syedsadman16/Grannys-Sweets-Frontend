@@ -14,7 +14,7 @@ const Routes = () => {
   const userRole = useSelector(({ user }) => user.role);
   return (
     <Switch>
-      {/* Customer Routes */}
+      {/* Surfer Routes */}
 
       <Route
         exact
@@ -36,17 +36,21 @@ const Routes = () => {
         path="/signin"
         render={(props) => <Layout page={Signin} {...props} />}
       />
-      <Route 
-        exact 
-        path="/signup" 
-        render={(props) => <Layout page={Signup} {...props} />} 
-      />
       <Route
         exact
-        path="/account"
+        path="/signup"
+        render={(props) => <Layout page={Signup} {...props} />}
+      />
+
+      {/* Customer Routes */}
+
+      <Route
+        exact
+        path="/customer/account"
         render={(props) => (
           <Layout
             isPrivate={true}
+            type="authUser"
             page={() => <div>Customer Account</div>}
             {...props}
           />
@@ -61,7 +65,7 @@ const Routes = () => {
         render={(props) => (
           <Layout
             isPrivate={true}
-            type="employee"
+            type="authUser"
             page={Dashboard}
             {...props}
           />

@@ -9,14 +9,18 @@ export default (OriginalComponent, isPrivate = false) => {
       const user = this.props.user;
       await this.props.getUser(localStorage.getItem("userId"));
       if (isEmpty(user) && isPrivate) {
-        this.props.history.push("/signin");
+        return this.props.history.push("/signin");
       }
       if (
-        !isEmpty(user) &&
-        (this.props.location.pathname === "/signin" ||
-          this.props.location.pathname === "/signup")
+        (!isEmpty(user) &&
+          (this.props.location.pathname === "/signin" ||
+            this.props.location.pathname === "/signup")) ||
+        (["CUSTOMER", "VIP"].includes(user.role) &&
+          this.props.location.pathname.startsWith("/employee")) ||
+        (!["CUSTOMER", "VIP"].includes(user.role) &&
+          this.props.location.pathname.startsWith("/customer"))
       ) {
-        this.props.history.push("/");
+        return this.props.history.push("/");
       }
     };
 
