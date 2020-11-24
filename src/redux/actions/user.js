@@ -45,6 +45,7 @@ const getUser = (id) => {
           username: data.username,
           role: data.role,
           closed: data.closed,
+          verified: data.verified,
         })
       );
     } catch (err) {}
