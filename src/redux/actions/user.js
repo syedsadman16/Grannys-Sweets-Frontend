@@ -26,6 +26,7 @@ const login = (formData, history) => {
           username: data.username,
           role: data.role,
           closed: data.closed,
+          verified: data.verified,
         })
       );
       history.push("/");
