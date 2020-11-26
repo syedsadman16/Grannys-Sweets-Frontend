@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Discussions from "./pages/Discussions";
 import Comments from "./pages/Comments";
+import Balance from "./pages/Balance";
 import Dashboard from "./pages/Employee/Home";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -68,6 +69,14 @@ const Routes = () => {
             page={() => <div>Customer Account</div>}
             {...props}
           />
+        )}
+      />
+
+      <Route
+        exact
+        path="/customer/balance"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Balance} {...props} />
         )}
       />
 

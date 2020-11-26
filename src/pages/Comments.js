@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import api from "axios";
 import { isEmpty } from "lodash";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Comments() {
   const [comments, setComments] = useState([]);
@@ -22,7 +22,6 @@ export default function Comments() {
     } catch (e) {}
   };
   const showList = () => {
-    console.log(comments);
     return comments.map((item, index) => (
       <div key={index}>
         <p>
@@ -44,7 +43,6 @@ export default function Comments() {
           discussion: { id },
         });
         setComments((prev) => [...prev, data]);
-        console.log(data);
       } catch (error) {}
     } else {
       setMessage("Only Customers can comment.");

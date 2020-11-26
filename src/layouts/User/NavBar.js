@@ -44,6 +44,9 @@ const NavBar = () => {
           <Link to="/chefs">
             <Navbar.Text>Chefs</Navbar.Text>
           </Link>
+          <Link to="/discussions">
+            <Navbar.Text>Discussions</Navbar.Text>
+          </Link>
         </Nav>
         {isEmpty(user) && (
           <Link to="/signin">

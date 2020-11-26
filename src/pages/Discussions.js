@@ -13,7 +13,6 @@ export default function Discussions() {
     try {
       let { data } = await api.get("/discussion");
       setDiscussions(data);
-      console.log(data);
     } catch (e) {}
   };
 
@@ -27,7 +26,6 @@ export default function Discussions() {
       try {
         let { data } = await api.post("/discussion", { topic });
         setDiscussions((prev) => [...prev, data]);
-        console.log(data);
       } catch (error) {}
     } else {
       setMessage("Only Customer can create discussions.");

@@ -30,6 +30,7 @@ const login = (formData, history) => {
         })
       );
       history.push("/");
+      history.go(0);
     } catch (err) {
       throw err;
     }
@@ -49,6 +50,7 @@ const getUser = (id) => {
           verified: data.verified,
         })
       );
+      return data;
     } catch (err) {}
   };
 };
