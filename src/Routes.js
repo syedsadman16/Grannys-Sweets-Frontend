@@ -4,6 +4,8 @@ import Chefs from "./pages/Chefs/Chefs";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
+import Discussions from "./pages/Discussions";
+import Comments from "./pages/Comments";
 import Dashboard from "./pages/Employee/Home";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -40,6 +42,18 @@ const Routes = () => {
         exact
         path="/signup"
         render={(props) => <Layout page={Signup} {...props} />}
+      />
+
+      <Route
+        exact
+        path="/discussions"
+        render={(props) => <Layout page={Discussions} {...props} />}
+      />
+
+      <Route
+        exact
+        path="/discussions/:id"
+        render={(props) => <Layout page={Comments} {...props} />}
       />
 
       {/* Customer Routes */}
