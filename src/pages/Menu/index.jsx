@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
-
+import Rating from '@material-ui/lab/Rating';
 import "./Menu.css";
 
 export default class Menu extends React.Component {
@@ -51,11 +51,12 @@ export default class Menu extends React.Component {
 
   componentDidMount() {
     //**MAKE API CALL TO BACKEND HERE**//
-    axios.get('menu')
+    axios.get('http://localhost:8080/Menu')
     .then(element =>{
       console.log(element.data);
      let newData = element.data.map(element => ({
           dishId : element.id,
+          dishRating: element.rating,
           dishTitle: element.name,
           dishDescription: "random desc",
           dishPrice: element.price,
@@ -190,6 +191,9 @@ export default class Menu extends React.Component {
                       </div>
                       <Divider />
                       <div className="dish-title-container">{el.dishTitle}</div>
+                      <div className="rating-container">
+                        <Rating name="hover-feedback" value={el.rating} precision={0.5}/>
+                      </div>
                       {/* The following code renders the dish description */}
                       {/* If the dish description is too long, the substring is used followed by ellipses to indicate overflow */}
                       {el.dishDescription.length > 71 ? (
