@@ -54,13 +54,17 @@ export default class Menu extends React.Component {
     axios.get('menu')
     .then(element =>{
       console.log(element.data);
+      console.log(element.data[0].keyWord[0].keyWord)
      let newData = element.data.map(element => ({
           dishId : element.id,
           dishRating: element.averageRating,
           dishTitle: element.name,
-          dishDescription: "random desc",
+          dishDescription: element.description,
           dishPrice: element.price,
-          keywords: ["sweet","cake"]
+          isSpecial: element.special,
+          //keywords: ["Spicy","Dessert"]
+          keywords: element.keyWord.map(word=>
+            word.keyWord.toLowerCase())
         }))
         this.setState({ 
            data: [...this.state.data, ...newData],
@@ -166,7 +170,8 @@ export default class Menu extends React.Component {
               alignItems="center"
               spacing={2}
             > 
-            {
+            { 
+
             data.filter(p => p.keywords.some( (s) => {
               if(searchText === '')
                   return s
