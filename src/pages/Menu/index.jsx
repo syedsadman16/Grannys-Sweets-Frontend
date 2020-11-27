@@ -51,7 +51,7 @@ export default class Menu extends React.Component {
 
   componentDidMount() {
     //**MAKE API CALL TO BACKEND HERE**//
-    axios.get('http://localhost:8080/Menu')
+    axios.get('menu')
     .then(element =>{
       console.log(element.data);
      let newData = element.data.map(element => ({
