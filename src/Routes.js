@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 
 import Layout from "./layouts";
 import Users from "./pages/Users";
+import Customer from "./pages/Customer";
 
 const Routes = () => {
   const userRole = useSelector(({ user }) => user.role);
@@ -62,12 +63,23 @@ const Routes = () => {
 
       <Route
         exact
-        path="/customer/account"
+        path="/customer"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Customer} {...props} />
+        )}
+      />
+      <Route
+        exact
+        path="/customer/info"
         render={(props) => (
           <Layout
             isPrivate={true}
             type="authUser"
-            page={() => <div>Customer Account</div>}
+            page={() => (
+              <div>
+                Customer Account Extra Stuff to edit ((customerInfo model))
+              </div>
+            )}
             {...props}
           />
         )}

@@ -68,7 +68,7 @@ const NavBar = () => {
             alignRight
           >
             <NavDropdown.Item>My Cart</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/customer/account">
+            <NavDropdown.Item as={Link} to="/customer">
               Account
             </NavDropdown.Item>
           </NavDropdown>
