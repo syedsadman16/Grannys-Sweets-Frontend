@@ -5,6 +5,8 @@ import TopBar from "./NavBar/TopBar";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import GlobalStyles from "./GlobalStyles";
+import { useSelector } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -37,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 const DashboardLayout = ({ children }) => {
   const classes = useStyles();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
