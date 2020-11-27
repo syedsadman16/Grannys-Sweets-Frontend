@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../redux/actions/user";
+import { isEmpty } from "lodash";
 
 export default function Discussions() {
   const [discussions, setDiscussions] = useState([]);
   const [errorMessage, setMessage] = useState("");
   const [topic, setTopic] = useState("");
-  const role = useSelector(({ user }) => user.role);
+  const dispatch = useDispatch();
+
+  const user = useSelector(({ user }) => user);
 
   const fetchData = async () => {
     try {
@@ -22,10 +26,11 @@ export default function Discussions() {
 
   const createTopic = async (event) => {
     event.preventDefault();
-    if (["CUSTOMER", "VIP"].includes(role)) {
+    if (["CUSTOMER", "VIP"].includes(user.role)) {
       try {
         let { data } = await api.post("/discussion", { topic });
         setDiscussions((prev) => [...prev, data]);
+        await dispatch(getUser(user.id));
       } catch (error) {}
     } else {
       setMessage("Only Customer can create discussions.");
@@ -51,11 +56,12 @@ export default function Discussions() {
     <div>
       <form onSubmit={createTopic}>
         <input value={topic} onChange={handleChange} />
-        <button disabled={!topic} type="submit">
+        <button disabled={!topic || !user.role || user.closed} type="submit">
           Create a Discussion
         </button>
       </form>
-
+      {user.closed && <strong>Account Closed</strong>}
+      {isEmpty(user) && <strong>Sign in</strong>}
       <p>{errorMessage}</p>
       {!discussions.length ? <div>No Discussions</div> : showList()}
     </div>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import api from "axios";
 import { isEmpty } from "lodash";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../redux/actions/user";
 
 export default function Comments() {
   const [comments, setComments] = useState([]);
@@ -11,7 +12,8 @@ export default function Comments() {
   const [errorMessage, setMessage] = useState("");
   const [comment, setComment] = useState("");
   const [discussion, setDiscussion] = useState({});
-  const role = useSelector(({ user }) => user.role);
+  const dispatch = useDispatch();
+  const user = useSelector(({ user }) => user);
 
   const fetchData = async () => {
     try {
@@ -36,13 +38,14 @@ export default function Comments() {
 
   const createComment = async (event) => {
     event.preventDefault();
-    if (["CUSTOMER", "VIP"].includes(role)) {
+    if (["CUSTOMER", "VIP"].includes(user.role)) {
       try {
         let { data } = await api.post("/comment", {
           message: comment,
           discussion: { id },
         });
         setComments((prev) => [...prev, data]);
+        await dispatch(getUser(user.id));
       } catch (error) {}
     } else {
       setMessage("Only Customers can comment.");
@@ -57,9 +60,11 @@ export default function Comments() {
     <div>
       <form onSubmit={createComment}>
         <input value={comment} onChange={handleChange} />
-        <button disabled={!comment} type="submit">
+        <button disabled={!comment || !user.role || user.closed} type="submit">
           Comment
         </button>
+        {user.closed && <strong>Account Closed</strong>}
+        {isEmpty(user) && <strong>Sign in</strong>}
       </form>
       <p>{errorMessage}</p>
       <div>
