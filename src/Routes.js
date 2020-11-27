@@ -12,6 +12,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Layout from "./layouts";
+import Users from "./pages/Users";
 
 const Routes = () => {
   const userRole = useSelector(({ user }) => user.role);
@@ -92,6 +93,14 @@ const Routes = () => {
             page={Dashboard}
             {...props}
           />
+        )}
+      />
+
+      <Route
+        exact
+        path="/employee/users"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Users} {...props} />
         )}
       />
       <Route
