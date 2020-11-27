@@ -23,6 +23,7 @@ import {
   Users as UsersIcon,
   DollarSign as DollarSignIcon,
   List as ListIcon,
+  XCircle as XCircleIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -91,6 +92,13 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         title="All Users"
         icon={UsersIcon}
       />
+      <NavItem
+        href="/employee/taboo"
+        key="Add Taboo Words"
+        title="Add Taboo Words"
+        icon={XCircleIcon}
+      />
+      
     </List>
   );
 
@@ -102,10 +110,23 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     />
   );
 
+  const employeeAvatar = (
+    <Avatar
+      className={classes.avatar}
+      component={RouterLink}
+      to={"/employee"}
+    />
+  );
+
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        {customerAvatar}
+        {
+          role === "MANAGER" || role === "CHEF" || role === "DELIVERER" ?
+          employeeAvatar
+          :
+          customerAvatar
+        }
         <Typography className={classes.name} color="textPrimary" variant="h5">
           Role: {role}
         </Typography>
