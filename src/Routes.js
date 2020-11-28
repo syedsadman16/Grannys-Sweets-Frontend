@@ -11,6 +11,7 @@ import Balance from "./pages/Balance";
 import Dashboard from "./pages/Employee/Home";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import UserWarningCount from "./components/UserWarningCount";
 
 import Layout from "./layouts";
 import Users from "./pages/Users";
@@ -54,10 +55,16 @@ const Routes = () => {
         render={(props) => <Layout page={Discussions} {...props} />}
       />
 
-      <Route
+          <Route
         exact
         path="/discussions/:id"
         render={(props) => <Layout page={Comments} {...props} />}
+      />
+   {/*   
+   <Route
+        exact
+        path="/'warningcount"
+        render={(props) => <Layout page={UserWarningCount} {...props} />}
       />
 
       {/* Customer Routes */}

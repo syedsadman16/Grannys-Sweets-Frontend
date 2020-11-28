@@ -39,6 +39,7 @@ const Users = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [closedUsers, setClosedUsers] = useState([]);
   const [unverifiedUsers, setUnverifiedUsers] = useState([]);
+  const [employeeUsers, setEmployeeUsers] = useState([]);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -57,6 +58,7 @@ const Users = () => {
       setAllUsers(allUsers);
       setUnverifiedUsers(allUsers.filter( (el) => el.verified === false ));
       setClosedUsers(allUsers.filter( (el) => el.closed === true ));
+      setEmployeeUsers(allUsers.filter( (el) => el.role !== "CUSTOMER" && el.role !== "MANAGER"));
     }
     catch(E){}  
   };
@@ -74,10 +76,12 @@ const Users = () => {
 
   return user.role === "MANAGER" ? (
     <div>
+      {console.log(employeeUsers)}
       <Tabs centered value={value} onChange={handleChange} aria-label="simple tabs example">
         <Tab label="All Users"/>
         <Tab label="Unverified Users"/>
         <Tab label="Closed Users"/>
+        <Tab label="Employees"/>
       </Tabs>
       <TabPanel value={value} index={0}>
         <Table aria-label="simple table">
@@ -208,6 +212,34 @@ const Users = () => {
             }
           </TableBody>
         </Table>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>Username</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                employeeUsers.map( (el) => (
+                  <TableRow key={el.id}>
+                    <TableCell scope="row">
+                      {el.id}
+                    </TableCell>
+                    <TableCell>
+                      {el.role}
+                    </TableCell>
+                    <TableCell>
+                      {el.username}
+                    </TableCell>  
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          </Table>
       </TabPanel>
     </div>
   ) 
