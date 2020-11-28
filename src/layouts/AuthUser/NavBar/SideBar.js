@@ -94,8 +94,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       />
       <NavItem
         href="/employee/taboo"
-        key="Add Taboo Words"
-        title="Add Taboo Words"
+        key="Taboo Words"
+        title="Taboo Words"
         icon={XCircleIcon}
       />
       
