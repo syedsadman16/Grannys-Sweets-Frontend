@@ -6,10 +6,16 @@ import {
 } from "react-bootstrap";
 import axios from 'axios';
 import Rating from '@material-ui/lab/Rating';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import MenuItemModal from "./Menu/MenuItemModal";
+import "./Menu/Menu.css";
 
 function VipMenu(){
     const [dishes, setDishes] = useState([]);
+    const [modalState, setModalState] = useState(false);
+    const [modalData, setModalData] = useState([]);
+    const [quantity, setQuantity] = useState(0);
 
     const url = '/menu';
     useEffect( () => {
@@ -21,6 +27,11 @@ function VipMenu(){
       testing();
     }, [url]);
 
+
+  function handleModalOrder(quantity) {
+    setQuantity( parseInt(quantity));
+    setModalState(false);
+  }
     
   return (
     <div className="App">
@@ -32,21 +43,10 @@ function VipMenu(){
           <div className="page-desc-text">Thanks for being a VIP member! Enjoy access to our special dishes</div>
           <div className="menu-icon-divider-container">
             <hr className="title-divider-left" />
-            
+            <FontAwesomeIcon icon={faUtensils} size="2x" color="gray" />
             <hr className="title-divider-right" />
           </div>
-        <div className="menu-searchbox-container">
-          <Form inline>
-            <Form.Control className="mr-sm-2" 
-              type="text"
-              value="TESTING"
-              placeholder="Search" 
-              onChange={null} 
-            />
-            <Button variant="outline-info">Search</Button>
-          </Form>
-        </div>
-        </div>
+      </div>
 
       {dishes.map( dish => {
        if(dish.special)
@@ -83,13 +83,18 @@ function VipMenu(){
                 <div className="dish-price-container">
                   ${dish.price}
                 </div>
-               
+                <div className="add-cart-btn">
+                  <Button variant="success" onClick={() => {setModalState(true); setModalData(dish);}}>Add to Cart</Button>
+                </div>
               </div>
             </div>
+            
           </Grid>
-          
+            
              )})}
-    
+             
+             <div> <MenuItemModal show={false} handleOrder={quantity} onHide={setModalState(false)} modalData={modalData}  />  </div>
+   
     </div>  
   );
 }
