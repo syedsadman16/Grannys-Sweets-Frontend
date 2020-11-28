@@ -47,6 +47,11 @@ const NavBar = () => {
           <Link to="/discussions">
             <Navbar.Text>Discussions</Navbar.Text>
           </Link>
+          {!isEmpty(user) && user.role == "VIP" && (
+          <Link to="/vipMenu">
+            <Navbar.Text>VIP</Navbar.Text>
+          </Link>
+          )}
         </Nav>
         {isEmpty(user) && (
           <Link to="/signin">
