@@ -12,9 +12,18 @@ import MenuItemModal from "./Menu/MenuItemModal";
 import "./Menu/Menu.css";
 
 function VipMenu(){
+
+    const defaultModalData = {
+      dishId: 1,
+      dishTitle: "Cup Cake",
+      dishDescription: "Some sort of description for a dish",
+      dishPrice: "5.99",
+      keywords: ["sweet", "cake", "cup"]
+    }
+
     const [dishes, setDishes] = useState([]);
     const [modalState, setModalState] = useState(false);
-    const [modalData, setModalData] = useState([]);
+    const [modalData, setModalData] = useState([defaultModalData]);
     const [quantity, setQuantity] = useState(0);
 
     const url = '/menu';
@@ -36,21 +45,28 @@ function VipMenu(){
   return (
     <div className="App">
 
-      {console.log(dishes)}
-
       <div className="page-title-container">
           <div className="page-title-text">VIP Menu</div>
           <div className="page-desc-text">Thanks for being a VIP member! Enjoy access to our special dishes</div>
           <div className="menu-icon-divider-container">
             <hr className="title-divider-left" />
             <FontAwesomeIcon icon={faUtensils} size="2x" color="gray" />
-            <hr className="title-divider-right" />
+            <hr className="title-divider-right" /> 
           </div>
       </div>
+
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={2}
+      > 
 
       {dishes.map( dish => {
        if(dish.special)
        return(
+
         <Grid item key={dish.id}>
 
             <div className="item-container">
@@ -90,10 +106,11 @@ function VipMenu(){
             </div>
             
           </Grid>
-            
              )})}
-             
-             <div> <MenuItemModal show={false} handleOrder={quantity} onHide={setModalState(false)} modalData={modalData}  />  </div>
+
+      </Grid>
+
+      {/*<div> <MenuItemModal show={modalState} handleOrder={quantity} onHide={setModalState(false)} modalData={modalData} />  </div>*/}
    
     </div>  
   );
