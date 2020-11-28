@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./pages/Menu";
-import VIPMenu from "./pages/Menu/vipMenu";
+import VIPMenu from "./pages/VipMenu";
 import Chefs from "./pages/Chefs/Chefs";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -96,11 +96,7 @@ const Routes = () => {
 
         
       {/* VIP Routes */}
-      <Route
-        exact
-        path="/menu"
-        render={(props) => <Layout page={Menu} {...props} />}
-      />
+
       <Route
         exact
         path="/vipMenu"

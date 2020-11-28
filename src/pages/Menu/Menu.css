@@ -10,6 +10,11 @@
     font-size: 3rem;
 }
 
+.page-desc-text {
+    font-size: 2rem;
+    font-style: italic;
+}
+
 .menu-icon-divider-container {
     display: flex;
 }
