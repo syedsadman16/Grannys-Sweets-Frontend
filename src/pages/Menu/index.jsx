@@ -55,6 +55,10 @@ export default class Menu extends React.Component {
     .then(element =>{
       console.log(element.data);
       console.log(element.data[0].keyWord[0].keyWord)
+
+      element.data.sort((a, b) => b.averageRating - a.averageRating);
+      console.log("Sorted data", element.data);
+
      let newData = element.data.map(element => ({
           dishId : element.id,
           dishRating: element.averageRating,
@@ -72,70 +76,7 @@ export default class Menu extends React.Component {
         });
     });
   }
-  // this.setState({
-  //   isLoading: false,
-  //     data: [
-  //       {
-  //         dishId: 1,
-  //         dishTitle: "Cup Cake",
-  //         dishDescription: "Some sort of description for a dish",
-  //         dishPrice: "5.99",
-  //         keywords: ["sweet", "cake", "cup"]
-  //       },
-  //       {
-  //         dishId: 2,
-  //         dishTitle: "Cheese Cake",
-  //         dishDescription:
-  //           "Some sort of description for a dish except this one is a bit longer and it may overflow",
-  //         dishPrice: "8.99",
-  //         keywords: ["sweet", "cake", "cheese"]
-  //       },
-  //       {
-  //         dishId: 3,
-  //         dishTitle: "Birthday Cake",
-  //         dishDescription: "Some sort of description for a dish",
-  //         dishPrice: "2.99",
-  //         keywords: ["sweet", "cake", "low-fat", "birthday","dessert"]
-  //       },
-  //       {
-  //         dishId: 4,
-  //         dishTitle: "Cookie Cake",
-  //         dishDescription: "Some sort of description for a dish",
-  //         dishPrice: "15.99",
-  //         keywords: ["sweet", "cake", "cookie",]
-  //       },
-  //       {
-  //         dishId: 5,
-  //         dishTitle: "Some Other Type Of Cake",
-  //         dishDescription: "Some sort of description for a dish",
-  //         dishPrice: "5.99",
-  //         keywords: ["sweet", "cake"]
-  //       },
-  //       {
-  //         dishId: 6,
-  //         dishTitle: "Vegan Cake",
-  //         dishDescription: "Some sort of description for a vegan cake",
-  //         dishPrice: "15.99",
-  //         keywords: ["cake", "vegan", "low-fat"]
-  //       },
-  //       {
-  //         dishId: 7,
-  //         dishTitle: "Boston Cream Donut",
-  //         dishDescription: "Some sort of description for a donut",
-  //         dishPrice: "2.99",
-  //         keywords: ["donut", "boston", "cream"]
-  //       },
-  //       {
-  //         dishId: 8,
-  //         dishTitle: "Vanilla Cream Donut",
-  //         dishDescription: "Some sort of description for a donut",
-  //         dishPrice: "2.99",
-  //         keywords: ["donut","vanilla", "cream"]
-  //       },
-  //     ]
-  //   })
-  // }
-  
+
 
   render() {
     const {data, isLoading, searchText, modalShow , modalData, orderItemId } = this.state;
@@ -161,6 +102,8 @@ export default class Menu extends React.Component {
           </Form>
         </div>
         </div>
+        
+        <div className="dishes-divided-title">  ―――――― Top 3 rated dishes!  ―――――― </div>
         {!isLoading ? (
           <div className="menu-items-container">
             <Grid
@@ -172,6 +115,66 @@ export default class Menu extends React.Component {
             > 
             { 
 
+            this.state.data.slice(0, 3)
+                .map((el) => (
+                  <Grid item key={el.dishId}>
+                    <div className="item-container">
+                      <div className="dish-img-container">
+                        <img
+                          onError={(event) => {
+                            event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico";
+                          }}
+                          src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+                          width="298"
+                          height="200"
+                          alt="dish"
+                        />
+                      </div>
+                      <Divider />
+                      <div className="dish-title-container">{el.dishTitle}</div>
+                      <div className="rating-container">
+                        <Rating name="hover-feedback" value={el.dishRating} precision={0.5}/>
+                      </div>
+                      {el.dishDescription.length > 71 ? (
+                        <div className="dish-desc-container">
+                          {el.dishDescription.substring(0, 71) + " ..."}
+                        </div>
+                      ) : (
+                        <div className="dish-desc-container">
+                          {el.dishDescription}
+                        </div>
+                      )}
+                      <div className="price-add-btn-container">
+                        <div className="dish-price-container">
+                          ${el.dishPrice}
+                        </div>
+                        <div className="add-cart-btn">
+                          <Button variant="success" onClick={() => this.setState({modalShow: true, modalData: el, orderItemId: el.dishId})}>Add to Cart</Button>
+                        </div>
+                      </div>
+                    </div>
+                  </Grid>
+                ))
+            }
+            </Grid>
+            <MenuItemModal show={modalShow} handleOrder={this.handleModalOrder} onHide={this.handleModalClose} modalData={modalData} {...this.props} />
+          </div>
+        ) : (
+          <h3>Could not load top rated dishes</h3>
+        )}
+
+        <div className="dishes-divided-title">  ―――――― Enjoy all of our available dishes!  ―――――― </div>
+        
+        {!isLoading ? (
+          <div className="menu-items-container">
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={2}
+            > 
+            { 
             data.filter(p => p.keywords.some( (s) => {
               if(searchText === '')
                   return s
