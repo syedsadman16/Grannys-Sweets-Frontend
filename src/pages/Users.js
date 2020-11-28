@@ -115,6 +115,7 @@ const Users = () => {
     try{
       await api.delete(`/users/${id}`);
       fetchUsers();
+      getSalaries();
     }
     catch(E){console.log(E)}
   };
