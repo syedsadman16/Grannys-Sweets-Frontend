@@ -10,7 +10,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,6 +41,7 @@ const Users = () => {
   const [unverifiedUsers, setUnverifiedUsers] = useState([]);
   const [employeeUsers, setEmployeeUsers] = useState([]);
   const [value, setValue] = React.useState(0);
+  const [salary, setSalaries] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -48,6 +49,7 @@ const Users = () => {
 
   useEffect(() => {
     fetchUsers();
+    getSalaries();
   }, []);
 
   const fetchUsers = async () => {
@@ -58,9 +60,19 @@ const Users = () => {
       setAllUsers(allUsers);
       setUnverifiedUsers(allUsers.filter( (el) => el.verified === false ));
       setClosedUsers(allUsers.filter( (el) => el.closed === true ));
-      setEmployeeUsers(allUsers.filter( (el) => el.role !== "CUSTOMER" && el.role !== "MANAGER"));
+      setEmployeeUsers(allUsers.filter( (el) => el.role !== "CUSTOMER" && el.role !== "MANAGER" && el.role !== "VIP"));
     }
     catch(E){}  
+  };
+
+  const getSalaries = async () => {
+    try{
+      let {
+        data: salaries
+      } = await api.get('/salary')
+      setSalaries(salaries);
+    }
+    catch(E){console.log(E)}
   };
 
   const verifyUser = async (id) => {
@@ -71,12 +83,44 @@ const Users = () => {
       });
       fetchUsers();
     }
-    catch(E){} 
+    catch(E){console.log(E)} 
+  };
+
+  const handleDemotion = async (id,currentSalary) =>{
+    console.log('-500 to',id)
+    try{
+      await api.put(`/salary/${id}`, {
+        id: id,
+        amount: currentSalary - 500,
+      });
+      getSalaries();
+    }
+    catch(E){console.log(E)}
+  };
+
+  const handlePromotion = async (id,currentSalary) =>{
+    console.log('+500 to',id)
+    try{
+      await api.put(`/salary/${id}`, {
+        id: id,
+        amount: currentSalary + 500,
+      });
+      getSalaries();
+    }
+    catch(E){console.log(E)}
+  };
+
+  const handleFire = async (id) =>{
+    console.log("deleting id", id)
+    try{
+      await api.delete(`/users/${id}`);
+      fetchUsers();
+    }
+    catch(E){console.log(E)}
   };
 
   return user.role === "MANAGER" ? (
     <div>
-      {console.log(employeeUsers)}
       <Tabs centered value={value} onChange={handleChange} aria-label="simple tabs example">
         <Tab label="All Users"/>
         <Tab label="Unverified Users"/>
@@ -178,6 +222,7 @@ const Users = () => {
               <TableCell>Username</TableCell>
               <TableCell>Verified</TableCell>
               <TableCell>Closed</TableCell>
+              <TableCell>Delete User</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -206,7 +251,12 @@ const Users = () => {
                     :
                     'false'
                     }
-                  </TableCell>    
+                  </TableCell>
+                  <TableCell>
+                      <Button onClick={() => handleFire(el.id)} variant="danger">
+                        Fire
+                      </Button>
+                    </TableCell>    
                 </TableRow>
               ))
             }
@@ -220,21 +270,43 @@ const Users = () => {
                 <TableCell>ID</TableCell>
                 <TableCell>Role</TableCell>
                 <TableCell>Username</TableCell>
+                <TableCell>Salary</TableCell>
+                <TableCell>Promote</TableCell>
+                <TableCell>Demote</TableCell>
+                <TableCell>Fire</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {
-                employeeUsers.map( (el) => (
-                  <TableRow key={el.id}>
+                salary.map( (el) => (
+                  <TableRow key={el.user.id}>
                     <TableCell scope="row">
-                      {el.id}
+                      {el.user.id}
                     </TableCell>
                     <TableCell>
-                      {el.role}
+                      {el.user.role}
                     </TableCell>
                     <TableCell>
-                      {el.username}
-                    </TableCell>  
+                      {el.user.username}
+                    </TableCell>
+                    <TableCell>
+                      {el.amount}
+                    </TableCell>
+                    <TableCell>
+                      <Button onClick={() => handlePromotion(el.user.id, el.amount)} variant="success">
+                        + $500
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button onClick={() => handleDemotion(el.user.id, el.amount)} variant="warning">
+                        - $500
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button onClick={() => handleFire(el.user.id)} variant="danger">
+                        Fire
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))
               }
