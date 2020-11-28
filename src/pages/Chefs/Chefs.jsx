@@ -26,7 +26,7 @@ export default class Chefs extends React.Component{
     })
 
     this.setState({ 
-      randomDesc: ["Multi-Michelin starred chef and star of Hell's Kitchen"],
+      randomDesc: ["coming soon"],
    });
 
   //   this.setState({

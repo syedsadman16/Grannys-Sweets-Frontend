@@ -156,3 +156,17 @@
     width: 50%;
     margin: auto;
 }
+
+.dishes-divided-title {
+    font-family: sans-serif;
+    padding: 100px auto;
+    margin-left: 50px;
+    margin-top: 60px;
+    text-align: center;
+    font-size: 25px;
+    position: relative;
+  }
+
+
+  
+ 
