@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "./pages/Menu";
+import VIPMenu from "./pages/VipMenu";
 import Chefs from "./pages/Chefs/Chefs";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -10,6 +11,7 @@ import Balance from "./pages/Balance";
 import Dashboard from "./pages/Employee/Home";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import UserWarningCount from "./components/UserWarningCount";
 
 import Layout from "./layouts";
 import Users from "./pages/Users";
@@ -53,10 +55,16 @@ const Routes = () => {
         render={(props) => <Layout page={Discussions} {...props} />}
       />
 
-      <Route
+          <Route
         exact
         path="/discussions/:id"
         render={(props) => <Layout page={Comments} {...props} />}
+      />
+   {/*   
+   <Route
+        exact
+        path="/'warningcount"
+        render={(props) => <Layout page={UserWarningCount} {...props} />}
       />
 
       {/* Customer Routes */}
@@ -92,6 +100,17 @@ const Routes = () => {
           <Layout isPrivate={true} type="authUser" page={Balance} {...props} />
         )}
       />
+
+        
+      {/* VIP Routes */}
+
+      <Route
+        exact
+        path="/vipMenu"
+        render={(props) => (
+          <Layout isPrivate={true} page={VIPMenu} {...props} />
+        )}
+      />   
 
       {/* Employee Routes */}
 
