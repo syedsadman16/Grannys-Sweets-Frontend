@@ -24,6 +24,7 @@ import {
   DollarSign as DollarSignIcon,
   List as ListIcon,
   XCircle as XCircleIcon,
+  Clipboard as ClipboardIcon
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -98,7 +99,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         title="Taboo Words"
         icon={XCircleIcon}
       />
-      
+      <NavItem
+        href="/employee/complaints"
+        key="Complaints"
+        title="Complaints"
+        icon={ClipboardIcon}
+      />
     </List>
   );
 
