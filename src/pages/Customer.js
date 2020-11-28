@@ -2,8 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Customer = () => {
-  const user = useSelector(({ user }) => user);
-
+  const user = useSelector(({ user }) => user)
   const showStatus = (
     <div>
       Status:

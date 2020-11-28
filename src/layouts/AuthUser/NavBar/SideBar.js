@@ -21,31 +21,17 @@ import {
   User as UserIcon,
   UserPlus as UserPlusIcon,
   Users as UsersIcon,
+  DollarSign as DollarSignIcon,
+  List as ListIcon,
+  XCircle as XCircleIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
+import { useSelector } from "react-redux";
 
 const user = {
   username: "Username",
   name: "Katarina Smith",
 };
-
-const items = [
-  {
-    href: "/employee/abc",
-    icon: UsersIcon,
-    title: "Customers",
-  },
-  {
-    href: "/employee/bca",
-    icon: ShoppingBagIcon,
-    title: "Products",
-  },
-  {
-    href: "/employee/aba",
-    icon: UserIcon,
-    title: "Account",
-  },
-];
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
@@ -66,7 +52,8 @@ const useStyles = makeStyles(() => ({
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
-
+  const role = useSelector(({ user }) => user.role);
+  const username = useSelector(({ user }) => user.username);
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
@@ -74,31 +61,90 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
+  const customerSidebar = (
+    <List>
+      <NavItem
+        href="/customer/balance"
+        key="Add Balance"
+        title="Add Balance"
+        icon={DollarSignIcon}
+      />
+      <NavItem
+        href="/customer/orders"
+        key="Order History"
+        title="Order History"
+        icon={ListIcon}
+      />
+      <NavItem
+        href="/customer/info"
+        key="Info"
+        title="Info"
+        icon={UserIcon}
+      />
+    </List>
+  );
+
+  const managerSidebar = (
+    <List>
+      <NavItem
+        href="/employee/users"
+        key="All Users"
+        title="All Users"
+        icon={UsersIcon}
+      />
+      <NavItem
+        href="/employee/taboo"
+        key="Add Taboo Words"
+        title="Add Taboo Words"
+        icon={XCircleIcon}
+      />
+      
+    </List>
+  );
+
+  const customerAvatar = (
+    <Avatar
+      className={classes.avatar}
+      component={RouterLink}
+      to={"/customer"}
+    />
+  );
+
+  const employeeAvatar = (
+    <Avatar
+      className={classes.avatar}
+      component={RouterLink}
+      to={"/employee"}
+    />
+  );
+
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          src={user.avatar}
-          to="/app/account"
-        />
+        {
+          role === "MANAGER" || role === "CHEF" || role === "DELIVERER" ?
+          employeeAvatar
+          :
+          customerAvatar
+        }
         <Typography className={classes.name} color="textPrimary" variant="h5">
-          {user.name}
+          Role: {role}
+        </Typography>
+        <Typography className={classes.name} color="textPrimary" variant="h5">
+          Username: {username}
         </Typography>
       </Box>
       <Divider />
       <Box p={2}>
-        <List>
-          {items.map((item) => (
-            <NavItem
-              href={item.href}
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
-            />
-          ))}
-        </List>
+        {
+          role === "CUSTOMER" ? 
+          customerSidebar
+          :
+          role === "MANAGER" ?
+          managerSidebar
+          :
+          null
+        }
       </Box>
       <Box flexGrow={1} />
     </Box>
