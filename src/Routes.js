@@ -9,6 +9,8 @@ import Discussions from "./pages/Discussions";
 import Comments from "./pages/Comments";
 import Balance from "./pages/Balance";
 import Dashboard from "./pages/Employee/Home";
+import Jobs from "./pages/Employee/Jobs";
+import DishForm from "./pages/Employee/DishForm"
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import UserWarningCount from "./components/UserWarningCount";
@@ -18,6 +20,7 @@ import Users from "./pages/Users";
 import Customer from "./pages/Customer";
 import Taboo from "./pages/Taboo";
 import Complaints from "./pages/Complaints";
+import ManagerOrders from "./pages/ManagerOrders";
 
 const Routes = () => {
   const userRole = useSelector(({ user }) => user.role);
@@ -129,6 +132,33 @@ const Routes = () => {
         )}
       />
 
+      
+      <Route
+        exact
+        path="/employee/jobs"
+        render={(props) => (
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={Jobs}
+            {...props}
+          />
+        )}
+      />
+
+      <Route
+        exact
+        path="/employee/createDish"
+        render={(props) => (
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={DishForm}
+            {...props}
+          />
+        )}
+      />
+
       <Route
         exact
         path="/employee/users"
@@ -150,6 +180,14 @@ const Routes = () => {
         path="/employee/complaints"
         render={(props) => (
           <Layout isPrivate={true} type="authUser" page={Complaints} {...props} />
+        )}
+      />
+
+      <Route
+        exact
+        path="/employee/managerorders"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={ManagerOrders} {...props} />
         )}
       />
 

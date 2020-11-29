@@ -56,7 +56,7 @@ const Taboo = () => {
   }, []);
 
   return (
-    <div className="taboo-page-container" style={{width: "80%",margin:"auto", textAlign:"center"}}>
+    <div style={{width: "80%",margin:"auto", textAlign:"center"}}>
       <h1 style={{marginBottom: "10px"}}>
         List of Taboo Words
       </h1>

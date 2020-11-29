@@ -24,6 +24,7 @@ import {
   DollarSign as DollarSignIcon,
   List as ListIcon,
   XCircle as XCircleIcon,
+  Briefcase as Briefcase,
   Clipboard as ClipboardIcon
 } from "react-feather";
 import NavItem from "./NavItem";
@@ -85,6 +86,28 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     </List>
   );
 
+  const delivererSidebar = (
+    <List>
+      <NavItem
+        href="/employee/jobs"
+        key="Jobs"
+        title="Available Jobs"
+        icon={Briefcase}
+      />
+    </List>
+  );
+
+  const chefSidebar = (
+    <List>
+      <NavItem
+        href="/employee/createDish"
+        key="Create Dish!"
+        title="Create Dish!"
+        icon={Briefcase}
+      />
+    </List>
+  );
+
   const managerSidebar = (
     <List>
       <NavItem
@@ -105,6 +128,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         title="Complaints"
         icon={ClipboardIcon}
       />
+      <NavItem
+        href="/employee/managerorders"
+        key="Orders"
+        title="Orders"
+        icon={ListIcon}
+      />
     </List>
   );
 
@@ -123,6 +152,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       to={"/employee"}
     />
   );
+
+
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
@@ -148,6 +179,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           :
           role === "MANAGER" ?
           managerSidebar
+          :
+          role === "DELIVERER" ? 
+          delivererSidebar
+          :
+          role === "CHEF" ? 
+          chefSidebar
           :
           null
         }
