@@ -25,7 +25,8 @@ import {
   List as ListIcon,
   XCircle as XCircleIcon,
   Briefcase as Briefcase,
-  Clipboard as ClipboardIcon
+  Clipboard as ClipboardIcon,
+  Truck as TruckIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -91,8 +92,15 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       <NavItem
         href="/employee/jobs"
         key="Jobs"
-        title="Available Jobs"
+        title="Job Center"
         icon={Briefcase}
+      />
+
+      <NavItem
+        href="/employee/currentJobs"
+        key="CurrentJobs"
+        title="Accepted Jobs"
+        icon={TruckIcon}
       />
     </List>
   );

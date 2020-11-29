@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import "./Employee.css";
 
 function Jobs(){
 
@@ -43,7 +43,6 @@ function Jobs(){
       console.log(url);
       try{
         axios.post(url);
-        testing();
       }
       catch(E){console.log(E)}
 
@@ -57,29 +56,28 @@ function Jobs(){
               if(job.status == 0)
               return(
                 <div> 
-     <Card className={classes.root}>
-      <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Job Reference# {job.id}
-          </Typography>
-          <h6 variant="body2" color="textSecondary" component="p">
-            Order # {job.order.id}
-            </h6>
-          <h6> Date: {job.order.date} </h6>
-          <h6> Customer: {job.order.customer.username} </h6>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={() => acceptJobEvent(job.id)}>
-          Accept Job
-        </Button>
-      </CardActions>
-    </Card>
-                
+                  <Card className={classes.root}>
+                    <CardActionArea>
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          Job Reference# {job.id}
+                        </Typography>
+                        <h6 variant="body2" color="textSecondary" component="p">
+                          Order # {job.order.id}
+                          </h6>
+                        <h6> Date: {job.order.date} </h6>
+                        <h6> Customer: {job.order.customer.username} </h6>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                      <Button size="small" color="primary" onClick={() => acceptJobEvent(job.id)}>
+                        Accept Job
+                      </Button>
+                    </CardActions>
+                  </Card>
                 </div>
-                
-            )})}
+            )})
+       }
 
         </div>
 
