@@ -105,6 +105,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         title="Complaints"
         icon={ClipboardIcon}
       />
+      <NavItem
+        href="/employee/managerorders"
+        key="Orders"
+        title="Orders"
+        icon={ListIcon}
+      />
     </List>
   );
 
