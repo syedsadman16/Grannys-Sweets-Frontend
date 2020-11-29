@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+
 import {
   Avatar,
   Box,
@@ -27,6 +28,7 @@ import {
   Briefcase as Briefcase,
   Clipboard as ClipboardIcon,
   Truck as TruckIcon,
+  Coffee as coffee
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -111,7 +113,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         href="/employee/createDish"
         key="Create Dish!"
         title="Create Dish!"
-        icon={Briefcase}
+        icon={coffee}
       />
     </List>
   );
