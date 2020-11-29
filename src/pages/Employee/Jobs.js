@@ -1,47 +1,85 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
 
 function Jobs(){
 
     const [jobs, setJobs] = useState([]);
 
    
+    async function testing() {
+      const jobsapi = await axios.get(url);
+      setJobs(jobsapi.data);
+      return jobsapi;
+    }
+
     const url = '/jobs/delivery';
     useEffect( () => {
-      async function testing() {
-        const jobsapi = await axios.get(url);
-        setJobs(jobsapi.data);
-        return jobsapi;
-      }
       testing();
     }, [url]);
 
     console.log(jobs);
-    return(
+    
 
+    const useStyles = makeStyles({
+      root: {
+        maxWidth: 345,
+      },
+      media: {
+        height: 140,
+      },
+    });
+    const classes = useStyles();
+
+    function acceptJobEvent(orderId){
+      const url = '/jobs/delivery/acceptJob/'+orderId;
+      console.log(url);
+      try{
+        axios.post(url);
+        testing();
+      }
+      catch(E){console.log(E)}
+
+    }
+
+
+    return(
         <div>
             {
-            jobs.map( job => (
+            jobs.map( job => {
+              if(job.status == 0)
+              return(
                 <div> 
-                  <div class="row">
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">{job.id} </span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-  </div>
+     <Card className={classes.root}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            Job Reference# {job.id}
+          </Typography>
+          <h6 variant="body2" color="textSecondary" component="p">
+            Order # {job.order.id}
+            </h6>
+          <h6> Date: {job.order.date} </h6>
+          <h6> Customer: {job.order.customer.username} </h6>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary" onClick={() => acceptJobEvent(job.id)}>
+          Accept Job
+        </Button>
+      </CardActions>
+    </Card>
                 
                 </div>
                 
-            ))}
+            )})}
 
         </div>
 
