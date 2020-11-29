@@ -24,11 +24,8 @@ import {
   DollarSign as DollarSignIcon,
   List as ListIcon,
   XCircle as XCircleIcon,
-<<<<<<< HEAD
   Briefcase as Briefcase,
-=======
   Clipboard as ClipboardIcon
->>>>>>> d2e72659e33d9a62472dd09ed5f367314104d0d0
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -95,6 +92,17 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         href="/employee/jobs"
         key="Jobs"
         title="Available Jobs"
+        icon={Briefcase}
+      />
+    </List>
+  );
+
+  const chefSidebar = (
+    <List>
+      <NavItem
+        href="/employee/createDish"
+        key="Create Dish!"
+        title="Create Dish!"
         icon={Briefcase}
       />
     </List>
@@ -174,6 +182,9 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           :
           role === "DELIVERER" ? 
           delivererSidebar
+          :
+          role === "CHEF" ? 
+          chefSidebar
           :
           null
         }

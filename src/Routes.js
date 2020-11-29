@@ -10,6 +10,7 @@ import Comments from "./pages/Comments";
 import Balance from "./pages/Balance";
 import Dashboard from "./pages/Employee/Home";
 import Jobs from "./pages/Employee/Jobs";
+import DishForm from "./pages/Employee/DishForm"
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import UserWarningCount from "./components/UserWarningCount";
@@ -140,6 +141,19 @@ const Routes = () => {
             isPrivate={true}
             type="authUser"
             page={Jobs}
+            {...props}
+          />
+        )}
+      />
+
+      <Route
+        exact
+        path="/employee/createDish"
+        render={(props) => (
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={DishForm}
             {...props}
           />
         )}
