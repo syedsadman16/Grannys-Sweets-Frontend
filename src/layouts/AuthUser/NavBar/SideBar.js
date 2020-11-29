@@ -24,6 +24,7 @@ import {
   DollarSign as DollarSignIcon,
   List as ListIcon,
   XCircle as XCircleIcon,
+  Briefcase as Briefcase,
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -84,6 +85,17 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     </List>
   );
 
+  const delivererSidebar = (
+    <List>
+      <NavItem
+        href="/employee/jobs"
+        key="Jobs"
+        title="Available Jobs"
+        icon={Briefcase}
+      />
+    </List>
+  );
+
   const managerSidebar = (
     <List>
       <NavItem
@@ -118,6 +130,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     />
   );
 
+
+
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
@@ -142,6 +156,9 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           :
           role === "MANAGER" ?
           managerSidebar
+          :
+          role === "DELIVERER" ? 
+          delivererSidebar
           :
           null
         }
