@@ -24,7 +24,11 @@ import {
   DollarSign as DollarSignIcon,
   List as ListIcon,
   XCircle as XCircleIcon,
+<<<<<<< HEAD
   Briefcase as Briefcase,
+=======
+  Clipboard as ClipboardIcon
+>>>>>>> d2e72659e33d9a62472dd09ed5f367314104d0d0
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -106,11 +110,22 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       />
       <NavItem
         href="/employee/taboo"
-        key="Add Taboo Words"
-        title="Add Taboo Words"
+        key="Taboo Words"
+        title="Taboo Words"
         icon={XCircleIcon}
       />
-      
+      <NavItem
+        href="/employee/complaints"
+        key="Complaints"
+        title="Complaints"
+        icon={ClipboardIcon}
+      />
+      <NavItem
+        href="/employee/managerorders"
+        key="Orders"
+        title="Orders"
+        icon={ListIcon}
+      />
     </List>
   );
 

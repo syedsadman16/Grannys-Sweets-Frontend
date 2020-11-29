@@ -17,6 +17,9 @@ import UserWarningCount from "./components/UserWarningCount";
 import Layout from "./layouts";
 import Users from "./pages/Users";
 import Customer from "./pages/Customer";
+import Taboo from "./pages/Taboo";
+import Complaints from "./pages/Complaints";
+import ManagerOrders from "./pages/ManagerOrders";
 
 const Routes = () => {
   const userRole = useSelector(({ user }) => user.role);
@@ -149,6 +152,31 @@ const Routes = () => {
           <Layout isPrivate={true} type="authUser" page={Users} {...props} />
         )}
       />
+
+      <Route
+        exact
+        path="/employee/taboo"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Taboo} {...props} />
+        )}
+      />
+
+      <Route
+        exact
+        path="/employee/complaints"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Complaints} {...props} />
+        )}
+      />
+
+      <Route
+        exact
+        path="/employee/managerorders"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={ManagerOrders} {...props} />
+        )}
+      />
+
       <Route
         render={() => (
           <Redirect to={userRole !== "CUSTOMER" ? "/employee" : "/"} />
