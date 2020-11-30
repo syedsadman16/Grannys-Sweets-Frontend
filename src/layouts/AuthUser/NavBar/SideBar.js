@@ -28,7 +28,8 @@ import {
   Briefcase as Briefcase,
   Clipboard as ClipboardIcon,
   Truck as TruckIcon,
-  Coffee as coffee
+  Coffee as coffee,
+  CheckCircle as CheckCircleIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -85,6 +86,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         key="Info"
         title="Info"
         icon={UserIcon}
+      />
+      <NavItem
+        href="/customer/reservations"
+        key="Reservations"
+        title="Reservations"
+        icon={CheckCircleIcon}
       />
     </List>
   );

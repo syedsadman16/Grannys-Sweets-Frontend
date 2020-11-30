@@ -24,6 +24,7 @@ import Taboo from "./pages/Taboo";
 import Complaints from "./pages/Complaints";
 import ManagerOrders from "./pages/ManagerOrders";
 import CustomerOrders from "./pages/CustomerOrders";
+import Reservations from "./pages/Reservations";
 
 const Routes = () => {
   const userRole = useSelector(({ user }) => user.role);
@@ -114,6 +115,14 @@ const Routes = () => {
         path="/customer/orders"
         render={(props) => (
           <Layout isPrivate={true} type="authUser" page={CustomerOrders} {...props} />
+        )}
+      />
+
+      <Route
+        exact
+        path="/customer/reservations"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Reservations} {...props} />
         )}
       />
 
