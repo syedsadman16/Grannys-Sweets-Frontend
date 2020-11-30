@@ -54,26 +54,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
       // console.log(id);
       // console.log(price);
       // console.log(description);
-      try {
-        let { data } = await axios.post("/menu",{
-          chef : {id},
-          price : price,
-          description : description,
-          imageUrl : imageUrl,
-          name : name,
-          special : special
-        })
-        
-        keyWord.map(async word => {
-          await axios.post("/keyword",  {
-            keyWord : word,
-            dish : {id: data.id},
-            chef : {id : id}
-          })}
-        )
-        
-        console.log(data)  
-      }catch (error) {}
+      if (keyWord.length != 0){
+        try {
+          let { data } = await axios.post("/menu",{
+            chef : {id},
+            price : price,
+            description : description,
+            imageUrl : imageUrl,
+            name : name,
+            special : special
+          })
+          
+          try{
+            keyWord.map(async word => {
+              await axios.post("/keyword",  {
+                keyWord : word,
+                dish : {id: data.id},
+                chef : {id : id}
+              })}
+            )
+          }catch (error) {}
+          
+          console.log(data)  
+        }catch (error) {}
+      }
+      
     };
     
     const handleCurrkeyword = (e) =>{
@@ -83,7 +88,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
     const handleAddKeyword = (e) =>{
       e.persist();
       e.preventDefault();
-      setAllKeyWord(prev => [...prev,currWord]);
+      if (currWord != ""){
+        setAllKeyWord(prev => [...prev,currWord]);
+      }
       
     }
 
