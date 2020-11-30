@@ -115,6 +115,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         title="Create Dish!"
         icon={coffee}
       />
+      <NavItem
+        href="/employee/CookJobs"
+        key="Cook Jobs"
+        title="Cook Jobs"
+        icon={coffee}
+      />
     </List>
   );
 
