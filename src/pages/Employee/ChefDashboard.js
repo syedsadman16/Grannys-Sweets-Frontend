@@ -26,7 +26,7 @@ const ChefDashboard = () => {
   return (
     <div>
       Average dish rating for {user.username}: 
-      <Rating value={parseInt(avgRating)} precision={0.5} readOnly/> ({avgRating.toPrecision(3)})
+      <Rating value={parseInt(avgRating)} precision={0.5} readOnly/> ({parseFloat(avgRating).toPrecision(3)})
     </div>
   );
 };
