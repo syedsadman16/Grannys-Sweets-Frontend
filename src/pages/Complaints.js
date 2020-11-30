@@ -6,6 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Button } from "react-bootstrap";
 
 const Complaints = () => {
   const [complaints, setComplaints] = useState([]);
@@ -21,6 +22,25 @@ const Complaints = () => {
     catch(E){console.log(E)};
   };
 
+  const dimissComplaint = async(claimId) => {
+    console.log("Dismissing claim: ",claimId)
+    try{
+      await api.post(`/claims/dismissClaim/${claimId}`,{
+      });
+      fetchComplaints();
+    }
+    catch(E){console.log(E)};
+  };
+
+  const denyComplaint = async(claimId) => {
+    try{
+      await api.post(`/claims/denyClaim/${claimId}`,{
+      });
+      fetchComplaints();
+    }
+    catch(E){console.log(E)};
+  };
+
   useEffect( () =>{
     fetchComplaints();
   }, []);
@@ -29,14 +49,17 @@ const Complaints = () => {
     <div style={{margin:"auto", textAlign:"center"}}>
       {console.log(complaints)}
       <h1 style={{marginBottom: "10px"}}>
-        List of Complaints
+        List of Pending Claims
       </h1>
       <Table aria-label="simple table"> 
         <TableHead>
           <TableRow>
             <TableCell align="center">Complaint ID</TableCell>
-            <TableCell align="center">Message</TableCell>
-            <TableCell align="center">Filed By</TableCell>
+            <TableCell align="center">Complaint Message</TableCell>
+            <TableCell align="center">Complaint By</TableCell>
+            <TableCell align="center">Complaint Role</TableCell>
+            <TableCell align="center">Dismiss (rating for complainant removed)</TableCell>
+            <TableCell align="center">Deny (warning issued to complainant)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -51,6 +74,19 @@ const Complaints = () => {
                 </TableCell>
                 <TableCell align="center">
                   {el.victim.username}
+                </TableCell>
+                <TableCell align="center">
+                  {el.victim.role}
+                </TableCell>
+                <TableCell align="center">
+                  <Button onClick={() => dimissComplaint(el.id)} variant="danger">
+                    Dismiss
+                  </Button>
+                </TableCell>
+                <TableCell align="center">
+                  <Button onClick={() => denyComplaint(el.id)} variant="danger">
+                    Deny
+                  </Button>
                 </TableCell>
               </TableRow>
             ))

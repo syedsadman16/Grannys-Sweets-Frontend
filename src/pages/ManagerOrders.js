@@ -36,6 +36,7 @@ const ManagerOrders = () => {
           <TableRow>
             <TableCell align="center">Order ID</TableCell>
             <TableCell align="center">Ordered By</TableCell>
+            <TableCell align="center">Date Placed</TableCell>
             <TableCell align="center">Delivery Person</TableCell>
             <TableCell align="center">Status</TableCell>
           </TableRow>
@@ -49,6 +50,9 @@ const ManagerOrders = () => {
                 </TableCell>
                 <TableCell align="center">
                   {el.customer.username}
+                </TableCell>
+                <TableCell align="center">
+                  {el.date}
                 </TableCell>
                 <TableCell align="center">
                   {el.customer.deliveryperson == null ? 
