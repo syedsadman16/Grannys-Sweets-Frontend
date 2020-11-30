@@ -6,11 +6,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Button } from "react-bootstrap";
+import { Button,Form } from "react-bootstrap";
 
 const Complaints = () => {
   const [complaints, setComplaints] = useState([]);
   const user = useSelector(({ user }) => user);
+  const [denyMesg,setDenyMesg] = useState('');
 
   const fetchComplaints = async() => {
     try{
@@ -35,10 +36,16 @@ const Complaints = () => {
   const denyComplaint = async(claimId) => {
     try{
       await api.post(`/claims/denyClaim/${claimId}`,{
+        message: denyMesg,
       });
       fetchComplaints();
+      setDenyMesg('');
     }
     catch(E){console.log(E)};
+  };
+
+  const handleChange = (e) => {
+    setDenyMesg(e.target.value);
   };
 
   useEffect( () =>{
@@ -47,7 +54,7 @@ const Complaints = () => {
 
   return (
     <div style={{margin:"auto", textAlign:"center"}}>
-      {console.log(complaints)}
+      {console.log(denyMesg)}
       <h1 style={{marginBottom: "10px"}}>
         List of Pending Claims
       </h1>
@@ -84,9 +91,14 @@ const Complaints = () => {
                   </Button>
                 </TableCell>
                 <TableCell align="center">
-                  <Button onClick={() => denyComplaint(el.id)} variant="danger">
-                    Deny
-                  </Button>
+                  <Form onSubmit={() => denyComplaint(el.id)}> 
+                    <Form.Group controlId="formBasicDenyMesg">
+                      <Form.Control value={denyMesg} placeholder="Enter message" onChange={handleChange}/>
+                    </Form.Group>
+                    <Button variant="danger" type="submit">
+                      Deny
+                    </Button>
+                  </Form>
                 </TableCell>
               </TableRow>
             ))
