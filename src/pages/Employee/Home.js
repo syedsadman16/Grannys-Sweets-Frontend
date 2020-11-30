@@ -1,10 +1,9 @@
 import React from "react";
-import { Container, Grid, makeStyles } from "@material-ui/core";
-
-import LatestOrders from "../../components/LatestOrders";
-import TotalCustomers from "../../components/TotalCustomers";
-import TotalProfit from "../../components/TotalProfit";
+import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import ManagerDashboard from "./ManagerDashboard";
+import ChefDashboard from "./ChefDashboard";
+import DelivererDashboard from "./DelivererDashboard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,49 +14,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const managerDashboard = (
-  <Container maxWidth={false}>
-    <Grid container spacing={3}>
-      <Grid item lg={3} sm={6} xl={3} xs={12}>
-        <TotalCustomers />
-      </Grid>
-      <Grid item lg={3} sm={6} xl={3} xs={12}>
-        <TotalProfit />
-      </Grid>
-      <Grid item lg={8} md={12} xl={9} xs={12}>
-        <LatestOrders />
-      </Grid>
-    </Grid>
-  </Container>
-);
-
-const chefDashboard = (
-  <h1>
-    Chef's Dashboard
-  </h1>
-);
-
-const delivererDashboard = (
-  <h1>
-    Deliverer Dashboard
-  </h1>
-);
-
 const Dashboard = () => {
   const classes = useStyles();
   const role = useSelector(({ user }) => user.role);
+  const username = useSelector(({ user }) => user.username);
 
   return (
     <div className={classes.root}>
       {
         role === "MANAGER" ?
-        managerDashboard
+        <ManagerDashboard/>
         :
         role === "DELIVERER" ? 
-        delivererDashboard
+        <DelivererDashboard/>
         :
         role === "CHEF" ? 
-        chefDashboard
+        <ChefDashboard/>
         :
         null
       }  
