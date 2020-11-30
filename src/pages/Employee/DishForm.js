@@ -11,8 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
     const [imageUrl, setImageUrl] = useState("");
     const [special,setSpecial] = useState(false);
     const [keyWord, setKeyWord] = useState([]);
-    const [allkeyWord, setAllKeyWord] = useState([]);
-    const [allcurrWord, setcurrKeyWord] = useState("");
+    const [allkeyWord, setAllKeyWord] = useState(["sweet","cake","Breakfast","Lunch","Dinner"]);
+    const [currWord, setcurrKeyWord] = useState("");
     const [price, setPrice] = useState("");
     const id = useSelector(({ user }) => user.id);
 
@@ -38,42 +38,53 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
     }
 
     const handleKeyword = (e) => {
-      console.log(e.target.value);
-      if (keyWord.includes(e.target.value)){
-        setKeyWord(keyWord.filter(word => word.value != e.target.value));
+      e.persist();
+      console.log(keyWord.includes(e.target.value));
+      if (keyWord.includes(e.target.value)) {
+        setKeyWord((prev) => prev.filter((word) => word != e.target.value));
+      } else {
+        setKeyWord((word) => [...word, e.target.value]);
       }
-      else{
-        setKeyWord (word => [...word,e.target.value]);
-      }
-    }
+      console.log(keyWord);
+    };
     
     const handleSubmission = async (e) =>{
       e.preventDefault();
-      console.log(keyWord);
-      console.log(id);
-      console.log(price);
-      console.log(description);
+      // console.log(keyWord);
+      // console.log(id);
+      // console.log(price);
+      // console.log(description);
       try {
-        let chefid = {id: id};
         let { data } = await axios.post("/menu",{
-          chef : chefid,
+          chef : {id},
           price : price,
           description : description,
           imageUrl : imageUrl,
           name : name,
           special : special
         })
-        // let {newdata} = await axios.post("/keyword"),{
-        //   keyWord : keyWord
-        //   dish :
-        // }
-        console.log(data.id)  
+        
+        keyWord.map(async word => {
+          await axios.post("/keyword",  {
+            keyWord : word,
+            dish : {id: data.id},
+            chef : {id : id}
+          })}
+        )
+        
+        console.log(data)  
       }catch (error) {}
     };
     
+    const handleCurrkeyword = (e) =>{
+      setcurrKeyWord(e.target.value);
+    }
 
     const handleAddKeyword = (e) =>{
+      e.persist();
       e.preventDefault();
+      setAllKeyWord(prev => [...prev,currWord]);
+      
     }
 
     return(
@@ -86,6 +97,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
             <FontAwesomeIcon icon={faUtensils} color="gray"/></h1>
                  
             {console.log(keyWord)}
+            {console.log(allkeyWord)}
+            {console.log(currWord)}
+
             <section align = "center">
               <label htmlFor = "Name">Dish Name : </label>
               <br></br>
@@ -155,7 +169,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
             <span>Give your Dish Some Keywords for people to find it :  (check at least one)</span>
             <br></br>
 
-            <input type="checkbox" name = "sweet" id = "sweet" value = "sweet" onChange = {handleKeyword}/>
+            {/* <input type="checkbox" name = "sweet" id = "sweet" value = "sweet" onChange = {handleKeyword}/>
             <label htmlFor = "sweet"> sweet </label>
             <input type="checkbox" name = "cake" id = "cake" value = "cake" onChange = {handleKeyword}/>
             <label htmlFor = "cake"> cake </label>
@@ -165,15 +179,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
             <label htmlFor = "Lunch"> Lunch </label>
             <input type="checkbox" name = "Dinner" id = "Dinner" value = "Dinner" onChange = {handleKeyword}/>
             <label htmlFor = "Dinner"> Dinner </label>
-            <br></br>
+            <br></br> */}
 
-            <label htmlFor = "other">Other : </label>
-            <br></br>
-            <input name="other" id = "other" placeholder = "Other keywords" />
-            <br></br>
-            <button  type="submit" onSubmit={handleAddKeyword}>
-              Add Keywords
-           </button>
+            {allkeyWord.map(word => 
+              <>
+              <label htmlFor = {word}> {word} </label>
+              <input type="checkbox" name = {word} id = {word} value = {word} onChange = {handleKeyword}/>
+              </>
+              )}
+          
+
+              <label htmlFor = "other">Other : </label>
+              <br></br>
+              <input name="other" id = "other"  onChange = {handleCurrkeyword} value = {currWord} placeholder = "Other keywords" />
+              <br></br>
+              <button  onClick={handleAddKeyword}>
+                Add Keywords
+            </button>
+            
 
           </section>
           <br></br>
