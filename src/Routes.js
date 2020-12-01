@@ -70,15 +70,14 @@ const Routes = () => {
         path="/discussions/:id"
         render={(props) => <Layout page={Comments} {...props} />}
       />
-   {/*   
-   <Route
+      
+     <Route
         exact
-        path="/'warningcount"
+        path="/warningcount"
         render={(props) => <Layout page={UserWarningCount} {...props} />}
       />
 
       {/* Customer Routes */}
-
       <Route
         exact
         path="/customer"

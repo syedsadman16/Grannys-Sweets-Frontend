@@ -8,6 +8,9 @@ class Warning extends Component{
     axios
     .get("/warning").then((response) => {
       console.log(response.data);
+      this.setStatus({
+        warning: response.data,
+      });
     })
     .catch((e) => console.log(e));
     }
@@ -16,6 +19,7 @@ class Warning extends Component{
       return(
         <div className="Warnings">
           <header className="warning header">
+            <p>Number of Warnings:</p>
             <p>(this.state.warning.length)</p>
           </header>
         </div>

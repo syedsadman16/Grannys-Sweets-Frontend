@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import UserWarnings from "../components/UserWarningCount";
 import api from "axios";
 
 const Customer = () => {
-  const user = useSelector(({ user }) => user)
+  const user = useSelector(({ user }) => user);
   const showStatus = (
     <div>
       Status:
@@ -15,6 +16,7 @@ const Customer = () => {
     <div>
       {showStatus}
       More customer stuff
+      <UserWarnings />
     </div>
   );
 };

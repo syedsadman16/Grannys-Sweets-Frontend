@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Rating from "@material-ui/lab/Rating";
+import UserWarnings from "../../components/UserWarningCount";
 import api from "axios";
 
 const ChefDashboard = () => {
@@ -25,6 +26,7 @@ const ChefDashboard = () => {
 
   return (
     <div>
+      <UserWarnings />
       Average dish rating for {user.username}: 
       <Rating value={parseInt(avgRating)} precision={0.5} readOnly/> ({parseFloat(avgRating).toPrecision(3)})
     </div>
