@@ -21,6 +21,14 @@ const CustomerOrders = () => {
     catch(E){console.log(E)};
   };
 
+  const markOrderCompleted = async(orderId) =>{
+    try{
+      await api.post(`/orders/${orderId}`);
+      fetchAllOrders();
+    }
+    catch(E){console.log(E)};
+  };
+
   useEffect( () =>{
     fetchAllOrders();
   }, []);
@@ -82,7 +90,7 @@ const CustomerOrders = () => {
                         </Button>
                       </div>
                       <div>
-                        <Button variant="success">
+                        <Button onClick={() => markOrderCompleted(el.id)} variant="success">
                           Mark As Completed
                         </Button>
                       </div>
