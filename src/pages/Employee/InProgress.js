@@ -61,34 +61,34 @@ function InProgress(){
 
             {
             jobs.length ?  
-            jobs.map( job => {
-              if(job.status == 1)
-              return(
-                <div> 
-                    <Card className={classes.root}>
-                    <CardActionArea>
-                        <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Job Reference# {job.id}
-                        </Typography>
-                        <h6 variant="body2" color="textSecondary" component="p">
-                            Order # {job.order.id}
-                            </h6>
-                        <h6> Date: {job.order.date} </h6>
-                        <h6> Customer: {job.order.customer.username} </h6>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button size="small" color="primary" onClick={() => cancelJob(job.id)}>
-                        Cancel Job
-                        </Button>
-                        <Button size="small" color="primary" onClick={() => completedJob(job.id)}>
-                        Completed Job
-                        </Button>
-                    </CardActions>
-                    </Card>
-                </div>
-            )})
+              jobs.map( job => {
+                if(job.status == 1)
+                return(
+                  <div> 
+                      <Card className={classes.root}>
+                      <CardActionArea>
+                          <CardContent>
+                          <Typography gutterBottom variant="h5" component="h2">
+                              Job Reference# {job.id}
+                          </Typography>
+                          <h6 variant="body2" color="textSecondary" component="p">
+                              Order # {job.order.id}
+                              </h6>
+                          <h6> Date: {job.order.date} </h6>
+                          <h6> Customer: {job.order.customer.username} </h6>
+                          </CardContent>
+                      </CardActionArea>
+                      <CardActions>
+                          <Button size="small" color="primary" onClick={() => cancelJob(job.id)}>
+                          Cancel Job
+                          </Button>
+                          <Button size="small" color="primary" onClick={() => completedJob(job.id)}>
+                          Completed Job
+                          </Button>
+                      </CardActions>
+                      </Card>
+                  </div>
+              )})
             : 
             <h3>You have not accepted any jobs. Visit the Job Center to get started!</h3>
         }

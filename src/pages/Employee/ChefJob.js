@@ -33,6 +33,7 @@ const ChefJob = () =>{
         axios.get(url, { cancelToken: source.token }).then(element => 
         {
             console.log(element.data);
+          //  console.log(element.data.order.id);
             let newData = element.data.map((element) =>({
                 jobId : element.id,
                 jobStatus : element.completed,
