@@ -33,13 +33,14 @@ const CustomerOrders = () => {
     catch(E){console.log(E)};
   };
 
-  const handleDishRatingSubmit = async(dishId) => {
+  const handleDishRatingSubmit = async(id) => {
     try{
-      await api.post(`/dishes/${dishId}/create`,{
-        rating: {rating: parseFloat(dishRating) },
-        comments: {comment :dishComment},
+      console.log("rating:", parseFloat(dishRating),"comments:", dishComment,"critic:", id ,"dish:", id)
+      await api.post(`/rating/dishes/${id}/create`,{
+        rating: parseFloat(dishRating),
+        comments: dishComment,
         critic: { id },
-        dish: { id: dishId },
+        dish: { id },
       });
       fetchAllOrders();
     }
