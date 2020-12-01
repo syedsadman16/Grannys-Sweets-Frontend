@@ -24,7 +24,11 @@ import Taboo from "./pages/Taboo";
 import Complaints from "./pages/Complaints";
 import ManagerOrders from "./pages/ManagerOrders";
 import CustomerOrders from "./pages/CustomerOrders";
+<<<<<<< HEAD
 import CustomerInfo from "./pages/Customer/CustomerInfo";
+=======
+import Reservations from "./pages/Reservations";
+>>>>>>> 7b8c2345ed116b15b1e837efaa54d669db2ba530
 
 const Routes = () => {
   const userRole = useSelector(({ user }) => user.role);
@@ -106,6 +110,14 @@ const Routes = () => {
         path="/customer/orders"
         render={(props) => (
           <Layout isPrivate={true} type="authUser" page={CustomerOrders} {...props} />
+        )}
+      />
+
+      <Route
+        exact
+        path="/customer/reservations"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Reservations} {...props} />
         )}
       />
 
