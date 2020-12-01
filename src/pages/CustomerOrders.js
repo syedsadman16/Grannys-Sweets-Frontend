@@ -11,7 +11,9 @@ import { Button,Form } from "react-bootstrap";
 
 const CustomerOrders = () => {
   const [allOrders, setAllOrders] = useState([]);
+  const id = useSelector(({ user }) => user.id);
   const [dishRating, setDishRating] = useState(2.5);
+  const [dishComment, setDishComment] = useState('');
   
   const fetchAllOrders = async () => {
     try{
@@ -23,12 +25,29 @@ const CustomerOrders = () => {
     catch(E){console.log(E)};
   };
 
-  const markOrderCompleted = async(orderId) =>{
+  const markOrderCompleted = async(orderId) => {
     try{
       await api.post(`/orders/${orderId}`);
       fetchAllOrders();
     }
     catch(E){console.log(E)};
+  };
+
+  const handleDishRatingSubmit = async(dishId) => {
+    try{
+      await api.post(`/dishes/${dishId}/create`,{
+        rating: {rating: parseFloat(dishRating) },
+        comments: {comment :dishComment},
+        critic: { id },
+        dish: { id: dishId },
+      });
+      fetchAllOrders();
+    }
+    catch(E){console.log(E)};
+  };
+
+  const handleCommentChange = (e) => {
+    setDishComment(e.target.value);
   };
 
   useEffect( () =>{
@@ -38,7 +57,8 @@ const CustomerOrders = () => {
   return (
     <div style={{margin:"auto", textAlign:"center"}}>
       {console.log(allOrders)}
-      {console.log(dishRating)}
+      {console.log(dishRating,dishComment)}
+      
       <h1>
         All Placed Orders
       </h1>
@@ -105,12 +125,12 @@ const CustomerOrders = () => {
                   {el.completed ?
                     <> 
                       <div>
-                        <Form > 
+                        <Form onSubmit={() => handleDishRatingSubmit(el.dishOrders[0].dish.id)}> 
                           <div style={{width: "200px",margin:"auto"}}>
                             <Form.Group>
-                              <Form.Control required placeholder="Dish Comment"/>
+                              <Form.Control value={dishComment} onChange={handleCommentChange} required placeholder="Dish Comment"/>
                             </Form.Group>
-                            <Rating
+                            <Rating style={{marginBottom:"10px"}}
                               name="simple-controlled"
                               value={dishRating}
                               required
