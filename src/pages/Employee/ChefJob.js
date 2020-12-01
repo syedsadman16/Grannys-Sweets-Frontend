@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 
 const ChefJob = () =>{
     const [chefJob,setChefJob] = useState([]);
+    const history = useHistory();
 
 
     // const getJobs = async() =>{
@@ -23,40 +25,45 @@ const ChefJob = () =>{
     //     }catch(error){console.log(error)};
     // }
     const url = "/jobs/chefJob/false"
-    useEffect(() => {
-        const CancelToken = axios.CancelToken;
-        const source = CancelToken.source();
+    const loadData = async () => {
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
+      try {
     
-        const loadData = () => {
-          try {
-            axios.get(url, { cancelToken: source.token }).then(element => 
-            {
-                console.log(element.data);
-                let newData = element.data.map((element) =>({
-                    jobId : element.id,
-                    jobStatus : element.completed,
-                    orderId : element.order.id,
-                    orderTime : element.order.date,
-                    customerName: element.order.customer.username,
-                    quantity : element.order.dishOrders[0].quantity,
-                    dishName : element.order.dishOrders[0].dish.name,
-                    dishImage : element.order.dishOrders[0].dish.imageUrl
-                }))
-              setChefJob(prev => [...prev,...newData]);
-            });
-          } catch (error) {
-            if (axios.isCancel(error)) {
-              console.log("cancelled");
-            } else {
-              throw error;
-            }
-          }
-        };
-    loadData();
-    return () => {
-      source.cancel();
+        axios.get(url, { cancelToken: source.token }).then(element => 
+        {
+            console.log(element.data);
+            let newData = element.data.map((element) =>({
+                jobId : element.id,
+                jobStatus : element.completed,
+                orderId : element.order.id,
+                orderTime : element.order.date,
+                customerName: element.order.customer.username,
+                quantity : element.order.dishOrders[0].quantity,
+                dishName : element.order.dishOrders[0].dish.name,
+                dishImage : element.order.dishOrders[0].dish.imageUrl
+            }))
+          setChefJob( newData);
+        });
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("cancelled");
+        } else {
+          throw error;
+        }
+        return () => {
+          source.cancel();
+        }
+      
+      };
     };
-  }, [url]);
+
+
+    useEffect(() => {
+        
+      loadData();
+    
+  }, []);
 
     
     // async function testing() {
@@ -84,12 +91,15 @@ const ChefJob = () =>{
 
     const classes = useStyles();
     
-    function handleComplete(id) {
+    const handleComplete = async (id) => {
         const url = "/jobs/chefJob/" + id;
         console.log(url);
         try{
             axios.post(url);
+            history.go(0);
+            loadData();
         }catch(error){console.log(error)}
+
     }
 
 
@@ -104,7 +114,7 @@ const ChefJob = () =>{
                         <CardActionArea>
                             <CardMedia
                             className={classes.media}
-                            image="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+                            image={job.dishImage}
                             title="dish"   //name of the dish goes here
                             />
                             <CardContent>

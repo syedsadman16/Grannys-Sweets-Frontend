@@ -130,7 +130,7 @@ export default class MenuItemModal extends React.Component {
                     event.target.src =
                       "/Online-Restaurant-System-Frontend/favicon.ico";
                   }}
-                  src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+                  src={this.props.modalData.dishImage}
                   width="300"
                   height="200"
                   alt="dish"
@@ -141,7 +141,7 @@ export default class MenuItemModal extends React.Component {
               </div>
               <Rating
                 name="read-only"
-                value={4.5}
+                value={this.props.modalData.dishRating}
                 readOnly
                 precision={0.5}
                 size="medium"
@@ -172,6 +172,7 @@ export default class MenuItemModal extends React.Component {
               </Form.Group>
               <div>
                 <p>Choose Order Type Pickup:</p>
+                Pick-up
                 <input
                   type="radio"
                   name="type"

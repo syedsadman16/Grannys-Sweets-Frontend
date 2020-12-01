@@ -20,6 +20,8 @@ export default class Menu extends React.Component {
       modalData: {
         dishId: 1,
         dishTitle: "Cup Cake",
+        dishImage : "",
+        dishRating : "0",
         dishDescription: "Some sort of description for a dish",
         dishPrice: "5.99",
         keywords: ["sweet", "cake", "cup"],
@@ -55,6 +57,7 @@ export default class Menu extends React.Component {
         dishDescription: element.description,
         dishPrice: element.price,
         isSpecial: element.special,
+        dishImage : element.imageUrl,
         //keywords: ["Spicy","Dessert"]
         keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
       }));
@@ -120,7 +123,7 @@ export default class Menu extends React.Component {
                           event.target.src =
                             "/Online-Restaurant-System-Frontend/favicon.ico";
                         }}
-                        src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+                        src= {el.dishImage}
                         width="298"
                         height="200"
                         alt="dish"
@@ -212,7 +215,7 @@ export default class Menu extends React.Component {
                             event.target.src =
                               "/Online-Restaurant-System-Frontend/favicon.ico";
                           }}
-                          src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+                          src= {el.dishImage}
                           width="298"
                           height="200"
                           alt="dish"
