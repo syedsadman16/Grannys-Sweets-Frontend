@@ -1,4 +1,4 @@
-button[type="submit"],
+.dishform-submit-btn[type="submit"],
 input[type="submit"] {
   background: #ec5990;
   color: white;
@@ -11,12 +11,12 @@ input[type="submit"] {
   letter-spacing: 10px;
 }
 
-button[type="submit"]:hover,
+.dishform-submit-btn[type="submit"]:hover,
 input[type="submit"]:hover {
   background: #bf1650;
 }
 
-button[type="submit"]:active,
+.dishform-submit-btn[type="submit"]:active,
 input[type="button"]:active,
 input[type="submit"]:active {
   transition: 0.3s all;

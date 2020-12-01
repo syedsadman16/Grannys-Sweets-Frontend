@@ -6,10 +6,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Rating from '@material-ui/lab/Rating';
 import { Button,Form } from "react-bootstrap";
 
 const CustomerOrders = () => {
   const [allOrders, setAllOrders] = useState([]);
+  const [dishRating, setDishRating] = useState(2.5);
   
   const fetchAllOrders = async () => {
     try{
@@ -36,6 +38,7 @@ const CustomerOrders = () => {
   return (
     <div style={{margin:"auto", textAlign:"center"}}>
       {console.log(allOrders)}
+      {console.log(dishRating)}
       <h1>
         All Placed Orders
       </h1>
@@ -48,6 +51,7 @@ const CustomerOrders = () => {
             <TableCell align="center">Date Placed</TableCell>
             <TableCell align="center">Delivery Person</TableCell>
             <TableCell align="center">Status</TableCell>
+            <TableCell align="center">Rate Dish</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -96,7 +100,40 @@ const CustomerOrders = () => {
                       </div>
                     </>
                   }
-                </TableCell> 
+                </TableCell>
+                <TableCell align="center">
+                  {el.completed ?
+                    <> 
+                      <div>
+                        <Form > 
+                          <div style={{width: "200px",margin:"auto"}}>
+                            <Form.Group>
+                              <Form.Control required placeholder="Dish Comment"/>
+                            </Form.Group>
+                            <Rating
+                              name="simple-controlled"
+                              value={dishRating}
+                              required
+                              precision={.5}
+                              onChange={(event, newValue) => {
+                                setDishRating(newValue);
+                              }}
+                            />
+                          </div>
+                          <Button variant="primary" type="submit">
+                            Submit Rating
+                          </Button>
+                        </Form>
+                      </div>
+                    </>
+                  :
+                    <>
+                      <Button variant="success" disabled>
+                        Order Must be Complete
+                      </Button>
+                    </>
+                  }
+                </TableCell>  
               </TableRow>
             ))
           }
