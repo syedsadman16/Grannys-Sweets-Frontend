@@ -66,7 +66,7 @@ function Home(){
         {console.log(data[0])}
             <AwesomeSlider cssModule = {home} >
               {data.slice(0,3).map((el) => (
-                <div class = "background" data-src= {el.dishImage} >
+                <div data-src= {el.dishImage} >
                 </div>
                   
                 ))
