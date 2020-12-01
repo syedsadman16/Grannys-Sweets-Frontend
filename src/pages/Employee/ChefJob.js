@@ -22,22 +22,25 @@ const ChefJob = () =>{
     //         console.log(jobs);
     //     }catch(error){console.log(error)};
     // }
-
+    const url = "/jobs/chefJob/false"
     useEffect(() => {
         const CancelToken = axios.CancelToken;
         const source = CancelToken.source();
     
         const loadData = () => {
           try {
-            axios.get("/jobs/chefJob/false", { cancelToken: source.token }).then(element => 
+            axios.get(url, { cancelToken: source.token }).then(element => 
             {
                 console.log(element.data);
                 let newData = element.data.map((element) =>({
                     jobId : element.id,
                     jobStatus : element.completed,
+                    orderId : element.order.id,
                     orderTime : element.order.date,
-                    quantity: element.order.dishOrders[0].quantity,
-                    dishName: element.order.dishOrders[0].dish.name
+                    customerName: element.order.customer.username,
+                    quantity : element.order.dishOrders[0].quantity,
+                    dishName : element.order.dishOrders[0].dish.name,
+                    dishImage : element.order.dishOrders[0].dish.imageUrl
                 }))
               setChefJob(prev => [...prev,...newData]);
             });
@@ -53,7 +56,7 @@ const ChefJob = () =>{
     return () => {
       source.cancel();
     };
-  }, []);
+  }, [url]);
 
     
     // async function testing() {
@@ -80,33 +83,56 @@ const ChefJob = () =>{
     });
 
     const classes = useStyles();
+    
+    function handleComplete(id) {
+        const url = "/jobs/chefJob/" + id;
+        console.log(url);
+        try{
+            axios.post(url);
+        }catch(error){console.log(error)}
+    }
 
 
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
-          title="dish"   //name of the dish goes here
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Mark Completed!
-        </Button>
-      </CardActions>
-    </Card>
+      <div>
+        {
+          chefJob.map(job => {
+            if (job.jobStatus === false)
+                return(
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardMedia
+                            className={classes.media}
+                            image="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+                            title="dish"   //name of the dish goes here
+                            />
+                            <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                Job Reference # {job.jobId}
+                            </Typography>
+                            <h6 variant="body2" color="textSecondary" component="p">
+                                Order # {job.orderId}
+                            </h6>
+                            <h6> Date: {job.orderTime} </h6>
+                            <h6> Dish: {job.dishName}  ||  QTY. {job.quantity} </h6>
+                            <h6> Ordered By: {job.customerName}</h6>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button size="small" color="primary" onClick = { () => handleComplete(job.jobId)}>
+                                Mark Completed!
+                            </Button>
+                        </CardActions>
+                    </Card>
+
+                )
+          })
+
+        }
+
+        </div>
+    
   );
 
 };
