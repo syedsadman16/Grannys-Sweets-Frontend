@@ -12,6 +12,7 @@ const SignupForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
+  const [name, setName] = useState("");
   const [userType, setUserType] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -29,11 +30,21 @@ const SignupForm = () => {
     setAddress(e.target.value);
   };
 
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleUserTypeChange = (e) => {
+    setUserType(e.target.value);
+  };
+
   const handleRegisterAccount = async (e) => {
     e.preventDefault();
     const body = {
       username,
       password,
+      address,
+      name,
       role: userType,
     };
     try {
@@ -45,9 +56,6 @@ const SignupForm = () => {
     }
   };
 
-  const handleUserTypeChange = (e) => {
-    setUserType(e.target.value);
-  };
 
   return (
     <>
@@ -59,6 +67,18 @@ const SignupForm = () => {
       </div>
       <div className="form-container">
         <Form onSubmit={handleRegisterAccount}>
+        <Form.Group>
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              autoFocus
+              required
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+              placeholder="Create Name"
+            />
+          </Form.Group>
           <Form.Group>
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -137,7 +157,7 @@ const SignupForm = () => {
           </div>
         </Form>
       </div>
-      {console.log(username, address, password, userType)}
+      {console.log(name, username, address, password, userType)}
     </>
   );
 };
