@@ -200,7 +200,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
               <br></br>
               <input name="other" id = "other"  onChange = {handleCurrkeyword} value = {currWord} placeholder = "Other keywords" />
               <br></br>
-              <button  onClick={handleAddKeyword}>
+              <button className="dishform-submit-btn"  onClick={handleAddKeyword}>
                 Add Keywords
             </button>
             
