@@ -197,7 +197,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       <Divider />
       <Box p={2}>
         {
-          role === "CUSTOMER" ? 
+          role === "CUSTOMER" || role === "VIP" ? 
           customerSidebar
           :
           role === "MANAGER" ?

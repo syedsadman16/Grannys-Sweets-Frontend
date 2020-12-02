@@ -63,7 +63,7 @@ const NavBar = () => {
             Logout
           </Navbar.Text>
         )}
-        {!isEmpty(user) && user.role === "CUSTOMER" && (
+        {!isEmpty(user) && (user.role === "CUSTOMER" || user.role === "VIP") && (
           <NavDropdown
             title={
               <FontAwesomeIcon icon={faCartPlus} size="2x" color="white" />
