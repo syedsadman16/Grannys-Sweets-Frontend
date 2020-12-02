@@ -20,6 +20,9 @@ import {
   faBriefcase,
   faCookieBite,
 } from "@fortawesome/free-solid-svg-icons";
+import { logout } from "../../../redux/actions/user";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import './TopBar.css'
 
@@ -34,6 +37,14 @@ const useStyles = makeStyles(() => ({
 const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
   const [notifications] = useState([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector(({ user }) => user);
+
+  const handleLogout = async () => {
+    dispatch(logout(history));
+    history.go(0);
+  };
 
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0}  {...rest}>
@@ -52,7 +63,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton onClick={handleLogout} color="inherit">
             <InputIcon />
           </IconButton>
         </Hidden>
