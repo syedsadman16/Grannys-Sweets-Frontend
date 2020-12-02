@@ -1,10 +1,15 @@
 import React from "react";
 import { isEmpty } from "lodash";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Collapse } from "react-bootstrap";
 import Rating from "@material-ui/lab/Rating";
 import { Link } from "react-router-dom";
 import ReservationForm from "../../components/ReservationForm";
 import api from "axios";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import "./Menu.css";
 
@@ -19,10 +24,28 @@ export default class MenuItemModal extends React.Component {
     timeFrom: null,
     message: null,
     orderSuccess: false,
+    openCommentSection: false,
+    comments: [],
   };
 
   handleQuantityChange = (event) => {
     this.setState((prev) => ({ ...prev, quantity: event.currentTarget.value }));
+  };
+
+  handleShowComments = (event) => {
+    this.setState(prevState => ({openCommentSection: !prevState.openCommentSection}))
+  };
+
+  componentDidMount(){
+    this.fetchDishRatings();
+  }
+
+  fetchDishRatings = async () => {
+    try{
+      let {data: res} = await api.get(`/rating/dishes/${this.props.modalData.dishId}`)
+      this.setState({comments:res})
+    }
+    catch(E){console.log(E)}
   };
 
   handleChange = (changeObj) =>
@@ -220,6 +243,38 @@ export default class MenuItemModal extends React.Component {
               Place Order
             </Button>
           </Modal.Footer>
+          <Button onClick={this.handleShowComments}>
+            Show User Comments and Ratings
+          </Button>
+          <Collapse in={this.state.openCommentSection} >
+            <div style={{marginTop:"10px",marginBottom:"10px"}}>
+              {isEmpty(this.state.comments) ? 
+              <>
+                No Comments Yet
+              </>
+              :
+                this.state.comments.map(el => (
+                <div style={{marginTop:"10px",marginBottom:"10px"}}>
+                  <ListItem button>
+                    <ListItemAvatar>
+                      <AccountCircleIcon>
+                      </AccountCircleIcon>
+                    </ListItemAvatar>
+                    <ListItemText primary={`User ID:${el.critic.id}`} />
+                    <ListItemText primary={`${el.comments}`} />
+                    <Rating
+                      name="read-only"
+                      value={el.rating}
+                      readOnly
+                      precision={0.5}
+                      size="medium"
+                    />
+                  </ListItem>
+                </div>
+              ))
+              }
+            </div>
+          </Collapse>       
         </Modal>
       );
     }
