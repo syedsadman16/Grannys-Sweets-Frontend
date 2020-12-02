@@ -11,7 +11,7 @@ import { Button,Form } from "react-bootstrap";
 
 const CustomerOrders = () => {
   const [allOrders, setAllOrders] = useState([]);
-  const id = useSelector(({ user }) => user.id);
+  const userid = useSelector(({ user }) => user.id);
   const [dishRating, setDishRating] = useState(2.5);
   const [dishComment, setDishComment] = useState('');
   
@@ -39,7 +39,7 @@ const CustomerOrders = () => {
       await api.post(`/rating/dishes/${id}/create`,{
         rating: parseFloat(dishRating),
         comments: dishComment,
-        critic: { id },
+        critic: { id: userid },
         dish: { id },
       });
       fetchAllOrders();
@@ -57,9 +57,7 @@ const CustomerOrders = () => {
 
   return (
     <div style={{margin:"auto", textAlign:"center"}}>
-      {console.log(allOrders)}
-      {console.log(dishRating,dishComment)}
-      
+      {console.log(allOrders)}  
       <h1>
         All Placed Orders
       </h1>
@@ -69,7 +67,7 @@ const CustomerOrders = () => {
             <TableCell align="center">Order ID</TableCell>
             <TableCell align="center">Ordered By</TableCell>
             <TableCell align="center">Dish</TableCell>
-            <TableCell align="center">Date Placed</TableCell>
+            <TableCell align="center">Quantity</TableCell>
             <TableCell align="center">Delivery Person</TableCell>
             <TableCell align="center">Status</TableCell>
             <TableCell align="center">Rate Dish</TableCell>
@@ -89,7 +87,7 @@ const CustomerOrders = () => {
                   {el.dishOrders[0].dish.name}
                 </TableCell>
                 <TableCell align="center">
-                  {el.date}
+                  x{el.dishOrders[0].quantity}
                 </TableCell>
                 <TableCell align="center">
                   {el.customer.deliveryperson == null ? 
