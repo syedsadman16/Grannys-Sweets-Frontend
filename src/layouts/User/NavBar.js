@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCartPlus,
+  faUserAlt,
   faBriefcase,
   faCookieBite,
 } from "@fortawesome/free-solid-svg-icons";
@@ -66,7 +66,7 @@ const NavBar = () => {
         {!isEmpty(user) && (user.role === "CUSTOMER" || user.role === "VIP") && (
           <NavDropdown
             title={
-              <FontAwesomeIcon icon={faCartPlus} size="2x" color="white" />
+              <FontAwesomeIcon icon={faUserAlt} size="2x" color="white" />
             }
             id="collapsible-nav-dropdown"
             color="white"
