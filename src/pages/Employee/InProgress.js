@@ -31,7 +31,7 @@ function InProgress(){
 
     async function testing() {
       const jobsapi = await axios.get(url);
-      setJobs(jobsapi.data);
+      setJobs((prev) => [...prev, ...jobsapi.data])
       return jobsapi;
     }
 
@@ -64,18 +64,19 @@ function InProgress(){
               jobs.map( job => {
                 if(job.status == 1)
                 return(
-                  <div> 
+                  <div>     
                       <Card className={classes.root}>
                       <CardActionArea>
                           <CardContent>
+                          {"JOBS", console.log( job)}
                           <Typography gutterBottom variant="h5" component="h2">
                               Job Reference# {job.id}
                           </Typography>
                           <h6 variant="body2" color="textSecondary" component="p">
                               Order # {job.order.id}
                               </h6>
-                          <h6> Date: {job.order.date} </h6>
-                          <h6> Customer: {job.order.customer.username} </h6>
+                          <h6> Date: {job.order.date} </h6>          
+                          <h6> Ordered By: {job.order.customer.username} </h6>     
                           </CardContent>
                       </CardActionArea>
                       <CardActions>

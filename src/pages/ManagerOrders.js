@@ -47,6 +47,7 @@ const ManagerOrders = () => {
               <TableRow key={el.id}>
                 <TableCell align="center" scope="row">
                   {el.id}
+            
                 </TableCell>
                 <TableCell align="center">
                   {el.customer.username}
@@ -55,14 +56,14 @@ const ManagerOrders = () => {
                   {el.date}
                 </TableCell>
                 <TableCell align="center">
-                  {el.customer.deliveryperson == null ? 
+                  {el.deliveryPerson != null ? 
                   <div>
-                    Unassigned
-                  </div>
+                  {el.deliveryPerson.username}
+                </div>
                   :
                   <div>
-                    {el.customer.deliveryperson}
-                  </div>
+                  Unassigned
+                </div>
                   }
                 </TableCell>
                 <TableCell align="center">
