@@ -187,7 +187,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           :
           customerAvatar
         }
-        <Typography className={classes.name} color="textPrimary" variant="h5">
+        <Typography className={classes.name} color="textPrimary" variant="h5" style={{marginTop:'16px'}}>
           Role: {role}
         </Typography>
         <Typography className={classes.name} color="textPrimary" variant="h5">
