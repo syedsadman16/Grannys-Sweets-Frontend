@@ -107,7 +107,7 @@ export default class MenuItemModal extends React.Component {
       );
     } else if (
       !isEmpty(this.props.user) &&
-      this.props.user.role !== "CUSTOMER"
+      this.props.user.role !== "CUSTOMER" && this.props.user.role !== "VIP"
     ) {
       return (
         <Modal className="item-modal" {...this.props} size="lg">
