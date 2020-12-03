@@ -1,30 +1,34 @@
 import React, { Component } from "react";
+import WarningIcon from "@material-ui/icons/Warning";
+import Info from "../components/Info";
 import axios from "axios";
 
-class Warning extends Component{
-  state = {warning:[]  };
+class Warning extends Component {
+  state = { warning: [] };
 
-  componentDidMount(){
+  componentDidMount() {
     axios
-    .get("/warning").then((response) => {
-      console.log(response.data);
-      this.setState({
-        warning: response.data,
-      });
-    })
-    .catch((e) => console.log(e));
-    }
-
-    render(){
-      return(
-        <div className="Warnings">
-          <header className="warning header">
-            <p>Number of Warnings:
-            {(this.state.warning.length)}</p>
-          </header>
-        </div>
-      );
-    }
+      .get("/warning")
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          warning: response.data,
+        });
+      })
+      .catch((e) => console.log(e));
   }
 
-  export default Warning;
+  render() {
+    return (
+      <div className="Warnings">
+        <Info
+          title="Warnings"
+          body={this.state.warning.length}
+          icon={WarningIcon}
+        />
+      </div>
+    );
+  }
+}
+
+export default Warning;

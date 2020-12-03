@@ -9,11 +9,11 @@ import {
   makeStyles,
   colors,
 } from "@material-ui/core";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 
 const useStyles = makeStyles(() => ({
   root: {
     height: "100%",
+    width: "256px",
   },
   avatar: {
     backgroundColor: colors.indigo[600],
@@ -22,24 +22,24 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const TotalProfit = ({ className, ...rest }) => {
+const Info = ({ className, title, icon, body, ...rest }) => {
   const classes = useStyles();
-
+  const Icon = icon;
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
         <Grid container justify="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              TOTAL PROFIT
+              {title}
             </Typography>
             <Typography color="textPrimary" variant="h3">
-              $23,200
+              {body}
             </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <AttachMoneyIcon />
+              <Icon />
             </Avatar>
           </Grid>
         </Grid>
@@ -48,4 +48,4 @@ const TotalProfit = ({ className, ...rest }) => {
   );
 };
 
-export default TotalProfit;
+export default Info;

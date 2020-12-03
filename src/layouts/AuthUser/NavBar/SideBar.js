@@ -53,6 +53,10 @@ const useStyles = makeStyles(() => ({
     width: 64,
     height: 64,
   },
+  status: {
+    fontSize: ".95em",
+    fontWeight: 800,
+  },
 }));
 
 const NavBar = ({ onMobileClose, openMobile }) => {
@@ -60,6 +64,21 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
   const role = useSelector(({ user }) => user.role);
   const username = useSelector(({ user }) => user.username);
+
+  const ShowStatus = () => {
+    let Status;
+    if (["VIP", "DELIVERER", "CHEF", "MANAGER"].includes(role)) {
+      Status = () => <span>{role}</span>;
+    } else {
+      Status = () => <span>REGULAR CUSTOMER</span>;
+    }
+    return (
+      <div className={classes.status}>
+        Status: <Status />
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
@@ -81,12 +100,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         title="Order History"
         icon={ListIcon}
       />
-      <NavItem
-        href="/customer/info"
-        key="Info"
-        title="Info"
-        icon={UserIcon}
-      />
+      <NavItem href="/customer/info" key="Info" title="Info" icon={UserIcon} />
       <NavItem
         href="/customer/reservations"
         key="Reservations"
@@ -176,19 +190,19 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     />
   );
 
-
-
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        {
-          role === "MANAGER" || role === "CHEF" || role === "DELIVERER" ?
-          employeeAvatar
-          :
-          customerAvatar
-        }
-        <Typography className={classes.name} color="textPrimary" variant="h5" style={{marginTop:'16px'}}>
-          Role: {role}
+        {role === "MANAGER" || role === "CHEF" || role === "DELIVERER"
+          ? employeeAvatar
+          : customerAvatar}
+        <Typography
+          className={classes.name}
+          color="textPrimary"
+          variant="h5"
+          style={{ marginTop: "16px" }}
+        >
+          <ShowStatus />
         </Typography>
         <Typography className={classes.name} color="textPrimary" variant="h5">
           Username: {username}
@@ -196,21 +210,15 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       </Box>
       <Divider />
       <Box p={2}>
-        {
-          role === "CUSTOMER" || role === "VIP" ? 
-          customerSidebar
-          :
-          role === "MANAGER" ?
-          managerSidebar
-          :
-          role === "DELIVERER" ? 
-          delivererSidebar
-          :
-          role === "CHEF" ? 
-          chefSidebar
-          :
-          null
-        }
+        {role === "CUSTOMER" || role === "VIP"
+          ? customerSidebar
+          : role === "MANAGER"
+          ? managerSidebar
+          : role === "DELIVERER"
+          ? delivererSidebar
+          : role === "CHEF"
+          ? chefSidebar
+          : null}
       </Box>
       <Box flexGrow={1} />
     </Box>
