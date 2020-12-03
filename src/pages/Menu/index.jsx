@@ -8,10 +8,12 @@ import axios from "axios";
 import Rating from "@material-ui/lab/Rating";
 import "./Menu.css";
 
+
+
 export default class Menu extends React.Component {
+  
   constructor(props) {
     super(props);
-
     this.state = {
       data: [],
       isLoading: true,
@@ -115,6 +117,7 @@ export default class Menu extends React.Component {
               spacing={2}
             >
               {this.state.data.slice(0, 3).map((el) => (
+                
                 <Grid item key={el.dishId}>
                   <div className="item-container">
                     <div className="dish-img-container">
@@ -130,7 +133,13 @@ export default class Menu extends React.Component {
                       />
                     </div>
                     <Divider />
-                    <div className="dish-title-container">{el.dishTitle}</div>
+                    
+              
+                    {el.isSpecial ? ( 
+                    <div className="dish-title-container">{el.dishTitle}<button className="special-btn"> VIP </button></div>
+                    ):( 
+                    <div className="dish-title-container">{el.dishTitle} </div>)}
+                   
                     <div className="rating-container">
                       <Rating
                         name="hover-feedback"
@@ -152,18 +161,26 @@ export default class Menu extends React.Component {
                         ${el.dishPrice}
                       </div>
                       <div className="add-cart-btn">
-                        <Button
-                          variant="success"
-                          onClick={() =>
-                            this.setState({
-                              modalShow: true,
-                              modalData: el,
-                              orderItemId: el.dishId,
-                            })
-                          }
-                        >
-                          Add to Cart
-                        </Button>
+                      {(this.props.user.role != "VIP" && el.isSpecial) ?
+                        <Button>
+                        VIP Only
+                        </Button>   
+                          :
+                          ( <Button
+                            variant="success"
+                            onClick={() => {
+                              
+                              this.setState({
+                                modalShow: true,
+                                modalData: el,
+                                orderItemId: el.dishId,
+                              })
+                              
+                            }}
+                          >
+                            Add to Cart
+                          </Button>)
+                        }
                       </div>
                     </div>
                   </div>
@@ -222,7 +239,12 @@ export default class Menu extends React.Component {
                         />
                       </div>
                       <Divider />
-                      <div className="dish-title-container">{el.dishTitle}</div>
+                      
+                    {el.isSpecial ? ( 
+                    <div className="dish-title-container">{el.dishTitle}<button className="special-btn"> VIP </button></div>
+                    ):( 
+                    <div className="dish-title-container">{el.dishTitle} </div>)}
+
                       <div className="rating-container">
                         <Rating
                           name="hover-feedback"
@@ -246,18 +268,26 @@ export default class Menu extends React.Component {
                           ${el.dishPrice}
                         </div>
                         <div className="add-cart-btn">
-                          <Button
+                        {(this.props.user.role != "VIP" && el.isSpecial) ?
+                        <Button>
+                        VIP Only
+                        </Button>   
+                          :
+                          ( <Button
                             variant="success"
-                            onClick={() =>
+                            onClick={() => {
+                              
                               this.setState({
                                 modalShow: true,
                                 modalData: el,
                                 orderItemId: el.dishId,
                               })
-                            }
+                              
+                            }}
                           >
                             Add to Cart
-                          </Button>
+                          </Button>)
+                        }
                         </div>
                       </div>
                     </div>

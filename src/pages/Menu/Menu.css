@@ -6,6 +6,13 @@
     padding-top: 10px;
 }
 
+.page-title-container-vip{
+    text-align: center;
+    text-decoration-color: rgb(253, 252, 252);
+    padding-top: 10px;
+    height: 100%; 
+}
+
 .page-title-text {
     font-size: 3rem;
 }
@@ -167,6 +174,12 @@
     position: relative;
   }
 
-
+.special-btn {
+    border-radius: 100%;
+    font-size: 10px;
+    size: 10px;
+    margin-left: 10px;
+    background-color: gold;
+}
   
  

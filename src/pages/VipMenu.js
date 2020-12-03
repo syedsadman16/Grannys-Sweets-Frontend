@@ -13,106 +13,111 @@ import "./Menu/Menu.css";
 
 function VipMenu(){
 
-    const defaultModalData = {
-      dishId: 1,
-      dishTitle: "Cup Cake",
-      dishDescription: "Some sort of description for a dish",
-      dishPrice: "5.99",
-      keywords: ["sweet", "cake", "cup"]
-    }
+  //   const defaultModalData = {
+  //     dishId: 1,
+  //     dishTitle: "Cup Cake",
+  //     dishDescription: "Some sort of description for a dish",
+  //     dishPrice: "5.99",
+  //     keywords: ["sweet", "cake", "cup"]
+  //   }
 
-    const [dishes, setDishes] = useState([]);
-    const [modalState, setModalState] = useState(false);
-    const [modalData, setModalData] = useState([defaultModalData]);
-    const [quantity, setQuantity] = useState(0);
+  //   const [dishes, setDishes] = useState([]);
+  //   const [modalState, setModalState] = useState(false);
+  //   const [modalData, setModalData] = useState([defaultModalData]);
+  //   const [quantity, setQuantity] = useState(0);
 
-    const url = '/menu';
-    useEffect( () => {
-      async function testing() {
-        const test = await axios.get(url);
-        setDishes(test.data);
-        return test;
-      }
-      testing();
-    }, [url]);
+  //   const url = '/menu';
+  //   useEffect( () => {
+  //     async function testing() {
+  //       const test = await axios.get(url);
+  //       setDishes(test.data);
+  //       return test;
+  //     }
+  //     testing();
+  //   }, [url]);
 
 
-  function handleModalOrder(quantity) {
-    setQuantity( parseInt(quantity));
-    setModalState(false);
-  }
+  // function handleModalOrder(quantity) {
+  //   setQuantity( parseInt(quantity));
+  //   setModalState(false);
+  // }
+
+  const imgMyimageexample = require('./vip-confetti.webp');
+  const style = {
+    width: '100%',
+    height: '875px',
+    color: 'white',
+    backgroundImage: `url(${imgMyimageexample})`,
+    backgroundSize: 'cover'   
+  };
     
   return (
-    <div className="App">
+    
+    // <div className="App">
 
-      <div className="page-title-container">
-          <div className="page-title-text">VIP Menu</div>
+      <div style={style} className="page-title-container-vip">
+          <div className="page-title-text">Congratulations!</div>
           <div className="page-desc-text">Thanks for being a VIP member! Enjoy access to our special dishes</div>
-          <div className="menu-icon-divider-container">
-            <hr className="title-divider-left" />
-            <FontAwesomeIcon icon={faUtensils} size="2x" color="gray" />
-            <hr className="title-divider-right" /> 
-          </div>
       </div>
 
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={2}
-      > 
+    //   <Grid
+    //     container
+    //     direction="row"
+    //     justify="center"
+    //     alignItems="center"
+    //     spacing={2}
+    //   > 
 
-      {dishes.map( dish => {
-       if(dish.special)
-       return(
+    //   {dishes.map( dish => {
+    //    if(dish.special)
+    //    return(
 
-        <Grid item key={dish.id}>
+    //     <Grid item key={dish.id}>
 
-            <div className="item-container">
-              <div className="dish-img-container">
-                <img
-                  onError={(event) => {
-                    event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico";
-                  }}
-                  src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
-                  width="298"
-                  height="200"
-                  alt="dish"
-                />
-              </div>
-              <Divider />
-              <div className="dish-title-container">{dish.name}</div>
-              <div className="rating-container">
-                <Rating name="hover-feedback" value={dish.averageRating} precision={0.5}/>
-              </div>
-              {dish.description.length > 71 ? (
-                <div className="dish-desc-container">
-                  {dish.description.substring(0, 71) + " ..."}
-                </div>
-              ) : (
-                <div className="dish-desc-container">
-                  {dish.description}
-                </div>
-              )}
-              <div className="price-add-btn-container">
-                <div className="dish-price-container">
-                  ${dish.price}
-                </div>
-                <div className="add-cart-btn">
-                  <Button variant="success" onClick={() => {setModalState(true); setModalData(dish);}}>Add to Cart</Button>
-                </div>
-              </div>
-            </div>
+    //         <div className="item-container">
+    //           <div className="dish-img-container">
+    //             <img
+    //               onError={(event) => {
+    //                 event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico";
+    //               }}
+    //               src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+    //               width="298"
+    //               height="200"
+    //               alt="dish"
+    //             />
+    //           </div>
+    //           <Divider />
+    //           <div className="dish-title-container">{dish.name}</div>
+    //           <div className="rating-container">
+    //             <Rating name="hover-feedback" value={dish.averageRating} precision={0.5}/>
+    //           </div>
+    //           {dish.description.length > 71 ? (
+    //             <div className="dish-desc-container">
+    //               {dish.description.substring(0, 71) + " ..."}
+    //             </div>
+    //           ) : (
+    //             <div className="dish-desc-container">
+    //               {dish.description}
+    //             </div>
+    //           )}
+    //           <div className="price-add-btn-container">
+    //             <div className="dish-price-container">
+    //               ${dish.price}
+    //             </div>
+    //             <div className="add-cart-btn">
+    //               <Button variant="success" onClick={() => {setModalState(true); setModalData(dish);}}>Add to Cart</Button>
+    //             </div>
+    //           </div>
+    //         </div>
             
-          </Grid>
-             )})}
+    //       </Grid>
+    //          )})}
 
-      </Grid>
+    //   </Grid>
 
-      {/*<div> <MenuItemModal show={modalState} handleOrder={quantity} onHide={setModalState(false)} modalData={modalData} />  </div>*/}
+    //   {/*<div> <MenuItemModal show={modalState} handleOrder={quantity} onHide={setModalState(false)} modalData={modalData} />  </div>*/}
    
-    </div>  
+    // </div>  
   );
 }
 

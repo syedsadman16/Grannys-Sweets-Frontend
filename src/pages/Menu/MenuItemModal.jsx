@@ -29,15 +29,7 @@ export default class MenuItemModal extends React.Component {
   };
 
   handleQuantityChange = (event) => {
-    console.log("Event Value", event.currentTarget.value);
-    console.log("Target", event.target.value);
-      
-   // this.setState((prev) => ({...prev, quantity: event.currentTarget.value }));
- 
     this.setState({quantity: event.currentTarget.value} );
- 
- 
-    
   };
 
   handleShowComments = (event) => {
