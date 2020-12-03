@@ -41,6 +41,7 @@ export default function Comments() {
               {item.commenter.username}
             </Typography>
           </ListItemAvatar>
+          <Divider orientation="vertical" flexItem style={{marginRight:"20px"}}/> 
           <ListItemText
             primary={
               <>
