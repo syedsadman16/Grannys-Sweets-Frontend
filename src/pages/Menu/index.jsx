@@ -16,6 +16,7 @@ export default class Menu extends React.Component {
     super(props);
     this.state = {
       data: [],
+      topThree: [],
       isLoading: true,
       searchText: "",
       modalShow: false,
@@ -68,11 +69,34 @@ export default class Menu extends React.Component {
         isLoading: false,
       });
     });
+
+    axios.get("menu/mostOrdered").then((element) => {
+      console.log(element.data);
+      console.log(element.data[0].keyWord[0].keyWord);
+
+      let newData = element.data.map((element) => ({
+        dishId: element.id,
+        dishRating: element.averageRating,
+        dishTitle: element.name,
+        dishDescription: element.description,
+        dishPrice: element.price,
+        isSpecial: element.special,
+        dishImage : element.imageUrl,
+        //keywords: ["Spicy","Dessert"]
+        keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
+      }));
+      this.setState({
+        topThree: [...this.state.topThree, ...newData],
+        isLoading: false,
+      });
+    });
+
   }
 
   render() {
     const {
       data,
+      topThree,
       isLoading,
       searchText,
       modalShow,
@@ -117,6 +141,103 @@ export default class Menu extends React.Component {
               spacing={2}
             >
               {this.state.data.slice(0, 3).map((el) => (
+                
+                <Grid item key={el.dishId}>
+                  <div className="item-container">
+                    <div className="dish-img-container">
+                      <img
+                        onError={(event) => {
+                          event.target.src =
+                            "/Online-Restaurant-System-Frontend/favicon.ico";
+                        }}
+                        src= {el.dishImage}
+                        width="298"
+                        height="200"
+                        alt="dish"
+                      />
+                    </div>
+                    <Divider />
+                    
+              
+                    {el.isSpecial ? ( 
+                    <div className="dish-title-container">{el.dishTitle}<button className="special-btn"> VIP </button></div>
+                    ):( 
+                    <div className="dish-title-container">{el.dishTitle} </div>)}
+                   
+                    <div className="rating-container">
+                      <Rating
+                        name="hover-feedback"
+                        value={el.dishRating}
+                        precision={0.5}
+                      />
+                    </div>
+                    {el.dishDescription.length > 71 ? (
+                      <div className="dish-desc-container">
+                        {el.dishDescription.substring(0, 71) + " ..."}
+                      </div>
+                    ) : (
+                      <div className="dish-desc-container">
+                        {el.dishDescription}
+                      </div>
+                    )}
+                    <div className="price-add-btn-container">
+                      <div className="dish-price-container">
+                        ${el.dishPrice}
+                      </div>
+                      <div className="add-cart-btn">
+                      {(this.props.user.role != "VIP" && el.isSpecial) ?
+                        <Button>
+                        VIP Only
+                        </Button>   
+                          :
+                          ( <Button
+                            variant="success"
+                            onClick={() => {
+                              
+                              this.setState({
+                                modalShow: true,
+                                modalData: el,
+                                orderItemId: el.dishId,
+                              })
+                              
+                            }}
+                          >
+                            Add to Cart
+                          </Button>)
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+            {modalShow && (
+              <MenuItemModal
+                show={modalShow}
+                onHide={this.handleModalClose}
+                modalData={modalData}
+                {...this.props}
+              />
+            )}
+          </div>
+        ) : (
+          <h3>Could not load top rated dishes</h3>
+        )}
+
+<div className="dishes-divided-title">
+          {" "}
+          ―――――― Most Ordered Dishes! ――――――{" "}
+        </div>
+        {!isLoading ? (
+          <div className="menu-items-container">
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={2}
+            >
+              {this.state.topThree.map((el) => (
                 
                 <Grid item key={el.dishId}>
                   <div className="item-container">
