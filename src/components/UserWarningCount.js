@@ -19,8 +19,8 @@ class Warning extends Component{
       return(
         <div className="Warnings">
           <header className="warning header">
-            <p>Number of Warnings:</p>
-            <p>{(this.state.warning.length)}</p>
+            <p>Number of Warnings:
+            {(this.state.warning.length)}</p>
           </header>
         </div>
       );
