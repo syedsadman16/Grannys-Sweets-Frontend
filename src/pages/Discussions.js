@@ -4,7 +4,6 @@ import api from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../redux/actions/user";
 import { isEmpty } from "lodash";
-import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';

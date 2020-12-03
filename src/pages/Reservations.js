@@ -33,22 +33,22 @@ const Reservations = () => {
         :
         <div>
           {reservationsList.map( (el) => (
-            <Card variant="outlined" style={{margin:"10px"}}>
+            <Card key={el.id} variant="outlined" style={{margin:"10px",width:"400px"}}>
               <CardContent>
-                <Typography variant="h5" component="h2">
-                  Table_ID
+                <Typography variant="h3" component="h2">
+                  Table #{el.table.id}
                 </Typography>
-                <Typography color="textSecondary">
+                <Typography variant="h3" color="textSecondary">
                   From
                 </Typography>
                 <Typography variant="body2" component="p">
-                  date_from
+                  {el.timeSlot.from}
                 </Typography>
-                <Typography s color="textSecondary">
+                <Typography variant="h3" color="textSecondary">
                   To
                 </Typography>
                 <Typography variant="body2" component="p">
-                  date_to
+                  {el.timeSlot.to}
                 </Typography>
               </CardContent>
             </Card>
