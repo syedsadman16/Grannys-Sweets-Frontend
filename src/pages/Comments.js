@@ -4,6 +4,13 @@ import api from "axios";
 import { isEmpty } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../redux/actions/user";
+import Typography from '@material-ui/core/Typography';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Divider from '@material-ui/core/Divider';
+import {Form, Button} from 'react-bootstrap';
 
 export default function Comments() {
   const [comments, setComments] = useState([]);
@@ -25,10 +32,32 @@ export default function Comments() {
   };
   const showList = () => {
     return comments.map((item, index) => (
-      <div key={index}>
-        <p>
-          {item.commenter.username}: {item.message}
-        </p>
+      <div key={index} style={{margin:"auto",width:"800px"}}>
+        <ListItem key={index} button>
+          <ListItemAvatar style={{marginRight:"20px"}} >
+            <AccountCircleIcon style={{display:"block",margin:"auto",height:"40px",width:"40px"}}>
+            </AccountCircleIcon>
+            <Typography style={{fontWeight:"bold"}}>
+              {item.commenter.username}
+            </Typography>
+          </ListItemAvatar>
+          <Divider orientation="vertical" flexItem style={{marginRight:"20px"}}/> 
+          <ListItemText
+            primary={
+              <>
+                <Typography
+                  component="span"
+                  variant="body1"                      
+                  color="textPrimary"
+                  style={{fontWeight:"500"}}
+                >
+                  {item.message}
+                </Typography>
+              </>
+            }
+          />
+        </ListItem>
+        <Divider />
       </div>
     ));
   };
@@ -45,6 +74,7 @@ export default function Comments() {
           discussion: { id },
         });
         setComments((prev) => [...prev, data]);
+        setComment("")
         await dispatch(getUser(user.id));
       } catch (error) {}
     } else {
@@ -57,23 +87,34 @@ export default function Comments() {
   }, []);
 
   return (
-    <div>
-      <form onSubmit={createComment}>
-        <input value={comment} onChange={handleChange} />
-        <button disabled={!comment || !user.role || user.closed} type="submit">
-          Comment
-        </button>
-        {user.closed && <strong>Account Closed</strong>}
-        {isEmpty(user) && <strong>Sign in</strong>}
-      </form>
-      <p>{errorMessage}</p>
-      <div>
-        <p>Topic: {isEmpty(discussion) ? "N/A" : discussion.topic}</p>
-        <p>
-          Creator: {isEmpty(discussion) ? "N/A" : discussion.creator.username}
-        </p>
+    <>
+    <div style={{margin:"auto", textAlign:"center",marginTop:'10px'}}>
+      {isEmpty(errorMessage) ? null : <p>{errorMessage}</p>}
+      <div style={{margin:"auto", textAlign:"center"}}>
+        <Typography variant="h4" style={{fontWeight:"600"}}>
+          Topic: {isEmpty(discussion) ? "N/A" : discussion.topic}
+        </Typography>
+        <Typography variant="h6" gutterBottom style={{fontWeight:"300"}}>
+          By: {isEmpty(discussion) ? "N/A" : discussion.creator.username}
+        </Typography>
       </div>
-      {!comments.length ? <div>No Comments</div> : showList()}
+      <div style={{marginBottom:"20px"}}>
+        {!comments.length ? <div>No Comments</div> : showList()}
+      </div>
     </div>
+    <div style={{margin:"auto",width:"max-content"}}>
+        <Form inline onSubmit={createComment}>
+          <Form.Group>
+            <Form.Control className="mx-sm-3" placeholder="Add Comment" value={comment} onChange={handleChange} style={{width:"400px"}}/>
+            <Form.Text id="passwordHelpBlock" muted  style={{marginRight:"16px"}}>
+              {isEmpty(user) ? <> Please Sign In First </> : user.closed ?  <> Your Account Is Closed</> : !user.verified ? <> Your Account Is Unverified</> : null}
+            </Form.Text>
+          </Form.Group>
+          <Button type="submit" disabled={!comment || !user.role || user.closed || !user.verified}>
+            Submit
+          </Button>
+        </Form>
+    </div>
+    </>
   );
 }

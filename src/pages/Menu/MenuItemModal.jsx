@@ -29,7 +29,7 @@ export default class MenuItemModal extends React.Component {
   };
 
   handleQuantityChange = (event) => {
-    this.setState((prev) => ({ ...prev, quantity: event.currentTarget.value }));
+    this.setState({quantity: event.currentTarget.value} );
   };
 
   handleShowComments = (event) => {
@@ -193,6 +193,7 @@ export default class MenuItemModal extends React.Component {
                   <option value={5}>5</option>
                 </Form.Control>
               </Form.Group>
+            {console.log("Event Value", this.state.quantity)}
               <div>
                 <p>Choose Order Type Pickup:</p>
                 Pick-up
