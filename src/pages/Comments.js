@@ -104,7 +104,7 @@ export default function Comments() {
     <div style={{margin:"auto",width:"max-content"}}>
         <Form inline onSubmit={createComment}>
           <Form.Group>
-            <Form.Control className="mx-sm-3" placeholder="Add Comment" value={comment} onChange={handleChange}/>
+            <Form.Control className="mx-sm-3" placeholder="Add Comment" value={comment} onChange={handleChange} style={{width:"400px"}}/>
             <Form.Text id="passwordHelpBlock" muted  style={{marginRight:"16px"}}>
               {isEmpty(user) ? <> Please Sign In First </> : user.closed ?  <> Your Account Is Closed</> : !user.verified ? <> Your Account Is Unverified</> : null}
             </Form.Text>
