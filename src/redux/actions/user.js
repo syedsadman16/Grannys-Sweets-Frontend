@@ -18,7 +18,9 @@ const login = (formData, history) => {
   return async (dispatch) => {
     try {
       const { data, headers } = await api.post("/auth", formData);
+
       localStorage.setItem("jwt", headers.authorization);
+      console.log(headers.authorization);
       localStorage.setItem("userId", data.id);
       dispatch(
         setUser({

@@ -8,10 +8,7 @@ import axios from "axios";
 import Rating from "@material-ui/lab/Rating";
 import "./Menu.css";
 
-
-
 export default class Menu extends React.Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -23,8 +20,8 @@ export default class Menu extends React.Component {
       modalData: {
         dishId: 1,
         dishTitle: "Cup Cake",
-        dishImage : "",
-        dishRating : "0",
+        dishImage: "",
+        dishRating: "0",
         dishDescription: "Some sort of description for a dish",
         dishPrice: "5.99",
         keywords: ["sweet", "cake", "cup"],
@@ -60,7 +57,7 @@ export default class Menu extends React.Component {
         dishDescription: element.description,
         dishPrice: element.price,
         isSpecial: element.special,
-        dishImage : element.imageUrl,
+        dishImage: element.imageUrl,
         //keywords: ["Spicy","Dessert"]
         keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
       }));
@@ -81,7 +78,7 @@ export default class Menu extends React.Component {
         dishDescription: element.description,
         dishPrice: element.price,
         isSpecial: element.special,
-        dishImage : element.imageUrl,
+        dishImage: element.imageUrl,
         //keywords: ["Spicy","Dessert"]
         keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
       }));
@@ -90,7 +87,6 @@ export default class Menu extends React.Component {
         isLoading: false,
       });
     });
-
   }
 
   render() {
@@ -141,7 +137,6 @@ export default class Menu extends React.Component {
               spacing={2}
             >
               {this.state.data.slice(0, 3).map((el) => (
-                
                 <Grid item key={el.dishId}>
                   <div className="item-container">
                     <div className="dish-img-container">
@@ -150,20 +145,25 @@ export default class Menu extends React.Component {
                           event.target.src =
                             "/Online-Restaurant-System-Frontend/favicon.ico";
                         }}
-                        src= {el.dishImage}
+                        src={el.dishImage}
                         width="298"
                         height="200"
                         alt="dish"
                       />
                     </div>
                     <Divider />
-                    
-              
-                    {el.isSpecial ? ( 
-                    <div className="dish-title-container">{el.dishTitle}<button className="special-btn"> VIP </button></div>
-                    ):( 
-                    <div className="dish-title-container">{el.dishTitle} </div>)}
-                   
+
+                    {el.isSpecial ? (
+                      <div className="dish-title-container">
+                        {el.dishTitle}
+                        <button className="special-btn"> VIP </button>
+                      </div>
+                    ) : (
+                      <div className="dish-title-container">
+                        {el.dishTitle}{" "}
+                      </div>
+                    )}
+
                     <div className="rating-container">
                       <Rating
                         name="hover-feedback"
@@ -185,26 +185,22 @@ export default class Menu extends React.Component {
                         ${el.dishPrice}
                       </div>
                       <div className="add-cart-btn">
-                      {(this.props.user.role != "VIP" && el.isSpecial) ?
-                        <Button>
-                        VIP Only
-                        </Button>   
-                          :
-                          ( <Button
+                        {this.props.user.role != "VIP" && el.isSpecial ? (
+                          <Button>VIP Only</Button>
+                        ) : (
+                          <Button
                             variant="success"
                             onClick={() => {
-                              
                               this.setState({
                                 modalShow: true,
                                 modalData: el,
                                 orderItemId: el.dishId,
-                              })
-                              
+                              });
                             }}
                           >
-                            Add to Cart
-                          </Button>)
-                        }
+                            Order
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -224,7 +220,7 @@ export default class Menu extends React.Component {
           <h3>Could not load top rated dishes</h3>
         )}
 
-<div className="dishes-divided-title">
+        <div className="dishes-divided-title">
           {" "}
           ―――――― Most Ordered Dishes! ――――――{" "}
         </div>
@@ -238,7 +234,6 @@ export default class Menu extends React.Component {
               spacing={2}
             >
               {this.state.topThree.map((el) => (
-                
                 <Grid item key={el.dishId}>
                   <div className="item-container">
                     <div className="dish-img-container">
@@ -247,20 +242,25 @@ export default class Menu extends React.Component {
                           event.target.src =
                             "/Online-Restaurant-System-Frontend/favicon.ico";
                         }}
-                        src= {el.dishImage}
+                        src={el.dishImage}
                         width="298"
                         height="200"
                         alt="dish"
                       />
                     </div>
                     <Divider />
-                    
-              
-                    {el.isSpecial ? ( 
-                    <div className="dish-title-container">{el.dishTitle}<button className="special-btn"> VIP </button></div>
-                    ):( 
-                    <div className="dish-title-container">{el.dishTitle} </div>)}
-                   
+
+                    {el.isSpecial ? (
+                      <div className="dish-title-container">
+                        {el.dishTitle}
+                        <button className="special-btn"> VIP </button>
+                      </div>
+                    ) : (
+                      <div className="dish-title-container">
+                        {el.dishTitle}{" "}
+                      </div>
+                    )}
+
                     <div className="rating-container">
                       <Rating
                         name="hover-feedback"
@@ -282,26 +282,22 @@ export default class Menu extends React.Component {
                         ${el.dishPrice}
                       </div>
                       <div className="add-cart-btn">
-                      {(this.props.user.role != "VIP" && el.isSpecial) ?
-                        <Button>
-                        VIP Only
-                        </Button>   
-                          :
-                          ( <Button
+                        {this.props.user.role != "VIP" && el.isSpecial ? (
+                          <Button>VIP Only</Button>
+                        ) : (
+                          <Button
                             variant="success"
                             onClick={() => {
-                              
                               this.setState({
                                 modalShow: true,
                                 modalData: el,
                                 orderItemId: el.dishId,
-                              })
-                              
+                              });
                             }}
                           >
-                            Add to Cart
-                          </Button>)
-                        }
+                            Order
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -353,18 +349,24 @@ export default class Menu extends React.Component {
                             event.target.src =
                               "/Online-Restaurant-System-Frontend/favicon.ico";
                           }}
-                          src= {el.dishImage}
+                          src={el.dishImage}
                           width="298"
                           height="200"
                           alt="dish"
                         />
                       </div>
                       <Divider />
-                      
-                    {el.isSpecial ? ( 
-                    <div className="dish-title-container">{el.dishTitle}<button className="special-btn"> VIP </button></div>
-                    ):( 
-                    <div className="dish-title-container">{el.dishTitle} </div>)}
+
+                      {el.isSpecial ? (
+                        <div className="dish-title-container">
+                          {el.dishTitle}
+                          <button className="special-btn"> VIP </button>
+                        </div>
+                      ) : (
+                        <div className="dish-title-container">
+                          {el.dishTitle}{" "}
+                        </div>
+                      )}
 
                       <div className="rating-container">
                         <Rating
@@ -389,26 +391,22 @@ export default class Menu extends React.Component {
                           ${el.dishPrice}
                         </div>
                         <div className="add-cart-btn">
-                        {(this.props.user.role != "VIP" && el.isSpecial) ?
-                        <Button>
-                        VIP Only
-                        </Button>   
-                          :
-                          ( <Button
-                            variant="success"
-                            onClick={() => {
-                              
-                              this.setState({
-                                modalShow: true,
-                                modalData: el,
-                                orderItemId: el.dishId,
-                              })
-                              
-                            }}
-                          >
-                            Add to Cart
-                          </Button>)
-                        }
+                          {this.props.user.role != "VIP" && el.isSpecial ? (
+                            <Button>VIP Only</Button>
+                          ) : (
+                            <Button
+                              variant="success"
+                              onClick={() => {
+                                this.setState({
+                                  modalShow: true,
+                                  modalData: el,
+                                  orderItemId: el.dishId,
+                                });
+                              }}
+                            >
+                              Order
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </div>

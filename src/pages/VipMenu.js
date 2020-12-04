@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Divider } from "@material-ui/core/";
-import { 
-  Form,
-  Button, 
-} from "react-bootstrap";
-import axios from 'axios';
-import Rating from '@material-ui/lab/Rating';
+import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import Rating from "@material-ui/lab/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import MenuItemModal from "./Menu/MenuItemModal";
 import "./Menu/Menu.css";
 
-function VipMenu(){
-
+function VipMenu() {
   //   const defaultModalData = {
   //     dishId: 1,
   //     dishTitle: "Cup Cake",
@@ -36,29 +32,29 @@ function VipMenu(){
   //     testing();
   //   }, [url]);
 
-
   // function handleModalOrder(quantity) {
   //   setQuantity( parseInt(quantity));
   //   setModalState(false);
   // }
 
-  const imgMyimageexample = require('./vip-confetti.webp');
+  const imgMyimageexample = require("./vip-confetti.webp");
   const style = {
-    width: '100%',
-    height: '875px',
-    color: 'white',
+    width: "100%",
+    height: "875px",
+    color: "white",
     backgroundImage: `url(${imgMyimageexample})`,
-    backgroundSize: 'cover'   
+    backgroundSize: "cover",
   };
-    
+
   return (
-    
     // <div className="App">
 
-      <div style={style} className="page-title-container-vip">
-          <div className="page-title-text">Congratulations!</div>
-          <div className="page-desc-text">Thanks for being a VIP member! Enjoy access to our special dishes</div>
+    <div style={style} className="page-title-container-vip">
+      <div className="page-title-text">Congratulations!</div>
+      <div className="page-desc-text">
+        Thanks for being a VIP member! Enjoy access to our special dishes
       </div>
+    </div>
 
     //   <Grid
     //     container
@@ -66,7 +62,7 @@ function VipMenu(){
     //     justify="center"
     //     alignItems="center"
     //     spacing={2}
-    //   > 
+    //   >
 
     //   {dishes.map( dish => {
     //    if(dish.special)
@@ -105,22 +101,20 @@ function VipMenu(){
     //               ${dish.price}
     //             </div>
     //             <div className="add-cart-btn">
-    //               <Button variant="success" onClick={() => {setModalState(true); setModalData(dish);}}>Add to Cart</Button>
+    //               <Button variant="success" onClick={() => {setModalState(true); setModalData(dish);}}>Order</Button>
     //             </div>
     //           </div>
     //         </div>
-            
+
     //       </Grid>
     //          )})}
 
     //   </Grid>
 
     //   {/*<div> <MenuItemModal show={modalState} handleOrder={quantity} onHide={setModalState(false)} modalData={modalData} />  </div>*/}
-   
-    // </div>  
+
+    // </div>
   );
 }
 
 export default VipMenu;
-
-    

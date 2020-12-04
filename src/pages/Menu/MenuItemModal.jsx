@@ -5,11 +5,11 @@ import Rating from "@material-ui/lab/Rating";
 import { Link } from "react-router-dom";
 import ReservationForm from "../../components/ReservationForm";
 import api from "axios";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import "./Menu.css";
 
@@ -29,23 +29,28 @@ export default class MenuItemModal extends React.Component {
   };
 
   handleQuantityChange = (event) => {
-    this.setState({quantity: event.currentTarget.value} );
+    this.setState({ quantity: event.currentTarget.value });
   };
 
   handleShowComments = (event) => {
-    this.setState(prevState => ({openCommentSection: !prevState.openCommentSection}))
+    this.setState((prevState) => ({
+      openCommentSection: !prevState.openCommentSection,
+    }));
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchDishRatings();
   }
 
   fetchDishRatings = async () => {
-    try{
-      let {data: res} = await api.get(`/rating/dishes/${this.props.modalData.dishId}`)
-      this.setState({comments:res})
+    try {
+      let { data: res } = await api.get(
+        `/rating/dishes/${this.props.modalData.dishId}`
+      );
+      this.setState({ comments: res });
+    } catch (E) {
+      console.log(E);
     }
-    catch(E){console.log(E)}
   };
 
   handleChange = (changeObj) =>
@@ -107,7 +112,8 @@ export default class MenuItemModal extends React.Component {
       );
     } else if (
       !isEmpty(this.props.user) &&
-      this.props.user.role !== "CUSTOMER" && this.props.user.role !== "VIP"
+      this.props.user.role !== "CUSTOMER" &&
+      this.props.user.role !== "VIP"
     ) {
       return (
         <Modal className="item-modal" {...this.props} size="lg">
@@ -117,6 +123,32 @@ export default class MenuItemModal extends React.Component {
           <Modal.Body>
             <div className="modal-signin-message">
               Must be signed in as a customer to order
+            </div>
+          </Modal.Body>
+        </Modal>
+      );
+    } else if (!isEmpty(this.props.user) && this.props.user.closed) {
+      return (
+        <Modal className="item-modal" {...this.props} size="lg">
+          <Modal.Header closeButton>
+            <Modal.Title>Account Closed</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="modal-signin-message">
+              You can't order. Your account was closed.
+            </div>
+          </Modal.Body>
+        </Modal>
+      );
+    } else if (!isEmpty(this.props.user) && !this.props.user.verified) {
+      return (
+        <Modal className="item-modal" {...this.props} size="lg">
+          <Modal.Header closeButton>
+            <Modal.Title>Account Unverified</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="modal-signin-message">
+              You can't order. Wait until manager verifies your account.
             </div>
           </Modal.Body>
         </Modal>
@@ -193,7 +225,7 @@ export default class MenuItemModal extends React.Component {
                   <option value={5}>5</option>
                 </Form.Control>
               </Form.Group>
-            {console.log("Event Value", this.state.quantity)}
+              {console.log("Event Value", this.state.quantity)}
               <div>
                 <p>Choose Order Type Pickup:</p>
                 Pick-up
@@ -247,35 +279,32 @@ export default class MenuItemModal extends React.Component {
           <Button onClick={this.handleShowComments}>
             Show User Comments and Ratings
           </Button>
-          <Collapse in={this.state.openCommentSection} >
-            <div style={{marginTop:"10px",marginBottom:"10px"}}>
-              {isEmpty(this.state.comments) ? 
-              <>
-                No Comments Yet
-              </>
-              :
-                this.state.comments.map(el => (
-                <div style={{marginTop:"10px",marginBottom:"10px"}}>
-                  <ListItem button>
-                    <ListItemAvatar>
-                      <AccountCircleIcon>
-                      </AccountCircleIcon>
-                    </ListItemAvatar>
-                    <ListItemText primary={`User ID:${el.critic.id}`} />
-                    <ListItemText primary={`${el.comments}`} />
-                    <Rating
-                      name="read-only"
-                      value={el.rating}
-                      readOnly
-                      precision={0.5}
-                      size="medium"
-                    />
-                  </ListItem>
-                </div>
-              ))
-              }
+          <Collapse in={this.state.openCommentSection}>
+            <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+              {isEmpty(this.state.comments) ? (
+                <>No Comments Yet</>
+              ) : (
+                this.state.comments.map((el) => (
+                  <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+                    <ListItem button>
+                      <ListItemAvatar>
+                        <AccountCircleIcon></AccountCircleIcon>
+                      </ListItemAvatar>
+                      <ListItemText primary={`User ID:${el.critic.id}`} />
+                      <ListItemText primary={`${el.comments}`} />
+                      <Rating
+                        name="read-only"
+                        value={el.rating}
+                        readOnly
+                        precision={0.5}
+                        size="medium"
+                      />
+                    </ListItem>
+                  </div>
+                ))
+              )}
             </div>
-          </Collapse>       
+          </Collapse>
         </Modal>
       );
     }
