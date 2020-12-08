@@ -6,8 +6,20 @@
     padding-top: 10px;
 }
 
+.page-title-container-vip{
+    text-align: center;
+    text-decoration-color: rgb(253, 252, 252);
+    padding-top: 10px;
+    height: 100%; 
+}
+
 .page-title-text {
     font-size: 3rem;
+}
+
+.page-desc-text {
+    font-size: 2rem;
+    font-style: italic;
 }
 
 .menu-icon-divider-container {
@@ -42,7 +54,7 @@
 
 .item-container {
     width: 300px;
-    height: 400px;
+    height: 450px;
     background-color: #dbdbdb;
     margin-right: 25px;
     margin-left: 25px;
@@ -64,6 +76,12 @@
     font-family: bold;
 }
 
+.rating-container {
+    margin: 0 auto;
+    margin-top: 5px;
+    text-align: center;        
+}
+
 .dish-desc-container {
     margin: 0 auto;
     margin-top: 10px;
@@ -81,6 +99,7 @@
     margin: 0 auto;
     width: 75%;
     display: flex;  
+    position: relative;
 }
 
 .dish-price-container {
@@ -109,3 +128,58 @@
     30% { transform: translate(2px, 2px) rotate(0deg); }
     40% { transform: translate(1px, -1px) rotate(1deg); }
 }
+
+.modal-backdrop {
+    background-color: rgba(0,0,0,.4) !important;
+}
+
+.modal-content {
+    text-align: center;
+}
+.modal-footer {
+    display: block;
+    text-align: center;
+}
+
+.modal-signin-message {
+    padding-bottom: 1rem;
+}
+
+.modal-item-img {
+    padding-top: 1rem;
+}
+
+.modal-dish-desc {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-keyword-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-quantity-form {
+    width: 50%;
+    margin: auto;
+}
+
+.dishes-divided-title {
+    font-family: sans-serif;
+    padding: 100px auto;
+    margin-left: 50px;
+    margin-top: 60px;
+    text-align: center;
+    font-size: 25px;
+    position: relative;
+  }
+
+.special-btn {
+    border-radius: 100%;
+    font-size: 10px;
+    size: 10px;
+    margin-left: 10px;
+    background-color: gold;
+}
+  
+ 

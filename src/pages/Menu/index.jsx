@@ -1,26 +1,40 @@
 import React from "react";
 import { Grid, Divider } from "@material-ui/core/";
-import { 
-  Form,
-  FormControl,
-  Button 
-} from "react-bootstrap";
+import MenuItemModal from "./MenuItemModal";
+import { Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
-
+import axios from "axios";
+import Rating from "@material-ui/lab/Rating";
 import "./Menu.css";
 
 export default class Menu extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {
       data: [],
+      topThree: [],
       isLoading: true,
-      searchText: '',
+      searchText: "",
+      modalShow: false,
+      modalData: {
+        dishId: 1,
+        dishTitle: "Cup Cake",
+        dishImage: "",
+        dishRating: "0",
+        dishDescription: "Some sort of description for a dish",
+        dishPrice: "5.99",
+        keywords: ["sweet", "cake", "cup"],
+      },
+      orderItemQuantity: null,
+      orderItemId: null,
     };
-
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
+  }
+
+  handleModalClose() {
+    this.setState({ modalShow: false });
   }
 
   handleSearchTextChange(event) {
@@ -29,72 +43,63 @@ export default class Menu extends React.Component {
 
   componentDidMount() {
     //**MAKE API CALL TO BACKEND HERE**//
-    this.setState({
-      isLoading: false,
-      data: [
-        {
-          dishId: 1,
-          dishTitle: "Cup Cake",
-          dishDescription: "Some sort of description for a dish",
-          dishPrice: "5.99",
-          keywords: ["sweet", "cake", "cup"]
-        },
-        {
-          dishId: 2,
-          dishTitle: "Cheese Cake",
-          dishDescription:
-            "Some sort of description for a dish except this one is a bit longer and it may overflow",
-          dishPrice: "8.99",
-          keywords: ["sweet", "cake", "cheese"]
-        },
-        {
-          dishId: 3,
-          dishTitle: "Birthday Cake",
-          dishDescription: "Some sort of description for a dish",
-          dishPrice: "2.99",
-          keywords: ["sweet", "cake", "low-fat", "birthday"]
-        },
-        {
-          dishId: 4,
-          dishTitle: "Cookie Cake",
-          dishDescription: "Some sort of description for a dish",
-          dishPrice: "15.99",
-          keywords: ["sweet", "cake", "cookie",]
-        },
-        {
-          dishId: 5,
-          dishTitle: "Some Other Type Of Cake",
-          dishDescription: "Some sort of description for a dish",
-          dishPrice: "5.99",
-          keywords: ["sweet", "cake"]
-        },
-        {
-          dishId: 6,
-          dishTitle: "Vegan Cake",
-          dishDescription: "Some sort of description for a vegan cake",
-          dishPrice: "15.99",
-          keywords: ["cake", "vegan"]
-        },
-        {
-          dishId: 7,
-          dishTitle: "Boston Cream Donut",
-          dishDescription: "Some sort of description for a donut",
-          dishPrice: "2.99",
-          keywords: ["donut"]
-        },
-        {
-          dishId: 8,
-          dishTitle: "Vanilla Cream Donut",
-          dishDescription: "Some sort of description for a donut",
-          dishPrice: "2.99",
-          keywords: ["donut"]
-        },
-      ],
+    axios.get("menu").then((element) => {
+      console.log(element.data);
+      console.log(element.data[0].keyWord[0].keyWord);
+
+      element.data.sort((a, b) => b.averageRating - a.averageRating);
+      console.log("Sorted data", element.data);
+
+      let newData = element.data.map((element) => ({
+        dishId: element.id,
+        dishRating: element.averageRating,
+        dishTitle: element.name,
+        dishDescription: element.description,
+        dishPrice: element.price,
+        isSpecial: element.special,
+        dishImage: element.imageUrl,
+        //keywords: ["Spicy","Dessert"]
+        keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
+      }));
+      this.setState({
+        data: [...this.state.data, ...newData],
+        isLoading: false,
+      });
+    });
+
+    axios.get("menu/mostOrdered").then((element) => {
+      console.log(element.data);
+      console.log(element.data[0].keyWord[0].keyWord);
+
+      let newData = element.data.map((element) => ({
+        dishId: element.id,
+        dishRating: element.averageRating,
+        dishTitle: element.name,
+        dishDescription: element.description,
+        dishPrice: element.price,
+        isSpecial: element.special,
+        dishImage: element.imageUrl,
+        //keywords: ["Spicy","Dessert"]
+        keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
+      }));
+      this.setState({
+        topThree: [...this.state.topThree, ...newData],
+        isLoading: false,
+      });
     });
   }
 
   render() {
-    const { data, isLoading, searchText } = this.state;
+    const {
+      data,
+      topThree,
+      isLoading,
+      searchText,
+      modalShow,
+      modalData,
+      orderItemId,
+    } = this.state;
+    console.log(this.state);
     return (
       <>
         <div className="page-title-container">
@@ -104,17 +109,23 @@ export default class Menu extends React.Component {
             <FontAwesomeIcon icon={faUtensils} size="2x" color="gray" />
             <hr className="title-divider-right" />
           </div>
-        <div className="menu-searchbox-container">
-          <Form inline>
-            <Form.Control className="mr-sm-2" 
-              type="text"
-              value={searchText} 
-              placeholder="Search" 
-              onChange={this.handleSearchTextChange} 
-            />
-            <Button variant="outline-info">Search</Button>
-          </Form>
+          <div className="menu-searchbox-container">
+            <Form inline>
+              <Form.Control
+                className="mr-sm-2"
+                type="text"
+                value={searchText}
+                placeholder="Search"
+                onChange={this.handleSearchTextChange}
+              />
+              <Button variant="outline-info">Search</Button>
+            </Form>
+          </div>
         </div>
+
+        <div className="dishes-divided-title">
+          {" "}
+          ―――――― Top 3 rated dishes! ――――――{" "}
         </div>
         {!isLoading ? (
           <div className="menu-items-container">
@@ -124,32 +135,246 @@ export default class Menu extends React.Component {
               justify="center"
               alignItems="center"
               spacing={2}
-            > 
-            {
-            data.filter(p => p.keywords.some( (s) => {
-              if(searchText == '')
-                  return s
-              else if(s.indexOf(searchText.toLowerCase()) != -1){
-                  return s
-              }
-            }    
-            ))
+            >
+              {this.state.data.slice(0, 3).map((el) => (
+                <Grid item key={el.dishId}>
+                  <div className="item-container">
+                    <div className="dish-img-container">
+                      <img
+                        onError={(event) => {
+                          event.target.src =
+                            "/Online-Restaurant-System-Frontend/favicon.ico";
+                        }}
+                        src={el.dishImage}
+                        width="298"
+                        height="200"
+                        alt="dish"
+                      />
+                    </div>
+                    <Divider />
+
+                    {el.isSpecial ? (
+                      <div className="dish-title-container">
+                        {el.dishTitle}
+                        <button className="special-btn"> VIP </button>
+                      </div>
+                    ) : (
+                      <div className="dish-title-container">
+                        {el.dishTitle}{" "}
+                      </div>
+                    )}
+
+                    <div className="rating-container">
+                      <Rating
+                        name="hover-feedback"
+                        value={el.dishRating}
+                        precision={0.5}
+                      />
+                    </div>
+                    {el.dishDescription.length > 71 ? (
+                      <div className="dish-desc-container">
+                        {el.dishDescription.substring(0, 71) + " ..."}
+                      </div>
+                    ) : (
+                      <div className="dish-desc-container">
+                        {el.dishDescription}
+                      </div>
+                    )}
+                    <div className="price-add-btn-container">
+                      <div className="dish-price-container">
+                        ${el.dishPrice}
+                      </div>
+                      <div className="add-cart-btn">
+                        {this.props.user.role != "VIP" && el.isSpecial ? (
+                          <Button>VIP Only</Button>
+                        ) : (
+                          <Button
+                            variant="success"
+                            onClick={() => {
+                              this.setState({
+                                modalShow: true,
+                                modalData: el,
+                                orderItemId: el.dishId,
+                              });
+                            }}
+                          >
+                            Order
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+            {modalShow && (
+              <MenuItemModal
+                show={modalShow}
+                onHide={this.handleModalClose}
+                modalData={modalData}
+                {...this.props}
+              />
+            )}
+          </div>
+        ) : (
+          <h3>Could not load top rated dishes</h3>
+        )}
+
+        <div className="dishes-divided-title">
+          {" "}
+          ―――――― Most Ordered Dishes! ――――――{" "}
+        </div>
+        {!isLoading ? (
+          <div className="menu-items-container">
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={2}
+            >
+              {this.state.topThree.map((el) => (
+                <Grid item key={el.dishId}>
+                  <div className="item-container">
+                    <div className="dish-img-container">
+                      <img
+                        onError={(event) => {
+                          event.target.src =
+                            "/Online-Restaurant-System-Frontend/favicon.ico";
+                        }}
+                        src={el.dishImage}
+                        width="298"
+                        height="200"
+                        alt="dish"
+                      />
+                    </div>
+                    <Divider />
+
+                    {el.isSpecial ? (
+                      <div className="dish-title-container">
+                        {el.dishTitle}
+                        <button className="special-btn"> VIP </button>
+                      </div>
+                    ) : (
+                      <div className="dish-title-container">
+                        {el.dishTitle}{" "}
+                      </div>
+                    )}
+
+                    <div className="rating-container">
+                      <Rating
+                        name="hover-feedback"
+                        value={el.dishRating}
+                        precision={0.5}
+                      />
+                    </div>
+                    {el.dishDescription.length > 71 ? (
+                      <div className="dish-desc-container">
+                        {el.dishDescription.substring(0, 71) + " ..."}
+                      </div>
+                    ) : (
+                      <div className="dish-desc-container">
+                        {el.dishDescription}
+                      </div>
+                    )}
+                    <div className="price-add-btn-container">
+                      <div className="dish-price-container">
+                        ${el.dishPrice}
+                      </div>
+                      <div className="add-cart-btn">
+                        {this.props.user.role != "VIP" && el.isSpecial ? (
+                          <Button>VIP Only</Button>
+                        ) : (
+                          <Button
+                            variant="success"
+                            onClick={() => {
+                              this.setState({
+                                modalShow: true,
+                                modalData: el,
+                                orderItemId: el.dishId,
+                              });
+                            }}
+                          >
+                            Order
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+            {modalShow && (
+              <MenuItemModal
+                show={modalShow}
+                onHide={this.handleModalClose}
+                modalData={modalData}
+                {...this.props}
+              />
+            )}
+          </div>
+        ) : (
+          <h3>Could not load top rated dishes</h3>
+        )}
+
+        <div className="dishes-divided-title">
+          {" "}
+          ―――――― Enjoy all of our available dishes! ――――――{" "}
+        </div>
+
+        {!isLoading ? (
+          <div className="menu-items-container">
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={2}
+            >
+              {data
+                .filter((p) =>
+                  p.keywords.some((s) => {
+                    if (searchText === "") return s;
+                    else if (s.indexOf(searchText.toLowerCase()) !== -1) {
+                      return s;
+                    }
+                  })
+                )
                 .map((el) => (
                   <Grid item key={el.dishId}>
                     <div className="item-container">
                       <div className="dish-img-container">
                         <img
                           onError={(event) => {
-                            event.target.src = "/Online-Restaurant-System-Frontend/favicon.ico";
+                            event.target.src =
+                              "/Online-Restaurant-System-Frontend/favicon.ico";
                           }}
-                          src="/Online-Restaurant-System-Frontend/menu-item-img-default.jpg"
+                          src={el.dishImage}
                           width="298"
                           height="200"
                           alt="dish"
                         />
                       </div>
                       <Divider />
-                      <div className="dish-title-container">{el.dishTitle}</div>
+
+                      {el.isSpecial ? (
+                        <div className="dish-title-container">
+                          {el.dishTitle}
+                          <button className="special-btn"> VIP </button>
+                        </div>
+                      ) : (
+                        <div className="dish-title-container">
+                          {el.dishTitle}{" "}
+                        </div>
+                      )}
+
+                      <div className="rating-container">
+                        <Rating
+                          name="hover-feedback"
+                          value={el.dishRating}
+                          precision={0.5}
+                        />
+                      </div>
                       {/* The following code renders the dish description */}
                       {/* If the dish description is too long, the substring is used followed by ellipses to indicate overflow */}
                       {el.dishDescription.length > 71 ? (
@@ -166,14 +391,36 @@ export default class Menu extends React.Component {
                           ${el.dishPrice}
                         </div>
                         <div className="add-cart-btn">
-                          <Button variant="success">Add to Cart</Button>
+                          {this.props.user.role != "VIP" && el.isSpecial ? (
+                            <Button>VIP Only</Button>
+                          ) : (
+                            <Button
+                              variant="success"
+                              onClick={() => {
+                                this.setState({
+                                  modalShow: true,
+                                  modalData: el,
+                                  orderItemId: el.dishId,
+                                });
+                              }}
+                            >
+                              Order
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </div>
                   </Grid>
-                ))
-            }
+                ))}
             </Grid>
+            {modalShow && (
+              <MenuItemModal
+                show={modalShow}
+                onHide={this.handleModalClose}
+                modalData={modalData}
+                {...this.props}
+              />
+            )}
           </div>
         ) : (
           <h3>Unable to Load Menu Data</h3>

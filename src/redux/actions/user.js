@@ -18,7 +18,9 @@ const login = (formData, history) => {
   return async (dispatch) => {
     try {
       const { data, headers } = await api.post("/auth", formData);
+
       localStorage.setItem("jwt", headers.authorization);
+      console.log(headers.authorization);
       localStorage.setItem("userId", data.id);
       dispatch(
         setUser({
@@ -26,9 +28,11 @@ const login = (formData, history) => {
           username: data.username,
           role: data.role,
           closed: data.closed,
+          verified: data.verified,
         })
       );
       history.push("/");
+      history.go(0);
     } catch (err) {
       throw err;
     }
@@ -45,8 +49,10 @@ const getUser = (id) => {
           username: data.username,
           role: data.role,
           closed: data.closed,
+          verified: data.verified,
         })
       );
+      return data;
     } catch (err) {}
   };
 };

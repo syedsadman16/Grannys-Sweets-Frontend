@@ -1,6 +1,6 @@
 import React from "react";
-import EmployeeLayout from "./Employee";
-import CustomerLayout from "./Customer";
+import AuthUserLayout from "./AuthUser";
+import UserLayout from "./User";
 import authPage from "../auth";
 
 const Layout = ({ page, isPrivate, type, ...props }) => {
@@ -9,14 +9,14 @@ const Layout = ({ page, isPrivate, type, ...props }) => {
 
   return (
     <>
-      {type === "employee" ? (
-        <EmployeeLayout {...props}>
+      {type === "authUser" ? (
+        <AuthUserLayout {...props}>
           <Page {...props} />
-        </EmployeeLayout>
+        </AuthUserLayout>
       ) : (
-        <CustomerLayout {...props}>
+        <UserLayout {...props}>
           <Page {...props} />
-        </CustomerLayout>
+        </UserLayout>
       )}
     </>
   );
