@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Card from '@material-ui/core/Card';
+import { useHistory } from "react-router-dom";
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -21,6 +22,7 @@ function InProgress(){
         },
       });
     const classes = useStyles();
+    const history = useHistory();
 
       
     const url = '/jobs/delivery';
@@ -31,7 +33,7 @@ function InProgress(){
 
     async function testing() {
       const jobsapi = await axios.get(url);
-      setJobs((prev) => [...prev, ...jobsapi.data])
+      setJobs(jobsapi.data)
       return jobsapi;
     }
 
@@ -50,7 +52,8 @@ function InProgress(){
         console.log(url);
         try{
           axios.post(url);
-          setJobs(axios.get('/jobs/delivery'));
+          testing();
+          history.go(0);
         }
         catch(E){console.log(E)}
       }
@@ -62,13 +65,12 @@ function InProgress(){
             {
             jobs.length ?  
               jobs.map( job => {
-                if(job.status == 1)
+                if(job.status == 1 && job.order.type == 1)
                 return(
                   <div>     
                       <Card className={classes.root}>
                       <CardActionArea>
                           <CardContent>
-                          {"JOBS", console.log( job)}
                           <Typography gutterBottom variant="h5" component="h2">
                               Job Reference# {job.id}
                           </Typography>
@@ -91,7 +93,7 @@ function InProgress(){
                   </div>
               )})
             : 
-            <h3>You have not accepted any jobs. Visit the Job Center to get started!</h3>
+            <h3>...</h3>
         }
         </div>
 
