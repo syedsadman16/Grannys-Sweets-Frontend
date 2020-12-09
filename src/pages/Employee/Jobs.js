@@ -58,12 +58,14 @@ function Jobs(){
             {
               jobs.length ?
               jobs.map( job => {
-                if(job.status == 0)
+                if(job.status == 0 && job.order.type == 1)
                 return(
+               
                   <div> 
                     <Card className={classes.root}>
                       <CardActionArea>
                         <CardContent>
+                        {console.log("JOB TYPE", job.type)}
                           <Typography gutterBottom variant="h5" component="h2">
                             Job Reference# {job.id}
                           </Typography>
