@@ -70,8 +70,8 @@ const Routes = () => {
         path="/discussions/:id"
         render={(props) => <Layout page={Comments} {...props} />}
       />
-      
-     <Route
+
+      <Route
         exact
         path="/warningcount"
         render={(props) => <Layout page={UserWarningCount} {...props} />}
@@ -89,7 +89,12 @@ const Routes = () => {
         exact
         path="/customer/info"
         render={(props) => (
-          <Layout isPrivate={true} type="authUser" page={CustomerInfo} {...props}/>
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={CustomerInfo}
+            {...props}
+          />
         )}
       />
 
@@ -105,7 +110,12 @@ const Routes = () => {
         exact
         path="/customer/orders"
         render={(props) => (
-          <Layout isPrivate={true} type="authUser" page={CustomerOrders} {...props} />
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={CustomerOrders}
+            {...props}
+          />
         )}
       />
 
@@ -113,11 +123,15 @@ const Routes = () => {
         exact
         path="/customer/reservations"
         render={(props) => (
-          <Layout isPrivate={true} type="authUser" page={Reservations} {...props} />
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={Reservations}
+            {...props}
+          />
         )}
       />
 
-        
       {/* VIP Routes */}
 
       <Route
@@ -126,7 +140,7 @@ const Routes = () => {
         render={(props) => (
           <Layout isPrivate={true} page={VIPMenu} {...props} />
         )}
-      />   
+      />
 
       {/* Employee Routes */}
 
@@ -142,31 +156,20 @@ const Routes = () => {
           />
         )}
       />
-      
+
       <Route
         exact
         path="/employee/jobs"
         render={(props) => (
-          <Layout
-            isPrivate={true}
-            type="authUser"
-            page={Jobs}
-            {...props}
-          />
+          <Layout isPrivate={true} type="authUser" page={Jobs} {...props} />
         )}
       />
 
-      
       <Route
         exact
         path="/employee/currentJobs"
         render={(props) => (
-          <Layout
-            isPrivate={true}
-            type="authUser"
-            page={TrackJob}
-            {...props}
-          />
+          <Layout isPrivate={true} type="authUser" page={TrackJob} {...props} />
         )}
       />
 
@@ -174,12 +177,7 @@ const Routes = () => {
         exact
         path="/employee/createDish"
         render={(props) => (
-          <Layout
-            isPrivate={true}
-            type="authUser"
-            page={DishForm}
-            {...props}
-          />
+          <Layout isPrivate={true} type="authUser" page={DishForm} {...props} />
         )}
       />
 
@@ -187,12 +185,7 @@ const Routes = () => {
         exact
         path="/employee/CookJobs"
         render={(props) => (
-          <Layout
-            isPrivate={true}
-            type="authUser"
-            page={ChefJob}
-            {...props}
-          />
+          <Layout isPrivate={true} type="authUser" page={ChefJob} {...props} />
         )}
       />
 
@@ -216,7 +209,12 @@ const Routes = () => {
         exact
         path="/employee/complaints"
         render={(props) => (
-          <Layout isPrivate={true} type="authUser" page={Complaints} {...props} />
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={Complaints}
+            {...props}
+          />
         )}
       />
 
@@ -224,7 +222,12 @@ const Routes = () => {
         exact
         path="/employee/managerorders"
         render={(props) => (
-          <Layout isPrivate={true} type="authUser" page={ManagerOrders} {...props} />
+          <Layout
+            isPrivate={true}
+            type="authUser"
+            page={ManagerOrders}
+            {...props}
+          />
         )}
       />
 
