@@ -19,7 +19,7 @@ https://syedsadman16.github.io/Online-Restaurant-System-Frontend/#/
 
 ### Move into project directory
 
-`cd postmates_2.0`
+`cd Online-Restaurant-System-Frontend`
 
 ### Install packages (creates node_modules folder)
 
