@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Divider } from "@material-ui/core/";
 import Button from '@material-ui/core/Button';
 import "./Employee.css";
 
@@ -14,8 +15,19 @@ function InProgress(){
 
     const [jobs, setJobs] = useState([]);
     const useStyles = makeStyles({
+      gridContainer:{
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        paddingTop : "20px",
+        paddingBottom : "20px",
+        marginLeft : "20px",
+        marginRight : "20px",
+        marginTop : "20px",
+        marginBottom : "20px"
+      },
         root: {
           maxWidth: 345,
+          width : 320
         },
         media: {
           height: 140,
@@ -63,12 +75,17 @@ function InProgress(){
         <div className="page-desc-text">You are currently assigned the following Jobs:</div>
 
             {
-            jobs.length ?  
-              jobs.map( job => {
+            jobs.length ? 
+            <Grid container 
+              direction = "row"
+              justify = "center"
+              allignItems = "center"
+              spacing = {4} >
+                {jobs.map( job => {
                 if(job.status == 1 && job.order.type == 1)
                 return(
-                  <div>     
-                      <Card className={classes.root}>
+                  <Grid className = {classes.gridContainer}>
+                    <Card className={classes.root}>
                       <CardActionArea>
                           <CardContent>
                           <Typography gutterBottom variant="h5" component="h2">
@@ -90,8 +107,10 @@ function InProgress(){
                           </Button>
                       </CardActions>
                       </Card>
-                  </div>
-              )})
+                  </Grid>        
+              )})}
+              </Grid>
+              
             : 
             <h3>...</h3>
         }

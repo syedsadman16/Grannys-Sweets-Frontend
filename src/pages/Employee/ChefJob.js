@@ -90,7 +90,8 @@ const ChefJob = () =>{
       paddingBottom : "20px",
       marginLeft : "20px",
       marginRight : "20px",
-      marginTop : "20px"
+      marginTop : "20px",
+      marginBottom : "20px"
     },
     root: {
         maxWidth: 345,
@@ -120,7 +121,7 @@ const ChefJob = () =>{
       <div>
         {
          <Grid container 
-            direction = "row-reverse"
+            direction = "row"
             justify = "center"
             allignItems = "center"
             spacing = {4} >
