@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Divider } from "@material-ui/core/";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -82,11 +83,22 @@ const ChefJob = () =>{
 
 
     const useStyles = makeStyles({
+    gridContainer:{
+      paddingLeft: "20px",
+      paddingRight: "20px",
+      paddingTop : "20px",
+      paddingBottom : "20px",
+      marginLeft : "20px",
+      marginRight : "20px",
+      marginTop : "20px",
+      marginBottom : "20px"
+    },
     root: {
         maxWidth: 345,
     },
     media: {
         height: 175,
+        width : 300
     },
     });
 
@@ -108,37 +120,45 @@ const ChefJob = () =>{
   return (
       <div>
         {
-          chefJob.map(job => {
-            if (job.jobStatus === false)
-                return(
-                    <Card className={classes.root}>
-                        <CardActionArea>
-                            <CardMedia
-                            className={classes.media}
-                            image={job.dishImage}
-                            title="dish"   //name of the dish goes here
-                            />
-                            <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                Job Reference # {job.jobId}
-                            </Typography>
-                            <h6 variant="body2" color="textSecondary" component="p">
-                                Order # {job.orderId}
-                            </h6>
-                            <h6> Date: {job.orderTime} </h6>
-                            <h6> Dish: {job.dishName}  ||  QTY. {job.quantity} </h6>
-                            <h6> Ordered By: {job.customerName}</h6>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary" onClick = { () => handleComplete(job.jobId)}>
-                                Mark Completed!
-                            </Button>
-                        </CardActions>
-                    </Card>
-
-                )
-          })
+         <Grid container 
+            direction = "row"
+            justify = "center"
+            allignItems = "center"
+            spacing = {4} >
+            {chefJob.map(job => {
+              if (job.jobStatus === false)
+                  return(
+                    <Grid className = {classes.gridContainer}>
+                      <Card className={classes.root}>
+                            <CardActionArea>
+                                <CardMedia
+                                className={classes.media}
+                                image={job.dishImage}
+                                title="dish"   //name of the dish goes here
+                                />
+                                <CardContent>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    Job Reference # {job.jobId}
+                                </Typography>
+                                <h6 variant="body2" color="textSecondary" component="p">
+                                    Order # {job.orderId}
+                                </h6>
+                                <h6> Date: {job.orderTime} </h6>
+                                <h6> Dish: {job.dishName}  ||  QTY. {job.quantity} </h6>
+                                <h6> Ordered By: {job.customerName}</h6>
+                                </CardContent>
+                            </CardActionArea>
+                            <CardActions>
+                                <Button size="small" color="primary" onClick = { () => handleComplete(job.jobId)}>
+                                    Mark Completed!
+                                </Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+    
+                  )
+            })}
+          </Grid>
 
         }
 

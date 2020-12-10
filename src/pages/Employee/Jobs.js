@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Grid, Divider } from "@material-ui/core/";
 import "./Employee.css";
 
 function Jobs(){
@@ -31,8 +32,19 @@ function Jobs(){
     
 
     const useStyles = makeStyles({
+      gridContainer:{
+        paddingLeft: "10px",
+        paddingRight: "10px",
+        paddingTop : "10px",
+        paddingBottom : "10px",
+        marginLeft : "20px",
+        marginRight : "20px",
+        marginTop : "20px",
+        marginBottom : "20px"
+      },
       root: {
-        maxWidth: 345,
+        maxWidth: 350,
+        width : 320
       },
       media: {
         height: 140,
@@ -57,11 +69,15 @@ function Jobs(){
         <div>
             {
               jobs.length ?
-              jobs.map( job => {
+              <Grid container 
+              direction = "row"
+              justify = "center"
+              allignItems = "center"
+              spacing = {4} >
+                {jobs.map( job => {
                 if(job.status == 0 && job.order.type == 1)
                 return(
-               
-                  <div> 
+                  <Grid className = {classes.gridContainer}>
                     <Card className={classes.root}>
                       <CardActionArea>
                         <CardContent>
@@ -82,8 +98,11 @@ function Jobs(){
                         </Button>
                       </CardActions>
                     </Card>
-                  </div>
-              )})
+                  </Grid>
+                  
+              )})}
+              </Grid>
+              
               :<div></div>
        }
 
