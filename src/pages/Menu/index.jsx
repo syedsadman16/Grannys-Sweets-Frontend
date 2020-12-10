@@ -44,9 +44,6 @@ export default class Menu extends React.Component {
   componentDidMount() {
     //**MAKE API CALL TO BACKEND HERE**//
     axios.get("menu").then((element) => {
-      console.log(element.data);
-      console.log(element.data[0].keyWord[0].keyWord);
-
       element.data.sort((a, b) => b.averageRating - a.averageRating);
       console.log("Sorted data", element.data);
 
@@ -69,7 +66,6 @@ export default class Menu extends React.Component {
 
     axios.get("menu/mostOrdered").then((element) => {
       console.log(element.data);
-      console.log(element.data[0].keyWord[0].keyWord);
 
       let newData = element.data.map((element) => ({
         dishId: element.id,
