@@ -3,7 +3,6 @@
     width: max-content;
     margin-bottom: 10px;
     text-align: center;
-    padding-top: 10px;
 }
 
 .page-title-container-vip{
@@ -24,6 +23,29 @@
 
 .menu-icon-divider-container {
     display: flex;
+}
+
+.section-divider-container {
+    display: flex;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.section-divider-left {
+    background-color: gray;
+    width: 100px;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    margin-right: 5px;
+}
+
+.section-divider-right {
+    background-color: gray;
+    width: 100px;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    margin-left: 5px;
 }
 
 .menu-items-container{

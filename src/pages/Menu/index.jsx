@@ -119,9 +119,10 @@ export default class Menu extends React.Component {
           </div>
         </div>
 
-        <div className="dishes-divided-title">
-          {" "}
-          ―――――― Top 3 rated dishes! ――――――{" "}
+        <div className="section-divider-container">
+          <hr className="section-divider-left" />
+          Top Rated
+          <hr className="section-divider-right" />
         </div>
         {!isLoading ? (
           <div className="menu-items-container">
@@ -217,9 +218,10 @@ export default class Menu extends React.Component {
           <h3>Could not load top rated dishes</h3>
         )}
 
-        <div className="dishes-divided-title">
-          {" "}
-          ―――――― Most Ordered Dishes! ――――――{" "}
+        <div className="section-divider-container">
+          <hr className="section-divider-left" />
+          Most Ordered
+          <hr className="section-divider-right" />
         </div>
         {!isLoading ? (
           <div className="menu-items-container">
@@ -315,11 +317,11 @@ export default class Menu extends React.Component {
           <h3>Could not load top rated dishes</h3>
         )}
 
-        <div className="dishes-divided-title">
-          {" "}
-          ―――――― Enjoy all of our available dishes! ――――――{" "}
+        <div className="section-divider-container">
+          <hr className="section-divider-left" />
+          All
+          <hr className="section-divider-right" />
         </div>
-
         {!isLoading ? (
           <div className="menu-items-container">
             <Grid
