@@ -198,6 +198,7 @@ const Users = () => {
               <TableCell>Verified</TableCell>
               <TableCell>Closed</TableCell>
               <TableCell>Delete User</TableCell>
+              <TableCell>Open Account</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -211,6 +212,11 @@ const Users = () => {
                 <TableCell>
                   <Button onClick={() => handleFire(el.id)} variant="danger">
                     Delete
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button variant="success">
+                    Open
                   </Button>
                 </TableCell>
               </TableRow>
