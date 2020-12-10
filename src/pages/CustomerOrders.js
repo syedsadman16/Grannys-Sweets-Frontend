@@ -90,13 +90,13 @@ const CustomerOrders = () => {
                   x{el.dishOrders[0].quantity}
                 </TableCell>
                 <TableCell align="center">
-                  {el.customer.deliveryperson == null ? 
+                  {el.deliveryPerson == null ? 
                   <div>
                     Unassigned
                   </div>
                   :
                   <div>
-                    {el.customer.deliveryperson}
+                    {el.deliveryPerson.username}
                   </div>
                   }
                 </TableCell>
