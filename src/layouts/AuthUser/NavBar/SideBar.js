@@ -107,6 +107,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         title="Reservations"
         icon={CheckCircleIcon}
       />
+      <NavItem
+        href="/myReviews"
+        key="Reviews"
+        title="Reviews"
+        icon={List}
+      />
     </List>
   );
 
@@ -124,6 +130,13 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         key="CurrentJobs"
         title="Accepted Jobs"
         icon={TruckIcon}
+      />
+
+      <NavItem
+        href="/myReviews"
+        key="Reviews"
+        title="Reviews"
+        icon={List}
       />
     </List>
   );

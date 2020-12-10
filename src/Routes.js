@@ -22,6 +22,7 @@ import Users from "./pages/Users";
 import Customer from "./pages/Customer";
 import Taboo from "./pages/Taboo";
 import Complaints from "./pages/Complaints";
+import Reviews from "./pages/Reviews";
 import ManagerOrders from "./pages/ManagerOrders";
 import CustomerOrders from "./pages/CustomerOrders";
 import CustomerInfo from "./pages/Customer/CustomerInfo";
@@ -100,9 +101,9 @@ const Routes = () => {
 
       <Route
         exact
-        path="/customer/balance"
+        path="/myReviews"
         render={(props) => (
-          <Layout isPrivate={true} type="authUser" page={Balance} {...props} />
+          <Layout isPrivate={true} type="authUser" page={Reviews} {...props} />
         )}
       />
 
@@ -131,6 +132,16 @@ const Routes = () => {
           />
         )}
       />
+
+      {/* Customer and Employee*/}
+      <Route
+        exact
+        path="/customer/balance"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={Balance} {...props} />
+        )}
+      />
+
 
       {/* VIP Routes */}
 
