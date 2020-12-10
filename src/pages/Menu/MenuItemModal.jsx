@@ -60,6 +60,7 @@ export default class MenuItemModal extends React.Component {
     let reservation = {};
     const { quantity, timeTo, timeFrom, table, type } = this.state;
     const { dishId: id } = this.props.modalData;
+    console.log(table);
     try {
       if (timeTo && timeFrom && table) {
         reservation = {
@@ -67,7 +68,7 @@ export default class MenuItemModal extends React.Component {
             from: new Date(timeFrom).toISOString(),
             to: new Date(timeTo).toISOString(),
           },
-          table,
+          table: parseInt(table),
         };
       }
       let { data } = await api.post(`/orders`, {
