@@ -165,6 +165,7 @@ export default class Menu extends React.Component {
                         name="hover-feedback"
                         value={el.dishRating}
                         precision={0.5}
+                        readOnly
                       />
                     </div>
                     {el.dishDescription.length > 71 ? (
@@ -262,6 +263,7 @@ export default class Menu extends React.Component {
                         name="hover-feedback"
                         value={el.dishRating}
                         precision={0.5}
+                        readOnly
                       />
                     </div>
                     {el.dishDescription.length > 71 ? (
@@ -369,6 +371,7 @@ export default class Menu extends React.Component {
                           name="hover-feedback"
                           value={el.dishRating}
                           precision={0.5}
+                          readOnly
                         />
                       </div>
                       {/* The following code renders the dish description */}
