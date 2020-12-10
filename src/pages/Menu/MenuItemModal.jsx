@@ -67,7 +67,7 @@ export default class MenuItemModal extends React.Component {
             from: new Date(timeFrom).toISOString(),
             to: new Date(timeTo).toISOString(),
           },
-          table: { id: table },
+          table,
         };
       }
       let { data } = await api.post(`/orders`, {

@@ -2,41 +2,44 @@ import React, { useState, useEffect } from "react";
 import api from "axios";
 import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
 const Reservations = () => {
   const [reservationsList, setReservationsList] = useState([]);
 
   const fetchReservations = async () => {
-    try{
-      let {
-        data: reservs
-      } = await api.get(`/reservations`);
+    try {
+      let { data: reservs } = await api.get(`/reservations`);
       setReservationsList(reservs);
+    } catch (E) {
+      console.log(E);
     }
-    catch(E){console.log(E)};
   };
 
-  useEffect( () =>{
+  useEffect(() => {
     fetchReservations();
   }, []);
 
-  return(
+  return (
     <h1>
       {console.log(reservationsList)}
-      {isEmpty(reservationsList) ?
-        <div style={{margin:"auto", textAlign:"center"}}>
+      {isEmpty(reservationsList) ? (
+        <div style={{ margin: "auto", textAlign: "center" }}>
           No reservations made
         </div>
-        :
+      ) : (
         <div>
-          {reservationsList.map( (el) => (
-            <Card key={el.id} variant="outlined" style={{margin:"10px",width:"400px"}}>
+          {reservationsList.map((el) => (
+            <Card
+              key={el.id}
+              variant="outlined"
+              style={{ margin: "10px", width: "400px" }}
+            >
               <CardContent>
                 <Typography variant="h3" component="h2">
-                  Table #{el.table.id}
+                  Table #{el.table.name}
                 </Typography>
                 <Typography variant="h3" color="textSecondary">
                   From
@@ -54,7 +57,7 @@ const Reservations = () => {
             </Card>
           ))}
         </div>
-      }
+      )}
     </h1>
   );
 };

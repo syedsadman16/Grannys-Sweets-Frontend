@@ -33,8 +33,8 @@ export default function DateAndTimePickers({
           timeTo
         ).toISOString()}`
       );
-      const tableIds = data.map((table) => table.id);
-      setTables(tableIds);
+      const tableNames = data.map((table) => table.name);
+      setTables(tableNames);
     } catch (e) {}
   };
 
