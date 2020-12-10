@@ -26,7 +26,7 @@ const Complaints = () => {
   const dimissComplaint = async(claimId) => {
     console.log("Dismissing claim: ",claimId)
     try{
-      await api.post(`/claims/dismissClaim/${claimId}`,{
+      await api.post(`claims/approveClaim/${claimId}`,{
       });
       fetchComplaints();
     }
