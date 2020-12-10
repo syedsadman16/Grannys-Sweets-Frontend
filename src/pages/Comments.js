@@ -34,7 +34,7 @@ export default function Comments() {
     return comments.map((item, index) => (
       <div key={index} style={{margin:"auto",width:"800px"}}>
         <ListItem key={index} button>
-          <ListItemAvatar style={{marginRight:"20px"}} >
+          <ListItemAvatar style={{marginRight:"20px",width:"80px",textAlign:"center"}} >
             <AccountCircleIcon style={{display:"block",margin:"auto",height:"40px",width:"40px"}}>
             </AccountCircleIcon>
             <Typography style={{fontWeight:"bold"}}>

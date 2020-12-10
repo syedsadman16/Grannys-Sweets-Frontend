@@ -77,8 +77,20 @@ const Users = () => {
   const verifyUser = async (id) => {
     console.log(id);
     try {
-      let { data } = await api.patch(`/users/${id}`, {
+      await api.patch(`/users/${id}`, {
         verified: true,
+      });
+      fetchUsers();
+    } catch (E) {
+      console.log(E);
+    }
+  };
+
+  const openUserAccount = async (id) => {
+    console.log(id);
+    try {
+      await api.patch(`/users/openAccount/${id}`, {
+        closed: false,
       });
       fetchUsers();
     } catch (E) {
@@ -215,7 +227,7 @@ const Users = () => {
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <Button variant="success">
+                  <Button onClick={() => openUserAccount(el.id)} variant="success">
                     Open
                   </Button>
                 </TableCell>
