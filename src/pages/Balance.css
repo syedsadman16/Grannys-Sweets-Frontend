@@ -1,0 +1,15 @@
+.outer {
+  width:100%;
+  display: flex;
+  justify-content: center; 
+}
+
+.price {
+    color: rgb(42, 212, 99);
+}
+
+.inner {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+}

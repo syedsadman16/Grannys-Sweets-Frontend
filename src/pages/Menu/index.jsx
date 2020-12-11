@@ -55,6 +55,7 @@ export default class Menu extends React.Component {
         dishPrice: element.price,
         isSpecial: element.special,
         dishImage: element.imageUrl,
+        dishChef : element.chef,
         //keywords: ["Spicy","Dessert"]
         keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
       }));
@@ -75,6 +76,7 @@ export default class Menu extends React.Component {
         dishPrice: element.price,
         isSpecial: element.special,
         dishImage: element.imageUrl,
+        dishChef : element.chef,
         //keywords: ["Spicy","Dessert"]
         keywords: element.keyWord.map((word) => word.keyWord.toLowerCase()),
       }));
@@ -98,6 +100,7 @@ export default class Menu extends React.Component {
     console.log(this.state);
     return (
       <>
+       
         <div className="page-title-container">
           <div className="page-title-text">Menu</div>
           <div className="menu-icon-divider-container">
@@ -153,11 +156,13 @@ export default class Menu extends React.Component {
                     {el.isSpecial ? (
                       <div className="dish-title-container">
                         {el.dishTitle}
+                        {console.log(el.chef)}
+                        <button className = "special-btn2"> {el.dishChef.username} </button>
                         <button className="special-btn"> VIP </button>
                       </div>
                     ) : (
                       <div className="dish-title-container">
-                        {el.dishTitle}{" "}
+                        {el.dishTitle}<button className = "special-btn2"> {el.dishChef.username} </button>{" "}
                       </div>
                     )}
 
@@ -252,11 +257,12 @@ export default class Menu extends React.Component {
                     {el.isSpecial ? (
                       <div className="dish-title-container">
                         {el.dishTitle}
+                        <button className = "special-btn2"> {el.dishChef.username} </button>
                         <button className="special-btn"> VIP </button>
                       </div>
                     ) : (
                       <div className="dish-title-container">
-                        {el.dishTitle}{" "}
+                        {el.dishTitle}<button className = "special-btn2"> {el.dishChef.username} </button>{" "}
                       </div>
                     )}
 
@@ -360,11 +366,12 @@ export default class Menu extends React.Component {
                       {el.isSpecial ? (
                         <div className="dish-title-container">
                           {el.dishTitle}
+                          <button className = "special-btn2"> {el.dishChef.username} </button>
                           <button className="special-btn"> VIP </button>
                         </div>
                       ) : (
                         <div className="dish-title-container">
-                          {el.dishTitle}{" "}
+                          {el.dishTitle}<button className = "special-btn2"> {el.dishChef.username} </button>{" "}
                         </div>
                       )}
 

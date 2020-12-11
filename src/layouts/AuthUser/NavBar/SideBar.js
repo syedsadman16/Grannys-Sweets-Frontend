@@ -112,7 +112,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         href="/myReviews"
         key="Reviews"
         title="Reviews"
-        icon={List}
+        icon={ListIcon}
       />
     </List>
   );

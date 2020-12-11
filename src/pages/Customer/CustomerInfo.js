@@ -114,11 +114,7 @@ function CustomerInfo() {
       <Card className={card_class.root}>
         <CardHeader title="Change User Information" />
         <CardContent>
-          <h6>Enter new Username</h6>
-
-          <section align="left">
-            <input name="username" placeholder="Username" />
-          </section>
+          <p> Coming soon... </p>
         </CardContent>
       </Card>
 
