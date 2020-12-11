@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./DishForm.scss";
 import { useSelector } from "react-redux";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import { faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -14,10 +16,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
     const [allkeyWord, setAllKeyWord] = useState(["Sweet","Cake","Breakfast","Lunch","Dinner"]);
     const [currWord, setcurrKeyWord] = useState("");
     const [price, setPrice] = useState("");
+    const [open,setOpen] = useState(false);
     const id = useSelector(({ user }) => user.id);
-
+  
+    function Alert(props) {
+      return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
     
-    const handleNameChange = (e) =>{
+    function handleNameChange(e) {
       setName(e.target.value);
     }
 
@@ -54,6 +60,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
       // console.log(id);
       // console.log(price);
       // console.log(description);
+      setOpen(true);
       if (keyWord.length != 0){
         try {
           let { data } = await axios.post("/menu",{
@@ -93,6 +100,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
       }
       
     }
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
 
     return(
   
@@ -210,6 +225,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
           <section align = "center">
             <input type="submit" />
           </section>
+
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              This is a success message!
+            </Alert>
+          </Snackbar>
             
         </form>
       </div>
