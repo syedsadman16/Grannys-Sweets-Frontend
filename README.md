@@ -1,5 +1,13 @@
 ## Project Site
 https://syedsadman16.github.io/Online-Restaurant-System-Frontend/#/
+- Note that Heroku goes to sleep after 1 hour if it doesn't recieve any traffic. Once you're on the page, wait about 30 seconds for Heroku to wake up and reload. All features should be available and ready to go. 
+
+## Team R
+- Syed Sadman
+- Abir Deb
+- Andrey Goryuk
+- Michal Moryosef
+- Samuel Fils
 
 ## Project Structure
 
@@ -12,6 +20,10 @@ https://syedsadman16.github.io/Online-Restaurant-System-Frontend/#/
 - auth.js: Authorization & authentication logic for routes.
 
 ## To run locally
+
+### Run Backend
+https://github.com/syedsadman16/Online-Restaurant-Backend
+- Make sure that the backend is cloned and running 
 
 ### Clone repository
 
@@ -28,3 +40,10 @@ https://syedsadman16.github.io/Online-Restaurant-System-Frontend/#/
 ### Startup localhost and run
 
 `npm start`
+
+## Technologies used for frontend
+- React
+- Redux
+- React-Boostrap
+- Material UI
+- SCSS/SASS
