@@ -30,6 +30,7 @@ import {
   Truck as TruckIcon,
   Coffee as coffee,
   CheckCircle as CheckCircleIcon,
+  Star as StarIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useSelector } from "react-redux";
@@ -137,6 +138,13 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         key="Reviews"
         title="Reviews"
         icon={ListIcon}
+      />
+
+      <NavItem
+        href="/employee/rateCustomer"
+        key="RateCustomer"
+        title="Rate a Customer"
+        icon={StarIcon}
       />
     </List>
   );

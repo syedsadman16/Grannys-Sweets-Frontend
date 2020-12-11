@@ -13,6 +13,7 @@ import Jobs from "./pages/Employee/Jobs";
 import TrackJob from "./pages/Employee/InProgress";
 import DishForm from "./pages/Employee/DishForm";
 import ChefJob from "./pages/Employee/ChefJob";
+import DelivererRateCustomer from "./pages/Employee/DelivererRateCustomer";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import UserWarningCount from "./components/UserWarningCount";
@@ -173,6 +174,14 @@ const Routes = () => {
         path="/employee/jobs"
         render={(props) => (
           <Layout isPrivate={true} type="authUser" page={Jobs} {...props} />
+        )}
+      />
+
+      <Route
+        exact
+        path="/employee/rateCustomer"
+        render={(props) => (
+          <Layout isPrivate={true} type="authUser" page={DelivererRateCustomer} {...props} />
         )}
       />
 
