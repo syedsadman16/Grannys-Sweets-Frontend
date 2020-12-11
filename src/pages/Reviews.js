@@ -48,7 +48,11 @@ function Reviews() {
         </TableHead>
         <TableBody>
           {
-            reviews.map( (el) => (
+            reviews.map( (el) => {
+              console.log("TYPE", el);
+              console.log("TYPE", el.type);
+              if(el.type == 0) 
+              return(
               <TableRow key={el.id}>
                 <TableCell align="center" scope="row">
                   {el.id}
@@ -64,7 +68,7 @@ function Reviews() {
                   <h6> {el.comments} </h6>
                 </TableCell>
               </TableRow>
-            ))
+            )})
           }
         </TableBody>
       </Table>

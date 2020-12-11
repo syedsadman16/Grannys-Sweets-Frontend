@@ -23,10 +23,11 @@ const Complaints = () => {
     catch(E){console.log(E)};
   };
 
-  const dimissComplaint = async(claimId) => {
-    console.log("Dismissing claim: ",claimId)
+  const approveClaim = async(claimId) => {
     try{
       await api.post(`claims/approveClaim/${claimId}`,{
+      });
+      await api.delete(`/claims/${claimId}`,{
       });
       fetchComplaints();
     }
@@ -35,7 +36,7 @@ const Complaints = () => {
 
   const denyComplaint = async(claimId) => {
     try{
-      await api.post(`/claims/denyClaim/${claimId}`,{
+      await api.post(`claims/denyClaim/${claimId}`,{
         message: denyMesg,
       });
       fetchComplaints();
@@ -65,7 +66,7 @@ const Complaints = () => {
             <TableCell align="center">Complaint Message</TableCell>
             <TableCell align="center">Complaint By</TableCell>
             <TableCell align="center">Complaint Role</TableCell>
-            <TableCell align="center">Dismiss (rating for complainant removed)</TableCell>
+            <TableCell align="center">Approve (rating for complainant removed)</TableCell>
             <TableCell align="center">Deny (warning issued to complainant)</TableCell>
           </TableRow>
         </TableHead>
@@ -86,8 +87,8 @@ const Complaints = () => {
                   {el.victim.role}
                 </TableCell>
                 <TableCell align="center">
-                  <Button onClick={() => dimissComplaint(el.id)} variant="danger">
-                    Dismiss
+                  <Button onClick={() => approveClaim(el.id)} variant="danger">
+                    Approve
                   </Button>
                 </TableCell>
                 <TableCell align="center">
