@@ -9,10 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Divider } from "@material-ui/core/";
 import Button from '@material-ui/core/Button';
+import { useSelector } from "react-redux";
 import "./Employee.css";
 
 function InProgress(){
-
+    const username = useSelector(({ user }) => user.username);
     const [jobs, setJobs] = useState([]);
     const useStyles = makeStyles({
       gridContainer:{
@@ -45,7 +46,9 @@ function InProgress(){
 
     async function testing() {
       const jobsapi = await axios.get(url);
-      setJobs(jobsapi.data)
+      setJobs(jobsapi.data.filter(a => (
+        a.order.deliveryPerson != null && a.order.deliveryPerson.username == username
+      )))
       return jobsapi;
     }
 
@@ -54,7 +57,8 @@ function InProgress(){
       console.log(url);
       try{
         axios.post(url);
-        setJobs(axios.get('/jobs/delivery'));
+        testing();
+        history.go(0);
       }
       catch(E){console.log(E)}
     }
@@ -103,7 +107,7 @@ function InProgress(){
                           Cancel Job
                           </Button>
                           <Button size="small" color="primary" onClick={() => completedJob(job.id)}>
-                          Completed Job
+                          Complete Job
                           </Button>
                       </CardActions>
                       </Card>
