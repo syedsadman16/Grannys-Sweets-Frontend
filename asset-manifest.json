@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Online-Restaurant-System-Frontend/static/css/main.823f480c.chunk.css",
-    "main.js": "/Online-Restaurant-System-Frontend/static/js/main.783a6fda.chunk.js",
-    "main.js.map": "/Online-Restaurant-System-Frontend/static/js/main.783a6fda.chunk.js.map",
+    "main.css": "/Online-Restaurant-System-Frontend/static/css/main.6c2605cd.chunk.css",
+    "main.js": "/Online-Restaurant-System-Frontend/static/js/main.02e018b8.chunk.js",
+    "main.js.map": "/Online-Restaurant-System-Frontend/static/js/main.02e018b8.chunk.js.map",
     "runtime-main.js": "/Online-Restaurant-System-Frontend/static/js/runtime-main.7a1156cd.js",
     "runtime-main.js.map": "/Online-Restaurant-System-Frontend/static/js/runtime-main.7a1156cd.js.map",
     "static/css/2.d9ad5f5c.chunk.css": "/Online-Restaurant-System-Frontend/static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.49d236f5.chunk.js": "/Online-Restaurant-System-Frontend/static/js/2.49d236f5.chunk.js",
-    "static/js/2.49d236f5.chunk.js.map": "/Online-Restaurant-System-Frontend/static/js/2.49d236f5.chunk.js.map",
+    "static/js/2.ac30243e.chunk.js": "/Online-Restaurant-System-Frontend/static/js/2.ac30243e.chunk.js",
+    "static/js/2.ac30243e.chunk.js.map": "/Online-Restaurant-System-Frontend/static/js/2.ac30243e.chunk.js.map",
     "index.html": "/Online-Restaurant-System-Frontend/index.html",
-    "precache-manifest.c4e9188b50b4de6ecc91b55de42f489a.js": "/Online-Restaurant-System-Frontend/precache-manifest.c4e9188b50b4de6ecc91b55de42f489a.js",
+    "precache-manifest.4c51be7fbeec73af8c9a7a8b98b90cc0.js": "/Online-Restaurant-System-Frontend/precache-manifest.4c51be7fbeec73af8c9a7a8b98b90cc0.js",
     "service-worker.js": "/Online-Restaurant-System-Frontend/service-worker.js",
     "static/css/2.d9ad5f5c.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/2.d9ad5f5c.chunk.css.map",
-    "static/css/main.823f480c.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/main.823f480c.chunk.css.map",
-    "static/js/2.49d236f5.chunk.js.LICENSE.txt": "/Online-Restaurant-System-Frontend/static/js/2.49d236f5.chunk.js.LICENSE.txt",
+    "static/css/main.6c2605cd.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/main.6c2605cd.chunk.css.map",
+    "static/js/2.ac30243e.chunk.js.LICENSE.txt": "/Online-Restaurant-System-Frontend/static/js/2.ac30243e.chunk.js.LICENSE.txt",
     "static/media/vip-confetti.webp": "/Online-Restaurant-System-Frontend/static/media/vip-confetti.651921f0.webp"
   },
   "entrypoints": [
     "static/js/runtime-main.7a1156cd.js",
     "static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.49d236f5.chunk.js",
-    "static/css/main.823f480c.chunk.css",
-    "static/js/main.783a6fda.chunk.js"
+    "static/js/2.ac30243e.chunk.js",
+    "static/css/main.6c2605cd.chunk.css",
+    "static/js/main.02e018b8.chunk.js"
   ]
 }
