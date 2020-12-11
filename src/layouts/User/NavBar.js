@@ -32,8 +32,13 @@ const NavBar = () => {
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Link to="/" className="header-icon">
-        <FontAwesomeIcon icon={faCookieBite} size="2x" color="white" />
+      <Link to="/" style={{paddingRight:"10px"}}>
+        <img
+          src="/Online-Restaurant-System-Frontend/Grannys_sweets_logo.png"
+          width="151px"
+          height="55px"
+          alt="dish"
+        />
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse>
