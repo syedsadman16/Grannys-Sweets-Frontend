@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Online-Restaurant-System-Frontend/static/css/main.6c2605cd.chunk.css",
-    "main.js": "/Online-Restaurant-System-Frontend/static/js/main.e09644a8.chunk.js",
-    "main.js.map": "/Online-Restaurant-System-Frontend/static/js/main.e09644a8.chunk.js.map",
+    "main.js": "/Online-Restaurant-System-Frontend/static/js/main.b7c5835e.chunk.js",
+    "main.js.map": "/Online-Restaurant-System-Frontend/static/js/main.b7c5835e.chunk.js.map",
     "runtime-main.js": "/Online-Restaurant-System-Frontend/static/js/runtime-main.7a1156cd.js",
     "runtime-main.js.map": "/Online-Restaurant-System-Frontend/static/js/runtime-main.7a1156cd.js.map",
     "static/css/2.d9ad5f5c.chunk.css": "/Online-Restaurant-System-Frontend/static/css/2.d9ad5f5c.chunk.css",
     "static/js/2.fe3988d8.chunk.js": "/Online-Restaurant-System-Frontend/static/js/2.fe3988d8.chunk.js",
     "static/js/2.fe3988d8.chunk.js.map": "/Online-Restaurant-System-Frontend/static/js/2.fe3988d8.chunk.js.map",
     "index.html": "/Online-Restaurant-System-Frontend/index.html",
-    "precache-manifest.f700c78fae3d7b88ef8d6b1b059e0ad0.js": "/Online-Restaurant-System-Frontend/precache-manifest.f700c78fae3d7b88ef8d6b1b059e0ad0.js",
+    "precache-manifest.16d4e0f4a4a759d31b9069ce219feea5.js": "/Online-Restaurant-System-Frontend/precache-manifest.16d4e0f4a4a759d31b9069ce219feea5.js",
     "service-worker.js": "/Online-Restaurant-System-Frontend/service-worker.js",
     "static/css/2.d9ad5f5c.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/2.d9ad5f5c.chunk.css.map",
     "static/css/main.6c2605cd.chunk.css.map": "/Online-Restaurant-System-Frontend/static/css/main.6c2605cd.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.d9ad5f5c.chunk.css",
     "static/js/2.fe3988d8.chunk.js",
     "static/css/main.6c2605cd.chunk.css",
-    "static/js/main.e09644a8.chunk.js"
+    "static/js/main.b7c5835e.chunk.js"
   ]
 }
