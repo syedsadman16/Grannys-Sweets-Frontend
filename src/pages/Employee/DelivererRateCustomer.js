@@ -46,6 +46,12 @@ const DelivererRateCustomer = () => {
         person: { id },
         order: { id : orderId }
       })
+
+      try{
+        console.log("post req")
+        await api.post(`/orders/userRated/${orderId}`);
+      } catch(E) {console.log(E)};
+
       history.go(0);
     }
     catch(E){console.log(E)};
@@ -90,25 +96,32 @@ const DelivererRateCustomer = () => {
                 </TableCell>
                 <TableCell align="center">
                   {el.status == 2 ?
-                    <Form onSubmit={(e) => handleRateCustomer(e,el.order.customer.id,el.order.id)}> 
-                      <div style={{width: "200px",margin:"auto"}}>
-                        <Form.Group>
-                          <Form.Control value={userComment} onChange={handleUserCommentChange} required placeholder="Rating Comment"/>
-                        </Form.Group>
-                        <Rating style={{marginBottom:"10px"}}
-                          name="controlled"
-                          value={userRating}
-                          required
-                          precision={.5}
-                          onChange={(event, newValue) => {
-                            setUserRating(newValue);
-                          }}
-                        />
-                      </div>
-                      <Button variant="primary" type="submit">
-                        Submit Rating
+                    !el.order.userRated ?
+                    <div>
+                      <Form onSubmit={(e) => handleRateCustomer(e,el.order.customer.id,el.order.id)}> 
+                        <div style={{width: "200px",margin:"auto"}}>
+                          <Form.Group>
+                            <Form.Control value={userComment} onChange={handleUserCommentChange} required placeholder="Rating Comment"/>
+                          </Form.Group>
+                          <Rating style={{marginBottom:"10px"}}
+                            name="controlled"
+                            value={userRating}
+                            required
+                            precision={.5}
+                            onChange={(event, newValue) => {
+                              setUserRating(newValue);
+                            }}
+                          />
+                        </div>
+                        <Button variant="primary" type="submit">
+                          Submit Rating
+                        </Button>
+                      </Form>
+                    </div>
+                    :
+                      <Button variant="success" disabled>
+                        Rating Submitted!
                       </Button>
-                    </Form>
                     :
                     <Button variant="danger" disabled>
                       Delivery Not Completed Yet
