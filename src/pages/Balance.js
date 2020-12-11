@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import api from "axios";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import { useSelector } from "react-redux";
+import { Button,Form } from "react-bootstrap";
+import "./Balance.css";
 
 const Balance = () => {
   const [balance, setBalance] = useState(0);
@@ -56,21 +63,49 @@ const Balance = () => {
 
   return (
     <div>
-      <div>Balance: {balance.toFixed(2)}</div>
-      <form onSubmit={depositMoney}>
-        <input
-          type="number"
-          min="0.00"
-          step="0.01"
-          value={amount}
-          onChange={handleChange}
-        />
+      <div className="outer"> <h3> Your Balance: $<i>{balance.toFixed(2)}</i> </h3> </div>
+      
+        <form onSubmit={depositMoney}>
+          <div className="inner"> 
+            <h4> Deposit an amount: </h4>
+            <input 
+              className="price"
+              type="number"
+              min="0.00"
+              step="0.01"
+              value={amount}
+              onChange={handleChange}
+            />
+            <Button variant="primary" disabled={!amount} type="submit">
+              Deposit
+            </Button>
+            </div>
+        </form>
+    
+      <div>
+      <Table aria-label="simple table"> 
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">Description</TableCell>
+            <TableCell align="center">Amount</TableCell>
+          </TableRow>
+        </TableHead>
 
-        <button disabled={!amount} type="submit">
-          Deposit
-        </button>
-      </form>
-      <div>{showList()}</div>
+          <TableBody>
+            {transactions.map((item, index) => (
+              <TableRow key={index}>
+                <TableCell align="center" scope="row">
+                  {item.description}
+                </TableCell>
+                <TableCell align="center">
+                  {item.amount.toFixed(2)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+
+        </Table>
+        </div>
     </div>
   );
 };
