@@ -210,7 +210,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
               
           <div class = "input-container" align = "center">
             <section>
-              <input name="other" id = "other"  onChange = {handleCurrkeyword} value = {currWord} />\
+              <input name="other" id = "other"  onChange = {handleCurrkeyword} value = {currWord} />
               <label htmlFor = "other">Other keywords: </label>
             </section>
           </div>
