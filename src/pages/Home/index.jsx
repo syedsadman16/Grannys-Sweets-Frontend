@@ -67,13 +67,25 @@ function Home(){
             <AwesomeSlider cssModule = {home} >
               {data.slice(0,3).map((el) => (
                 <div data-src= {el.dishImage} >
+                  <div className="welcome-text-container" style={{position:"absolute",padding:"10px",width:"100%",background:"rgba(204, 204, 204, 0.6)",color:"black",textAlign:"center",top:"15%",left:"left: 50%;",transform:"translate(-50%, -50%)",textTransform:"uppercase",fontFamily:"Tahoma, Geneva, sans-serif",fontWeight:"600"}}>	
+                  <div className="welcome-text-upper" style={{marginBottom:"5px",fontSize:"25px"}}>	
+                    Welcome to Our Restaurant	
+                  </div>	
+                  <div className="welcome-text-lower" style={{marginBottom:"5px",fontSize:"15px"}}>	
+                    Warm Baked Sweets	
+                  </div>	
+                  <div className="welcome-button" style={{marginBottom:"5px"}}>	
+                    <Link to="/Menu">	
+                      <Button variant="outline-dark">Check Out Our Menu</Button>	
+                    </Link>	
+                  </div>	
                 </div>
-                  
+                </div>
+
                 ))
               }
               
             </AwesomeSlider>
-
         </>
       );
 }

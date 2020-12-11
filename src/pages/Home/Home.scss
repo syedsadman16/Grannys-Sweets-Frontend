@@ -4,7 +4,7 @@ $transition-bezier: cubic-bezier(0.5, 0.075, 0.25, 0.95);
 $slider-height-percentage: 60%;
 $slider-transition-duration: 575ms;
 
-$organic-arrow-color: #6a6a6a;
+$organic-arrow-color: black;
 $organic-arrow-thickness: 4px;
 $organic-arrow-height: 40px;
 $organic-arrow-border-radius: 0;
@@ -93,7 +93,7 @@ $content-background-color: #2f2f2f;
     display: block;
     overflow: hidden;
     position: relative;
-    height: 92vh;
+    height: 93vh;
     width: 100%;
   }
   &__container {
@@ -148,12 +148,6 @@ $content-background-color: #2f2f2f;
     //   position: relative;
     //   z-index: 1;
     // }
-    &--enter {
-      // On content enter
-    }
-    &--exit {
-      // On content exit
-    }
   }
   &__controls {
     button {
@@ -171,9 +165,6 @@ $content-background-color: #2f2f2f;
       color: #fff;
       cursor: pointer;
       .#{$root-element}__controls__arrow-left,
-      .#{$root-element}__controls__arrow-right {
-        opacity: var(--control-button-opacity);
-      }
       &:hover {
         .#{$root-element}__controls__arrow-left,
         .#{$root-element}__controls__arrow-right {
@@ -295,11 +286,10 @@ $content-background-color: #2f2f2f;
     align-items: center;
     justify-content: center;
     button {
-      @extend %clear-focus;
       padding: 0;
       display: block;
-      width: 16px;
-      height: 16px;
+      width: 0px;
+      height: 0px;
       margin: 5px;
       border-radius: 50%;
       background: var(--control-bullet-color);
@@ -307,21 +297,9 @@ $content-background-color: #2f2f2f;
       overflow: hidden;
       cursor: pointer;
       border: none;
-      transition: transform 0.225s cubic-bezier(0.8, 1.35, 0.75, 1.45),
-        background-color 0.175s ease-out;
 
-      &:hover {
-        transform: scale(1.2);
-      }
     }
-    .#{$root-element}__bullets--active {
-      transform: scale(1.5);
-      background: var(--control-bullet-active-color);
-
-      &:hover {
-        transform: scale(1.5);
-      }
-    }
+    
   }
 
   &__controls__arrow-left,
