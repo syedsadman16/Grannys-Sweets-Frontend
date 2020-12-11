@@ -14,6 +14,10 @@ const CustomerOrders = () => {
   const userid = useSelector(({ user }) => user.id);
   const [dishRating, setDishRating] = useState(2.5);
   const [dishComment, setDishComment] = useState('');
+  const [userRating, setUserRating] = useState(2.5);
+  const [userComment, setUserComment] = useState('');
+  const [dishRatingTracker, setDishRatingTracker] = useState([]);
+  const [ratingTracker, setRatingTracker] = useState([]);
   
   const fetchAllOrders = async () => {
     try{
@@ -33,7 +37,8 @@ const CustomerOrders = () => {
     catch(E){console.log(E)};
   };
 
-  const handleDishRatingSubmit = async(id) => {
+  const handleDishRatingSubmit = async(id,orderId) => {
+    setDishRatingTracker((prev) => [...prev, orderId]);
     try{
       console.log("rating:", parseFloat(dishRating),"comments:", dishComment,"critic:", id ,"dish:", id)
       await api.post(`/rating/dishes/${id}/create`,{
@@ -49,6 +54,25 @@ const CustomerOrders = () => {
 
   const handleCommentChange = (e) => {
     setDishComment(e.target.value);
+  };
+
+  const handleUserCommentChange = (e) => {
+    setUserComment(e.target.value);
+  };
+
+  const handleUserRatingSubmit = async(id,orderId) => {
+    setRatingTracker((prev) => [...prev, orderId]);
+    try{
+      console.log("rating:", parseFloat(userRating),"comments:", userComment,"person:", id ,"order:", orderId)
+      await api.post(`/rating/users/add`,{
+        rating: parseFloat(userRating),
+        comments: userComment,
+        person: { id },
+        order: { id : orderId }
+      });
+      fetchAllOrders();
+    }
+    catch(E){console.log(E)};
   };
 
   useEffect( () =>{
@@ -95,9 +119,40 @@ const CustomerOrders = () => {
                     Unassigned
                   </div>
                   :
-                  <div>
-                    {el.deliveryPerson.username}
-                  </div>
+                    <div>
+                      {el.deliveryPerson.username}
+                      {el.completed ?
+                        !ratingTracker.includes(el.id) ? 
+                          <div>
+                            <Form onSubmit={() => handleUserRatingSubmit(el.deliveryPerson.id,el.id)}> 
+                              <div style={{width: "200px",margin:"auto"}}>
+                                <Form.Group>
+                                  <Form.Control value={userComment} onChange={handleUserCommentChange} required placeholder="Rating Comment"/>
+                                </Form.Group>
+                                <Rating style={{marginBottom:"10px"}}
+                                  name="controlled"
+                                  value={userRating}
+                                  required
+                                  precision={.5}
+                                  onChange={(event, newValue) => {
+                                    setUserRating(newValue);
+                                  }}
+                                />
+                              </div>
+                              <Button variant="primary" type="submit">
+                                Submit Rating
+                              </Button>
+                            </Form>
+                          </div>
+                        :
+                          <Button variant="success" disabled>
+                            Rating Submitted!
+                          </Button>
+                      :
+                        <div></div>}
+                    </div>
+                     
+                    
                   }
                 </TableCell>
                 <TableCell align="center">
@@ -122,9 +177,10 @@ const CustomerOrders = () => {
                 </TableCell>
                 <TableCell align="center">
                   {el.completed ?
+                    !dishRatingTracker.includes(el.id) ?
                     <> 
                       <div>
-                        <Form onSubmit={() => handleDishRatingSubmit(el.dishOrders[0].dish.id)}> 
+                        <Form onSubmit={() => handleDishRatingSubmit(el.dishOrders[0].dish.id, el.id)}> 
                           <div style={{width: "200px",margin:"auto"}}>
                             <Form.Group>
                               <Form.Control value={dishComment} onChange={handleCommentChange} required placeholder="Dish Comment"/>
@@ -145,6 +201,10 @@ const CustomerOrders = () => {
                         </Form>
                       </div>
                     </>
+                    : 
+                      <Button variant="success" disabled>
+                        Dish Rating Submitted!
+                      </Button>
                   :
                     <>
                       <Button variant="success" disabled>
