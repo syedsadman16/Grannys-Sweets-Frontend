@@ -174,9 +174,12 @@ const CustomerOrders = () => {
                             </Form>
                           </div>
                         :
+                        <div>
                           <Button variant="success" disabled>
                             Rating Submitted!
                           </Button>
+                        </div>
+                          
                       :
                         <div></div>}
                     </div>
