@@ -6,12 +6,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { useHistory } from "react-router-dom";
 import { Button,Form } from "react-bootstrap";
 
 const Complaints = () => {
   const [complaints, setComplaints] = useState([]);
   const user = useSelector(({ user }) => user);
   const [denyMesg,setDenyMesg] = useState('');
+  const history = useHistory();
 
   const fetchComplaints = async() => {
     try{
@@ -34,13 +36,16 @@ const Complaints = () => {
     catch(E){console.log(E)};
   };
 
-  const denyComplaint = async(claimId) => {
+  const denyComplaint = (claimId) => {
     try{
-      await api.post(`claims/denyClaim/${claimId}`,{
+      api.post(`claims/denyClaim/${claimId}`,{
         message: denyMesg,
       });
-      fetchComplaints();
-      setDenyMesg('');
+      api.delete(`/claims/${claimId}`,{
+      });
+      history.go(0);
+      //fetchComplaints();
+      //setDenyMesg('');
     }
     catch(E){console.log(E)};
   };
@@ -55,7 +60,7 @@ const Complaints = () => {
 
   return (
     <div style={{margin:"auto", textAlign:"center"}}>
-      {console.log(denyMesg)}
+      {console.log(complaints)}
       <h1 style={{marginBottom: "10px"}}>
         List of Pending Claims
       </h1>
@@ -87,7 +92,7 @@ const Complaints = () => {
                   {el.victim.role}
                 </TableCell>
                 <TableCell align="center">
-                  <Button onClick={() => approveClaim(el.id)} variant="danger">
+                  <Button onClick={() => approveClaim(el.id)} variant="success">
                     Approve
                   </Button>
                 </TableCell>
