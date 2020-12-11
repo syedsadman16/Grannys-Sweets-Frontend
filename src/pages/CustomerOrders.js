@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "axios";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,8 +17,7 @@ const CustomerOrders = () => {
   const [dishComment, setDishComment] = useState('');
   const [userRating, setUserRating] = useState(2.5);
   const [userComment, setUserComment] = useState('');
-  const [dishRatingTracker, setDishRatingTracker] = useState([]);
-  const [ratingTracker, setRatingTracker] = useState([]);
+  const history = useHistory();
   
   const fetchAllOrders = async () => {
     try{
@@ -29,6 +29,20 @@ const CustomerOrders = () => {
     catch(E){console.log(E)};
   };
 
+  // const markDishRatedCompleted = async(orderId) => {
+  //   try{
+  //     console.log("post req")
+  //     await  api.post(`/orders/dishRated/${orderId}`);
+  //   } catch(E) {console.log(E)};
+  // };
+
+  // const markDelivererRatedCompleted = async(orderId) => {
+  //   try{
+  //     console.log("post req")
+  //     await api.post(`/orders/delivererRated/${orderId}`);
+  //   } catch(E) {console.log(E)};
+  // };
+
   const markOrderCompleted = async(orderId) => {
     try{
       await api.post(`/orders/${orderId}`);
@@ -38,7 +52,6 @@ const CustomerOrders = () => {
   };
 
   const handleDishRatingSubmit = async(id,orderId) => {
-    setDishRatingTracker((prev) => [...prev, orderId]);
     try{
       console.log("rating:", parseFloat(dishRating),"comments:", dishComment,"critic:", id ,"dish:", id)
       await api.post(`/rating/dishes/${id}/create`,{
@@ -47,7 +60,14 @@ const CustomerOrders = () => {
         critic: { id: userid },
         dish: { id },
       });
+
+      try{
+        console.log("post req")
+        await  api.post(`/orders/dishRated/${orderId}`);
+      } catch(E) {console.log(E)};
+
       fetchAllOrders();
+      history.go(0);
     }
     catch(E){console.log(E)};
   };
@@ -61,23 +81,32 @@ const CustomerOrders = () => {
   };
 
   const handleUserRatingSubmit = async(id,orderId) => {
-    setRatingTracker((prev) => [...prev, orderId]);
     try{
       console.log("rating:", parseFloat(userRating),"comments:", userComment,"person:", id ,"order:", orderId)
+
       await api.post(`/rating/users/add`,{
         rating: parseFloat(userRating),
         comments: userComment,
         person: { id },
         order: { id : orderId }
       });
+
+      try{
+        console.log("post req")
+        await api.post(`/orders/delivererRated/${orderId}`);
+      } catch(E) {console.log(E)};
+      
       fetchAllOrders();
+      history.go(0);
     }
     catch(E){console.log(E)};
   };
 
+
   useEffect( () =>{
     fetchAllOrders();
   }, []);
+
 
   return (
     <div style={{margin:"auto", textAlign:"center"}}>
@@ -122,7 +151,7 @@ const CustomerOrders = () => {
                     <div>
                       {el.deliveryPerson.username}
                       {el.completed ?
-                        !ratingTracker.includes(el.id) ? 
+                        !el.delivererRated ? 
                           <div>
                             <Form onSubmit={() => handleUserRatingSubmit(el.deliveryPerson.id,el.id)}> 
                               <div style={{width: "200px",margin:"auto"}}>
@@ -177,30 +206,30 @@ const CustomerOrders = () => {
                 </TableCell>
                 <TableCell align="center">
                   {el.completed ?
-                    !dishRatingTracker.includes(el.id) ?
-                    <> 
-                      <div>
-                        <Form onSubmit={() => handleDishRatingSubmit(el.dishOrders[0].dish.id, el.id)}> 
-                          <div style={{width: "200px",margin:"auto"}}>
-                            <Form.Group>
-                              <Form.Control value={dishComment} onChange={handleCommentChange} required placeholder="Dish Comment"/>
-                            </Form.Group>
-                            <Rating style={{marginBottom:"10px"}}
-                              name="simple-controlled"
-                              value={dishRating}
-                              required
-                              precision={.5}
-                              onChange={(event, newValue) => {
-                                setDishRating(newValue);
-                              }}
-                            />
-                          </div>
-                          <Button variant="primary" type="submit">
-                            Submit Rating
-                          </Button>
-                        </Form>
-                      </div>
-                    </>
+                    !el.dishRated ?
+                      <> 
+                        <div>
+                          <Form onSubmit={() => handleDishRatingSubmit(el.dishOrders[0].dish.id, el.id)}> 
+                            <div style={{width: "200px",margin:"auto"}}>
+                              <Form.Group>
+                                <Form.Control value={dishComment} onChange={handleCommentChange} required placeholder="Dish Comment"/>
+                              </Form.Group>
+                              <Rating style={{marginBottom:"10px"}}
+                                name="simple-controlled"
+                                value={dishRating}
+                                required
+                                precision={.5}
+                                onChange={(event, newValue) => {
+                                  setDishRating(newValue);
+                                }}
+                              />
+                            </div>
+                            <Button variant="primary" type="submit">
+                              Submit Rating
+                            </Button>
+                          </Form>
+                        </div>
+                      </>
                     : 
                       <Button variant="success" disabled>
                         Dish Rating Submitted!
