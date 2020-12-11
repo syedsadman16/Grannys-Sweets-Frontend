@@ -89,6 +89,8 @@ const Users = () => {
   const openUserAccount = async (id) => {
     console.log(id);
     try {
+      console.log("deleting",id);
+      await api.delete(`/warning/${id}`);
       await api.patch(`/users/openAccount/${id}`, {
         closed: false,
       });
