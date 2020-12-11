@@ -52,7 +52,7 @@ function VipMenu() {
     <div style={style} className="page-title-container-vip">
       <div className="page-title-text">Congratulations!</div>
       <div className="page-desc-text">
-        Thanks for being a VIP member! Enjoy access to our special dishes
+        Thanks for being a VIP member! Enjoy access to our special dishes and all your orders now apply a 10% discount at checkout!
       </div>
     </div>
 
