@@ -8,6 +8,8 @@ https://syedsadman16.github.io/Online-Restaurant-System-Frontend/#/
 - Andrey Goryuk
 - Michal Moryosef
 - Samuel Fils
+#### Project Specs 
+https://docs.google.com/document/d/1lEruPP9p8F0GyLhqFYyd5d9nFlPnDlaE4Xk_Yul2MMw/edit?usp=sharing
 
 ## Project Structure
 
