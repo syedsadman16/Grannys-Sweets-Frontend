@@ -2,6 +2,11 @@
 https://syedsadman16.github.io/Online-Restaurant-System-Frontend/#/
 - Note that Heroku goes to sleep after 1 hour if it doesn't recieve any traffic. Once you're on the page, wait about 30 seconds for Heroku to wake up and reload. All features should be available and ready to go. 
 
+## Customer Demo 
+<img src='restaurant_demo.gif' title='' width='' alt='Demo' /> 
+
+#### Checkout the Screenshots folder for more images!
+
 ## Team R
 - Syed Sadman
 - Abir Deb
