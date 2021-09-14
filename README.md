@@ -1,5 +1,5 @@
 ## Project Site
-https://syedsadman16.github.io/Online-Restaurant-System-Frontend/#/
+https://syedsadman16.github.io/Grannys-Sweets-Frontend//#/
 - Note that Heroku goes to sleep after 1 hour if it doesn't recieve any traffic. Once you're on the page, wait about 30 seconds for Heroku to wake up and reload. All features should be available and ready to go. (Check the instructions below to run locally) 
 
 <img src='Screenshots/main_menu.jpg' title='' width='' alt='Demo' /> 
@@ -36,11 +36,11 @@ https://github.com/syedsadman16/Online-Restaurant-Backend
 
 ### Clone repository
 
-`git clone https://github.com/syedsadman16/Online-Restaurant-System-Frontend.git`
+`git clone https://github.com/syedsadman16/Grannys-Sweets-Frontend.git`
 
 ### Move into project directory
 
-`cd Online-Restaurant-System-Frontend`
+`cd Grannys-Sweets-Frontend/`
 
 ### Install packages (creates node_modules folder)
 
